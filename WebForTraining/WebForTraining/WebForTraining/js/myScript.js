@@ -114,7 +114,37 @@ function setForm($form,url) {
             alertMsg('Notification', dt.msg, 'success');
             if ($(".btn-primary", $form).text() == 'Save') {
                 $form[0].reset();
+                $('.refresh').trigger('click');
             }
+        }
+        else {
+            alertMsg('Notification', dt.msg, 'error');
+            //alert(dt.msg);
+        }
+    }).fail(function (jqXHR, textStatus) {
+        alertMsg('Notification', textStatus, 'error');
+        //alert(textStatus);
+    });
+
+    //alert('called finally');
+    return false;
+}
+
+function delRecord(id, url) {
+    if (!confirm('Are you sure you want to delete this record?')) {
+        return;
+    }
+    $.ajax({
+        type: "POST",
+        url: url,
+        dataType: 'json',
+        data: {ids:id}
+    }).done(function (dt) {
+        //alert(dt);
+        //console.log(dt);
+        if (dt.isSuccess == 1) {
+            alertMsg('Notification', dt.msg, 'success');
+            $('.refresh').trigger('click');
         }
         else {
             alertMsg('Notification', dt.msg, 'error');

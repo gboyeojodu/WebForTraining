@@ -130,5 +130,17 @@ namespace WebForTraining.Controllers
             ClsReturnValues k = Administration.setUsers(obj);
             return Json(new { id = k.ID, isSuccess = k.IsSuccess ?? false ? 1 : 0, msg = k.Response });
         }
+        public JsonResult deleteUsersGroup(string ids)
+        {
+            int id = int.Parse(ids);
+            ClsReturnValues k = Administration.delUsersGroup(id);
+            return Json(new { id = k.ID, isSuccess = k.IsSuccess ?? false ? 1 : 0, msg = k.Response });
+        }
+        public JsonResult deleteUser(string ids)
+        {
+            int id = int.Parse(ids);
+            ClsReturnValues k = Administration.delUsers(id);
+            return Json(new { id = k.ID, isSuccess = k.IsSuccess ?? false ? 1 : 0, msg = k.Response });
+        }
     }
 }

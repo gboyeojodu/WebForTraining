@@ -32,7 +32,7 @@
                             <a data-id="@usr.userID" onclick="javascript: ld_modal_fm('/Administration/AddEditUser', 'modalContentLoad', '@usr.userID');" class="btn btn-metro btn-info btn-xs">
                                 <i class="fa fa-pencil"></i>
                             </a>
-                            <a data-id="@usr.userID" class="btn btn-metro btn-danger btn-xs">
+                            <a data-id="@usr.userID" onclick="javascript: delRecord('@usr.userID','/Administration/deleteUser');" class="btn btn-metro btn-danger btn-xs">
                                 <i class="glyphicon glyphicon-remove"></i>
                             </a>
                         </td>

@@ -47,7 +47,7 @@
                 </ul>
                 <div id="myTabContent" class="tab-content">
                     <div role="tabpanel" class="tab-pane fade active in" id="usergroup_tab" aria-labelledby="usergroup-tab">
-                        <button type="button" id="btnRefreshUserGroup" class="btn btn-primary" onclick="javascript:ld_fm('/Administration/getUserGroupDisplay', 'userGroupDetail');" title="Click to refresh">
+                        <button type="button" id="btnRefreshUserGroup" class="btn btn-primary refresh" onclick="javascript:ld_fm('/Administration/getUserGroupDisplay', 'userGroupDetail');" title="Click to refresh">
                             <i class="fa fa-refresh"></i>
                         </button>
                         <button data-toggle="modal" id="btnAddUserGroup" type="button" onclick="javascript: ld_modal_fm('/Administration/AddEditUserGroup', 'modalContentLoad', '0');" class="btn btn-primary" title="Click to Add New Record">
@@ -57,7 +57,7 @@
                         </div>
                     </div>
                     <div role="tabpanel" class="tab-pane fade" id="users_tab" aria-labelledby="users-tab">
-                        <button type="button" id="btnRefreshUsers" class="btn btn-primary" onclick="javascript:ld_fm('/Administration/getUserDisplay', 'userDetail');" title="Click to refresh">
+                        <button type="button" id="btnRefreshUsers" class="btn btn-primary refresh" onclick="javascript:ld_fm('/Administration/getUserDisplay', 'userDetail');" title="Click to refresh">
                             <i class="fa fa-refresh"></i>
                         </button>
                         <button data-toggle="modal" id="btnAddUser" type="button" onclick="javascript: ld_modal_fm('/Administration/AddEditUser', 'modalContentLoad', '0');" class="btn btn-primary" title="Click to Add New Record">
