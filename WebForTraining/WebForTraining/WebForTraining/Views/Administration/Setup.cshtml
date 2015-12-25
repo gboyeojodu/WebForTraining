@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewBag.Title = "Setup";
+    Layout = null;
+}
+
+@*<h2>Setup</h2>*@
+
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2><i class="fa fa-bars"></i> General Setup </h2>
+            @*<ul class="nav navbar-right panel_toolbox">
+                <li>
+                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a href="#">Settings 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Settings 2</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="close-link"><i class="fa fa-close"></i></a>
+                </li>
+            </ul>*@
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            
+            <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#usergroup-tab" id="usergroup-tab" role="tab" data-toggle="tab" aria-expanded="true" onclick="javascript: ld_fm();">User Group</a>
+                    </li>
+                    <li role="presentation" class="">
+                        <a href="#users-tab" role="tab" id="users-tab" data-toggle="tab" aria-expanded="false">Users</a>
+                    </li>
+                    <li role="presentation" class="">
+                        <a href="#accesslevel-tab" role="tab" id="accesslevel-tab" data-toggle="tab" aria-expanded="false">Access Levels</a>
+                    </li>
+                </ul>
+                <div id="myTabContent" class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade active in" id="usergroup-tab" aria-labelledby="usergroup-tab">
+                        <div id="userGroupDetail" class="userGroupDetail">
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="users-tab" aria-labelledby="users-tab">
+                        <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip</p>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="accesslevel-tab" aria-labelledby="accesslevel-tab">
+                        <p>xxFood truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function ld_fm() {
+        alert("I got called");
+        //var link = url;
+        //var cnt = container;
+        //$("." + cnt).html(loading);
+        //$("." + cnt).load(link, function (response, status, xhr) {
+        //    if (status == "error") {
+        //        var msg = "Sorry but there was an error: " + xhr.status + " " + xhr.statusText;
+        //        //$("." + cnt).html(msg + xhr.status + " " + xhr.statusText);
+        //        alertMsg('Notification', msg, 'error');
+
+        //    }
+        //    alertMsg('Notification', 'Successfully processed!', 'success');
+        //}
+        //);
+        return false;
+    }
+
+</script>

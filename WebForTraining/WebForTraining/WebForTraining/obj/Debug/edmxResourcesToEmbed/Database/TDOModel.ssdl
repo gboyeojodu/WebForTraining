@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="tdoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <Function Name="uspAddEditCargoType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="cargoTypeID" Type="int" Mode="In" />
+    <Parameter Name="cargoTypeName" Type="varchar" Mode="In" />
+    <Parameter Name="createdByID" Type="int" Mode="In" />
+    <Parameter Name="sessionID" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="uspAddEditUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userID" Type="int" Mode="In" />
+    <Parameter Name="userGroupID" Type="int" Mode="In" />
+    <Parameter Name="userName" Type="varchar(max)" Mode="In" />
+    <Parameter Name="password" Type="varchar(max)" Mode="In" />
+    <Parameter Name="salt" Type="varchar(max)" Mode="In" />
+    <Parameter Name="passwordCanExpire" Type="bit" Mode="In" />
+    <Parameter Name="passwordExpiryDate" Type="datetime" Mode="In" />
+    <Parameter Name="isLocked" Type="bit" Mode="In" />
+    <Parameter Name="loginAttempts" Type="int" Mode="In" />
+    <Parameter Name="lastLoginDate" Type="datetime" Mode="In" />
+    <Parameter Name="theme" Type="varchar(max)" Mode="In" />
+    <Parameter Name="resetPassword" Type="bit" Mode="In" />
+    <Parameter Name="createdByID" Type="int" Mode="In" />
+    <Parameter Name="sessionID" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="uspAddEditUserSessionHistory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="sessionID" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="userID" Type="int" Mode="In" />
+    <Parameter Name="logoutDate" Type="datetime" Mode="In" />
+    <Parameter Name="isActive" Type="bit" Mode="In" />
+    <Parameter Name="deviceType" Type="varchar" Mode="In" />
+    <Parameter Name="deviceName" Type="varchar" Mode="In" />
+    <Parameter Name="browser" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="uspAddEditUserSessions" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="sessionID" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="userID" Type="int" Mode="In" />
+    <Parameter Name="isActive" Type="bit" Mode="In" />
+    <Parameter Name="deviceType" Type="varchar" Mode="In" />
+    <Parameter Name="deviceName" Type="varchar" Mode="In" />
+    <Parameter Name="browser" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="uspDelUserSession" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="sessionID" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="userID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="uspGetCargoType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="cargoTypeID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="uspGetUserDisplay" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="uspGetUserGroups" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="uspGetUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="uspGetUserSessionHistory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="uspGetUserSessions" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="uspUserAuthentication" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userName" Type="varchar" Mode="In" />
+    <Parameter Name="password" Type="varchar(max)" Mode="In" />
+    <Parameter Name="deviceType" Type="varchar(max)" Mode="In" />
+    <Parameter Name="deviceName" Type="varchar(max)" Mode="In" />
+    <Parameter Name="browser" Type="varchar(max)" Mode="In" />
+  </Function>
+  <EntityContainer Name="tdoModelStoreContainer" />
+</Schema>

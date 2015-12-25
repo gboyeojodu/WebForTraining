@@ -1,0 +1,50 @@
+﻿@using WebForTraining.Models;
+@using WebForTraining.Database;
+@{
+    //var employeeID = Request.Params["employeeID"];
+    //var token = Session["Token"].ToString();
+    Layout = null;
+    //List<string> AuthForms = (List<string>)Session["Forms"];
+    var UserGroup = Model.Administration.getUsersGroup();
+
+
+}
+@if (UserGroup.Length > 0)
+{
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover" id="tbleducation">
+            <thead>
+                <tr>
+                    <th><strong>Group Name</strong></th>
+                    <th><strong>Description</strong></th>
+                    <th><strong></strong></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var grp in UserGroup)
+                {
+                    <tr>
+                        <td><span class="underline">@grp.groupName</span></td>
+                        <td>@grp.description</td>
+                        <td>
+                            <a data-id="@grp.educationID" class="btn btn-metro btn-info btn-xs educationRecord-edit">
+                                <i class="fa fa-pencil"></i>
+                            </a>
+                            <a data-id="@grp.educationID" class="btn btn-metro btn-danger btn-xs educationRecord-trash">
+                                <i class="glyphicon glyphicon-remove"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div class="alert alert-warning">No record to display</div>
+}
+
+
+
+
