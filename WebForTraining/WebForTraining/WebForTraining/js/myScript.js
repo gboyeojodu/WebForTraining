@@ -81,7 +81,7 @@ function ld_modal_fm(url, container, id) {
     return false;
 }
 function validate_form(fm_id, url) {
-    alert(fm_id);
+    //alert(fm_id);
 
     $.validate({
         form: "#"+fm_id,
@@ -97,7 +97,7 @@ function validate_form(fm_id, url) {
             return false; // Will stop the submission of the form
         }
     });
-    alert("I got called finally");
+    //alert("I got called finally");
 }
 
 function setForm($form,url) {
@@ -112,7 +112,9 @@ function setForm($form,url) {
         //console.log(dt);
         if (dt.isSuccess == 1) {
             alertMsg('Notification', dt.msg, 'success');
-            $form[0].reset();
+            if ($(".btn-primary", $form).text() == 'Save') {
+                $form[0].reset();
+            }
         }
         else {
             alertMsg('Notification', dt.msg, 'error');

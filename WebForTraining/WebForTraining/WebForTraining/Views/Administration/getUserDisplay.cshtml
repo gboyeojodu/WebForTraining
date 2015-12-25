@@ -29,7 +29,7 @@
                         <td>@usr.groupName</td>
                         <td>@(usr.isLocked ? "Yes" : "No")</td>
                         <td>
-                            <a data-id="@usr.userID" class="btn btn-metro btn-info btn-xs">
+                            <a data-id="@usr.userID" onclick="javascript: ld_modal_fm('/Administration/AddEditUser', 'modalContentLoad', '@usr.userID');" class="btn btn-metro btn-info btn-xs">
                                 <i class="fa fa-pencil"></i>
                             </a>
                             <a data-id="@usr.userID" class="btn btn-metro btn-danger btn-xs">

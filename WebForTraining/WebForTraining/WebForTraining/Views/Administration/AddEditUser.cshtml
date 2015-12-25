@@ -8,7 +8,7 @@
     var Users = Administration.getUsers().Where(p => p.userID == usrID);
 }
 
-
+@if (usrID == 0) {
 <div class="modal-content">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -79,5 +79,80 @@
         </div>
     </form>
 </div>
+}
+else
+{
+    foreach (var usr in Users) { 
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel2">Add/Edit User</h4>
+        </div>
+        <form method="post" id="addUserForm" class="form-horizontal form-label-left">
+            <div class="modal-body ">
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="userName">
+                        User Name <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="userName" name="userName" data-validation="required" class="form-control col-md-7 col-xs-12" value="@usr.userName">
+                        <input type="hidden" id="userID" name="userID" value="@usr.userID">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Password">
+                        Password <span class="required"></span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="password" id="Password" name="Password" class="form-control col-md-7 col-xs-12" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="userGroupID">
+                        User Group <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <select class="form-control col-md-7 col-xs-12" id="userGroupID" name="userGroupID" data-validation="required">
+                            <option value="">Select a User Group</option>
+                            @foreach (var usrgrp in Administration.getUsersGroup())
+                            {
+                                <option value="@usrgrp.userGroupID" @(usrgrp.userGroupID == usr.userGroupID ? "selected" : "")>@usrgrp.groupName</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="isLocked">
+                        Lock <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <select class="form-control col-md-7 col-xs-12" id="isLocked" name="isLocked">
+                            <option value="0" @(usr.isLocked == true ? "selected" : "")>No</option>
+                            <option value="1" @(usr.isLocked == true ? "selected" : "")>yes</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="resetPassword">
+                        Reset Password <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <select class="form-control col-md-7 col-xs-12" id="resetPassword" name="resetPassword">
+                            <option value="0" @(usr.resetPassword == true ? "selected" : "")>No</option>
+                            <option value="1" @(usr.resetPassword == true ? "selected" : "")>yes</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                @*<button type="submit" class="btn btn-primary" data-dismiss="modal">Close</button>*@
+                <button type="submit" class="btn btn-primary" onclick="javascript: validate_form('addUserForm', '/Administration/setUsers');">Update</button>
+            </div>
+        </form>
+    </div>
+    }
+}
 
 
