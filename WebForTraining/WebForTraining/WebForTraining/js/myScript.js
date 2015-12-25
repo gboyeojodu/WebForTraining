@@ -42,20 +42,87 @@ function alertMsg(ttl, msg, cls) {
     });
 };
 
-function ld_fm() {
-    alert("I got called");
-    //var link = url;
-    //var cnt = container;
-    //$("." + cnt).html(loading);
-    //$("." + cnt).load(link, function (response, status, xhr) {
-    //    if (status == "error") {
-    //        var msg = "Sorry but there was an error: " + xhr.status + " " + xhr.statusText;
-    //        //$("." + cnt).html(msg + xhr.status + " " + xhr.statusText);
-    //        alertMsg('Notification', msg, 'error');
+function ld_fm(url, container) {
+    //alert(url + " " + container);
+    var link = url;
+    var cnt = container;
+    $("." + cnt).html(loading);
+    $("." + cnt).load(link, function (response, status, xhr) {
+        if (status == "error") {
+            var msg = "Sorry but there was an error: " + xhr.status + " " + xhr.statusText;
+            //$("." + cnt).html(msg + xhr.status + " " + xhr.statusText);
+            alertMsg('Notification', msg, 'error');
 
-    //    }
-    //    alertMsg('Notification', 'Successfully processed!', 'success');
-    //}
-    //);
+        }
+        //alertMsg('Notification', 'Successfully processed!', 'success');
+    }
+    );
+    return false;
+}
+
+function ld_modal_fm(url, container, id) {
+    //alert(url + " " + container);
+    var link = url;
+    var cnt = container;
+    var ids = id;
+    $('#modalContent').modal('show');
+    $("#" + cnt).html(loading);
+    $("#" + cnt).load(link,{id:ids}, function (response, status, xhr) {
+        if (status == "error") {
+            var msg = "Sorry but there was an error: " + xhr.status + " " + xhr.statusText;
+            //$("." + cnt).html(msg + xhr.status + " " + xhr.statusText);
+            alertMsg('Notification', msg, 'error');
+            $("#" + cnt).html('Notification', msg, 'error');
+        }
+        //alertMsg('Notification', 'Successfully processed!', 'success');
+        
+    }
+    );
+    return false;
+}
+function validate_form(fm_id, url) {
+    alert(fm_id);
+
+    $.validate({
+        form: "#"+fm_id,
+        //modules: 'security',
+        onError: function () {
+            alertMsg('Notification', 'Please check your entries.', 'error');
+            return false; // Will stop the submission of the form
+        },
+        onSuccess: function ($form) {
+            //alert('The form is valid!');
+            //alertMsg('Notification', 'This form is valid', 'success');
+            setForm($form,url);
+            return false; // Will stop the submission of the form
+        }
+    });
+    alert("I got called finally");
+}
+
+function setForm($form,url) {
+
+    $.ajax({
+        type: "POST",
+        url: url,
+        dataType: 'json',
+        data: $form.serialize()
+    }).done(function (dt) {
+        //alert(dt);
+        //console.log(dt);
+        if (dt.isSuccess == 1) {
+            alertMsg('Notification', dt.msg, 'success');
+            $form[0].reset();
+        }
+        else {
+            alertMsg('Notification', dt.msg, 'error');
+            //alert(dt.msg);
+        }
+    }).fail(function (jqXHR, textStatus) {
+        alertMsg('Notification', textStatus, 'error');
+        //alert(textStatus);
+    });
+
+    //alert('called finally');
     return false;
 }

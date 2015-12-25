@@ -36,25 +36,37 @@
             <div class="" role="tabpanel" data-example-id="togglable-tabs">
                 <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
                     <li role="presentation" class="active">
-                        <a href="#usergroup-tab" id="usergroup-tab" role="tab" data-toggle="tab" aria-expanded="true" onclick="javascript: ld_fm();">User Group</a>
+                        <a href="#usergroup_tab" id="usergroup-tab" role="tab" data-toggle="tab" aria-expanded="true" onclick="javascript: ld_fm('/Administration/getUserGroupDisplay', 'userGroupDetail');">User Group</a>
                     </li>
                     <li role="presentation" class="">
-                        <a href="#users-tab" role="tab" id="users-tab" data-toggle="tab" aria-expanded="false">Users</a>
+                        <a href="#users_tab" role="tab" id="users-tab" data-toggle="tab" aria-expanded="false" onclick="javascript: ld_fm('/Administration/getUserDisplay', 'userDetail');">Users</a>
                     </li>
                     <li role="presentation" class="">
-                        <a href="#accesslevel-tab" role="tab" id="accesslevel-tab" data-toggle="tab" aria-expanded="false">Access Levels</a>
+                        <a href="#accesslevel_tab" role="tab" id="accesslevel-tab" data-toggle="tab" aria-expanded="false">Access Levels</a>
                     </li>
                 </ul>
                 <div id="myTabContent" class="tab-content">
-                    <div role="tabpanel" class="tab-pane fade active in" id="usergroup-tab" aria-labelledby="usergroup-tab">
+                    <div role="tabpanel" class="tab-pane fade active in" id="usergroup_tab" aria-labelledby="usergroup-tab">
+                        <button type="button" id="btnRefreshUserGroup" class="btn btn-primary" onclick="javascript:ld_fm('/Administration/getUserGroupDisplay', 'userGroupDetail');" title="Click to refresh">
+                            <i class="fa fa-refresh"></i>
+                        </button>
+                        <button data-toggle="modal" id="btnAddUserGroup" type="button" onclick="javascript: ld_modal_fm('/Administration/AddEditUserGroup', 'modalContentLoad', '0');" class="btn btn-primary" title="Click to Add New Record">
+                            <i class=" fa fa-plus"></i>
+                        </button>
                         <div id="userGroupDetail" class="userGroupDetail">
                         </div>
                     </div>
-                    <div role="tabpanel" class="tab-pane fade" id="users-tab" aria-labelledby="users-tab">
-                        <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip</p>
+                    <div role="tabpanel" class="tab-pane fade" id="users_tab" aria-labelledby="users-tab">
+                        <button type="button" id="btnRefreshUsers" class="btn btn-primary" onclick="javascript:ld_fm('/Administration/getUserDisplay', 'userDetail');" title="Click to refresh">
+                            <i class="fa fa-refresh"></i>
+                        </button>
+                        <button data-toggle="modal" id="btnAddUser" type="button" onclick="javascript: ld_modal_fm('/Administration/AddEditUser', 'modalContentLoad', '0');" class="btn btn-primary" title="Click to Add New Record">
+                            <i class=" fa fa-plus"></i>
+                        </button>
+                        <div id="userDetail" class="userDetail">
+                        </div>
                     </div>
-                    <div role="tabpanel" class="tab-pane fade" id="accesslevel-tab" aria-labelledby="accesslevel-tab">
-                        <p>xxFood truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk </p>
+                    <div role="tabpanel" class="tab-pane fade" id="accesslevel_tab" aria-labelledby="accesslevel-tab">
                     </div>
                 </div>
             </div>
@@ -62,22 +74,7 @@
     </div>
 </div>
 <script>
-    function ld_fm() {
-        alert("I got called");
-        //var link = url;
-        //var cnt = container;
-        //$("." + cnt).html(loading);
-        //$("." + cnt).load(link, function (response, status, xhr) {
-        //    if (status == "error") {
-        //        var msg = "Sorry but there was an error: " + xhr.status + " " + xhr.statusText;
-        //        //$("." + cnt).html(msg + xhr.status + " " + xhr.statusText);
-        //        alertMsg('Notification', msg, 'error');
-
-        //    }
-        //    alertMsg('Notification', 'Successfully processed!', 'success');
-        //}
-        //);
-        return false;
-    }
+    ld_fm('/Administration/getUserGroupDisplay', 'userGroupDetail');
+    //$('.bs-example-modal-sm').modal('show');
 
 </script>

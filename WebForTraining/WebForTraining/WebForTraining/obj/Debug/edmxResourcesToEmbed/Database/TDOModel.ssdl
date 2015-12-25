@@ -4,6 +4,12 @@
     <Parameter Name="cargoTypeID" Type="int" Mode="In" />
     <Parameter Name="cargoTypeName" Type="varchar" Mode="In" />
     <Parameter Name="createdByID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="uspAddEditUserGroups" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userGroupID" Type="int" Mode="In" />
+    <Parameter Name="groupName" Type="varchar(max)" Mode="In" />
+    <Parameter Name="description" Type="varchar(max)" Mode="In" />
+    <Parameter Name="createdByID" Type="int" Mode="In" />
     <Parameter Name="sessionID" Type="uniqueidentifier" Mode="In" />
   </Function>
   <Function Name="uspAddEditUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -38,6 +44,12 @@
     <Parameter Name="deviceType" Type="varchar" Mode="In" />
     <Parameter Name="deviceName" Type="varchar" Mode="In" />
     <Parameter Name="browser" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="uspDelUsergroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userGroupID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="uspDelUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userID" Type="int" Mode="In" />
   </Function>
   <Function Name="uspDelUserSession" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="sessionID" Type="uniqueidentifier" Mode="In" />
