@@ -1073,6 +1073,7 @@
     <Content Include="Views\Administration\getUserDisplay.cshtml" />
     <Content Include="Views\Administration\AddEditUserGroup.cshtml" />
     <Content Include="Views\Administration\AddEditUser.cshtml" />
+    <Content Include="Views\Administration\changePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

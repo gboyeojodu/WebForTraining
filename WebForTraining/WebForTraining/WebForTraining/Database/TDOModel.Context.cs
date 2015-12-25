@@ -286,5 +286,22 @@ namespace WebForTraining.Database
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspDelUsers", userIDParameter);
         }
+    
+        public virtual ObjectResult<ClsReturnValues> uspChangePassword(Nullable<int> userID, string oldPassword, string newPassword)
+        {
+            var userIDParameter = userID.HasValue ?
+                new ObjectParameter("userID", userID) :
+                new ObjectParameter("userID", typeof(int));
+    
+            var oldPasswordParameter = oldPassword != null ?
+                new ObjectParameter("oldPassword", oldPassword) :
+                new ObjectParameter("oldPassword", typeof(string));
+    
+            var newPasswordParameter = newPassword != null ?
+                new ObjectParameter("newPassword", newPassword) :
+                new ObjectParameter("newPassword", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspChangePassword", userIDParameter, oldPasswordParameter, newPasswordParameter);
+        }
     }
 }

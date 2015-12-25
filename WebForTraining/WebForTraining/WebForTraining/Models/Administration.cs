@@ -84,5 +84,16 @@ namespace WebForTraining.Models
         }
 
         #endregion users
+        public static ClsReturnValues changePassword(int userID, string oldPassword, string newPassword)
+        {
+            newPassword = Security.Encrypt(newPassword);
+            oldPassword = Security.Encrypt(oldPassword);
+            ClsReturnValues lst = new ClsReturnValues();
+            using (var db = new tdoEntities())
+            {
+                lst = db.uspChangePassword(userID, oldPassword, newPassword).FirstOrDefault();
+            }
+            return lst;
+        }
     }
 }

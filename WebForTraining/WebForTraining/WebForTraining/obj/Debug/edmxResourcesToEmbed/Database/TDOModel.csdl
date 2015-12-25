@@ -73,6 +73,11 @@
     <FunctionImport Name="uspDelUsers" ReturnType="Collection(tdoModel.ClsReturnValues)">
       <Parameter Name="userID" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="uspChangePassword" ReturnType="Collection(tdoModel.ClsReturnValues)">
+      <Parameter Name="userID" Mode="In" Type="Int32" />
+      <Parameter Name="oldPassword" Mode="In" Type="String" />
+      <Parameter Name="newPassword" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="ClsReturnValues">
     <Property Type="Int32" Name="ID" Nullable="true" />

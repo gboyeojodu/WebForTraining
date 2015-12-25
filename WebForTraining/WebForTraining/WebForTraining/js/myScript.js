@@ -114,8 +114,8 @@ function setForm($form,url) {
             alertMsg('Notification', dt.msg, 'success');
             if ($(".btn-primary", $form).text() == 'Save') {
                 $form[0].reset();
-                $('.refresh').trigger('click');
             }
+            $('.refresh').trigger('click');
         }
         else {
             alertMsg('Notification', dt.msg, 'error');

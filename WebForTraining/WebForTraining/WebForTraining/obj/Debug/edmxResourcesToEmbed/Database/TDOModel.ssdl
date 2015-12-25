@@ -45,6 +45,11 @@
     <Parameter Name="deviceName" Type="varchar" Mode="In" />
     <Parameter Name="browser" Type="varchar" Mode="In" />
   </Function>
+  <Function Name="uspChangePassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userID" Type="int" Mode="In" />
+    <Parameter Name="oldPassword" Type="varchar(max)" Mode="In" />
+    <Parameter Name="newPassword" Type="varchar(max)" Mode="In" />
+  </Function>
   <Function Name="uspDelUsergroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="userGroupID" Type="int" Mode="In" />
   </Function>

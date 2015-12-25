@@ -84,6 +84,14 @@ namespace WebForTraining.Controllers
             }
             return View();
         }
+        public ActionResult changePassword()
+        {
+            if (!CheckSession())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            return View();
+        }
         public JsonResult setUsersGroup(string userGroupID, string groupName, string description)
         {
 
@@ -140,6 +148,17 @@ namespace WebForTraining.Controllers
         {
             int id = int.Parse(ids);
             ClsReturnValues k = Administration.delUsers(id);
+            return Json(new { id = k.ID, isSuccess = k.IsSuccess ?? false ? 1 : 0, msg = k.Response });
+        }
+        public JsonResult setChangePassword(string userID, string oldPassword, string newPassword, string confirmNewPassword)
+        {
+            if (newPassword != confirmNewPassword)
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "Confirm password not correct." });
+            }
+            int id = int.Parse(userID);
+            
+            ClsReturnValues k = Administration.changePassword(id, oldPassword, newPassword);
             return Json(new { id = k.ID, isSuccess = k.IsSuccess ?? false ? 1 : 0, msg = k.Response });
         }
     }
