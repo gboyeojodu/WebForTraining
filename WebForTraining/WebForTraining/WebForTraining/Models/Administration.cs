@@ -98,25 +98,25 @@ namespace WebForTraining.Models
             return lst;
         }
 
-        public static List<ClsCargoType> getCargoType(int cargoTypeID)
+        public static List<ClsCargoType> getCargoType()
         {
             List<ClsCargoType> lst = new List<ClsCargoType>();
             using (var db = new tdoEntities())
             {
-                lst = db.uspGetCargoType(cargoTypeID).ToList<ClsCargoType>();
+                lst = db.uspGetCargoType().ToList<ClsCargoType>();
             }
             return lst;
         }
 
-        //public static ClsReturnValues delCargoType(int cargoTypeID)
-        //{
-        //    ClsReturnValues lst = new ClsReturnValues();
-        //    using (var db = new tdoEntities())
-        //    {
-        //        lst = db.uspDelCargoType(cargoTypeID).FirstOrDefault();
-        //    }
-        //    return lst;
-        //}
+        public static ClsReturnValues delCargoType(int cargoTypeID)
+        {
+            ClsReturnValues lst = new ClsReturnValues();
+            using (var db = new tdoEntities())
+            {
+                lst = db.uspDelCargoType(cargoTypeID).FirstOrDefault();
+            }
+            return lst;
+        }
 
         #endregion
 

@@ -7,9 +7,7 @@
       <Parameter Name="createdByID" Mode="In" Type="Int32" />
       <Parameter Name="sessionID" Mode="In" Type="Guid" />
     </FunctionImport>
-    <FunctionImport Name="uspGetCargoType" ReturnType="Collection(tdoModel.ClsCargoType)">
-      <Parameter Name="cargoTypeID" Mode="In" Type="Int32" />
-    </FunctionImport>
+    <FunctionImport Name="uspGetCargoType" ReturnType="Collection(tdoModel.ClsCargoType)" />
     <FunctionImport Name="uspAddEditUsers" ReturnType="Collection(tdoModel.ClsReturnValues)">
       <Parameter Name="userID" Mode="In" Type="Int32" />
       <Parameter Name="userGroupID" Mode="In" Type="Int32" />
@@ -78,6 +76,9 @@
       <Parameter Name="userID" Mode="In" Type="Int32" />
       <Parameter Name="oldPassword" Mode="In" Type="String" />
       <Parameter Name="newPassword" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="uspDelCargoType" ReturnType="Collection(tdoModel.ClsReturnValues)">
+      <Parameter Name="cargoTypeID" Mode="In" Type="Int32" />
     </FunctionImport>
   </EntityContainer>
   <ComplexType Name="ClsReturnValues">
@@ -159,5 +160,10 @@
     <Property Type="Boolean" Name="canView" Nullable="false" />
     <Property Type="Boolean" Name="canEdit" Nullable="false" />
     <Property Type="Boolean" Name="canDelete" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="uspDelCargoType_Result">
+    <Property Type="Int32" Name="ID" Nullable="true" />
+    <Property Type="Boolean" Name="IsSuccess" Nullable="true" />
+    <Property Type="String" Name="Response" Nullable="true" />
   </ComplexType>
 </Schema>

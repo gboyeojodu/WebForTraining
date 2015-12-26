@@ -39,13 +39,14 @@
     <Parameter Name="deviceName" Type="varchar" Mode="In" />
     <Parameter Name="browser" Type="varchar" Mode="In" />
   </Function>
+  <Function Name="uspDelCargoType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="cargoTypeID" Type="int" Mode="In" />
+  </Function>
   <Function Name="uspDelUserSession" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="sessionID" Type="uniqueidentifier" Mode="In" />
     <Parameter Name="userID" Type="int" Mode="In" />
   </Function>
-  <Function Name="uspGetCargoType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="cargoTypeID" Type="int" Mode="In" />
-  </Function>
+  <Function Name="uspGetCargoType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="uspGetUserDisplay" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="userID" Type="int" Mode="In" />
   </Function>

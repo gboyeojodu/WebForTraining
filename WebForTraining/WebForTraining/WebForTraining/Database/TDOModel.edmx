@@ -44,13 +44,14 @@
           <Parameter Name="deviceName" Type="varchar" Mode="In" />
           <Parameter Name="browser" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="uspDelCargoType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cargoTypeID" Type="int" Mode="In" />
+        </Function>
         <Function Name="uspDelUserSession" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="sessionID" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="userID" Type="int" Mode="In" />
         </Function>
-        <Function Name="uspGetCargoType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="cargoTypeID" Type="int" Mode="In" />
-        </Function>
+        <Function Name="uspGetCargoType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="uspGetUserDisplay" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userID" Type="int" Mode="In" />
         </Function>
@@ -78,7 +79,6 @@
             <Parameter Name="sessionID" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="uspGetCargoType" ReturnType="Collection(tdoModel.ClsCargoType)">
-          <Parameter Name="cargoTypeID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="uspAddEditUsers" ReturnType="Collection(tdoModel.ClsReturnValues)">
             <Parameter Name="userID" Mode="In" Type="Int32" />
@@ -148,6 +148,9 @@
             <Parameter Name="userID" Mode="In" Type="Int32" />
             <Parameter Name="oldPassword" Mode="In" Type="String" />
             <Parameter Name="newPassword" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspDelCargoType" ReturnType="Collection(tdoModel.ClsReturnValues)">
+            <Parameter Name="cargoTypeID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="ClsReturnValues">
@@ -229,6 +232,11 @@
           <Property Type="Boolean" Name="canView" Nullable="false" />
           <Property Type="Boolean" Name="canEdit" Nullable="false" />
           <Property Type="Boolean" Name="canDelete" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="uspDelCargoType_Result">
+          <Property Type="Int32" Name="ID" Nullable="true" />
+          <Property Type="Boolean" Name="IsSuccess" Nullable="true" />
+          <Property Type="String" Name="Response" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -386,6 +394,15 @@
                 <ScalarProperty Name="canView" ColumnName="canView" />
                 <ScalarProperty Name="canEdit" ColumnName="canEdit" />
                 <ScalarProperty Name="canDelete" ColumnName="canDelete" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspDelCargoType" FunctionName="tdoModel.Store.uspDelCargoType">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="tdoModel.ClsReturnValues">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IsSuccess" ColumnName="IsSuccess" />
+                <ScalarProperty Name="Response" ColumnName="Response" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

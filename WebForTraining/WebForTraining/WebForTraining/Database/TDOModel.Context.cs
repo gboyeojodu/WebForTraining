@@ -49,13 +49,9 @@ namespace WebForTraining.Database
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspAddEditCargoType", cargoTypeIDParameter, cargoTypeNameParameter, createdByIDParameter, sessionIDParameter);
         }
     
-        public virtual ObjectResult<ClsCargoType> uspGetCargoType(Nullable<int> cargoTypeID)
+        public virtual ObjectResult<ClsCargoType> uspGetCargoType()
         {
-            var cargoTypeIDParameter = cargoTypeID.HasValue ?
-                new ObjectParameter("cargoTypeID", cargoTypeID) :
-                new ObjectParameter("cargoTypeID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsCargoType>("uspGetCargoType", cargoTypeIDParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsCargoType>("uspGetCargoType");
         }
     
         public virtual ObjectResult<ClsReturnValues> uspAddEditUsers(Nullable<int> userID, Nullable<int> userGroupID, string userName, string password, string salt, Nullable<bool> passwordCanExpire, Nullable<System.DateTime> passwordExpiryDate, Nullable<bool> isLocked, Nullable<int> loginAttempts, Nullable<System.DateTime> lastLoginDate, string theme, Nullable<bool> resetPassword, Nullable<int> createdByID, Nullable<System.Guid> sessionID)
@@ -306,6 +302,15 @@ namespace WebForTraining.Database
                 new ObjectParameter("newPassword", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspChangePassword", userIDParameter, oldPasswordParameter, newPasswordParameter);
+        }
+    
+        public virtual ObjectResult<ClsReturnValues> uspDelCargoType(Nullable<int> cargoTypeID)
+        {
+            var cargoTypeIDParameter = cargoTypeID.HasValue ?
+                new ObjectParameter("cargoTypeID", cargoTypeID) :
+                new ObjectParameter("cargoTypeID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspDelCargoType", cargoTypeIDParameter);
         }
     }
 }
