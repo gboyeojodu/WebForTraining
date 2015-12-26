@@ -68,6 +68,14 @@ namespace WebForTraining.Controllers
             }
             return View();
         }
+        public ActionResult getCargoTypeDisplay()
+        {
+            if (!CheckSession())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            return View();
+        }
         public ActionResult AddEditUserGroup()
         {
             if (!CheckSession())
