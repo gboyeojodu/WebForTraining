@@ -1,4 +1,5 @@
 ﻿
+
 loading = '<div align="center" style="margin-top: 3%;"><i class="fa fa-spinner fa-3x fa-pulse"></i></div>';
 
 function ld_fm2(url) {
@@ -14,7 +15,7 @@ function hashChange() {
         $('.pageContent').load(page, function (response, status, xhr) {
             if (status == "error") {
                 var msg = "Sorry there was an error: ";
-                $('.pageContent').html(msg + xhr.status + " " + xhr.statusText);
+                alertMsg('Notification', msg, 'error');
 
             }
             //alertMsg('Successfully processed!','success');
@@ -157,4 +158,72 @@ function delRecord(id, url) {
 
     //alert('called finally');
     return false;
+}
+
+function styleTable(tb_id) {
+
+        $('input.tableflat').iCheck({
+            checkboxClass: 'icheckbox_flat-green',
+            radioClass: 'iradio_flat-green'
+        });
+
+    var asInitVals = new Array();
+    var oTable = $('#'+tb_id).dataTable({
+        "oLanguage": {
+            "sSearch": "Search all columns:"
+        },
+        "aoColumnDefs": [
+            {
+                'bSortable': false,
+                'aTargets': [0]
+            } //disables sorting for column one
+        ],
+        
+        'iDisplayLength': 12,
+        "sPaginationType": "full_numbers",
+        "dom": 'T<"clear">lfrtip'
+        ,
+        "tableTools": {
+            "sSwfPath": "../js/datatables/tools/swf/copy_csv_xls_pdf.swf"
+        }
+    });
+    $("tfoot input").keyup(function () {
+        /* Filter on the column based on the index of this element's parent <th> */
+        oTable.fnFilter(this.value, $("tfoot th").index($(this).parent()));
+    });
+    $("tfoot input").each(function (i) {
+        asInitVals[i] = this.value;
+    });
+    $("tfoot input").focus(function () {
+        if (this.className == "search_init") {
+            this.className = "";
+            this.value = "";
+        }
+    });
+    $("tfoot input").blur(function (i) {
+        if (this.value == "") {
+            this.className = "search_init";
+            this.value = asInitVals[$("tfoot input").index(this)];
+        }
+    });
+}
+
+function checkAll(ele, cls) {
+    //var checkboxes = document.getElementsByTagName('input');
+    alert(cls);
+    var checkboxes = document.getElementsByClassName(cls);
+    if (ele.checked) {
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].type == 'checkbox') {
+                checkboxes[i].checked = true;
+            }
+        }
+    } else {
+        for (var i = 0; i < checkboxes.length; i++) {
+            console.log(i)
+            if (checkboxes[i].type == 'checkbox') {
+                checkboxes[i].checked = false;
+            }
+        }
+    }
 }

@@ -26,14 +26,17 @@ namespace WebForTraining
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/js/bootstrap.min.js",
-                      "~/js/custom.js",
                        "~/js/nicescroll/jquery.nicescroll.min.js",
                        "~/js/notify/pnotify.core.js",
                        "~/js/notify/pnotify.buttons.js",
                        "~/js/notify/pnotify.nonblock.js",
-                       "~/js/myScript.js"
+                       "~/js/myScript.js",
+                       "~/js/icheck/icheck.min.js",
+                        "~/js/custom.js",
+                       "~/js/datatables/js/jquery.dataTables.js",
+                       "~/js/datatables/tools/js/dataTables.tableTools.js"
                       ));
-
+            
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/css/bootstrap.min.css",
                       "~/css/custom.css",
@@ -41,8 +44,10 @@ namespace WebForTraining
                       "~/css/animate.min.css",
                       "~/less/custom.css",
                       "~/css/normalize.css",
-                      "~/css/animate.min.css"
+                      "~/css/icheck/flat/green.css",
+                      "~/css/datatables/tools/css/dataTables.tableTools.css"
                       ));
+
             //bundles.Add(new ScriptBundle("~/bundles/scripts").IncludeDirectory("~/Scripts", "*.js", true));
 
             // Set EnableOptimizations to false for debugging. For more information,

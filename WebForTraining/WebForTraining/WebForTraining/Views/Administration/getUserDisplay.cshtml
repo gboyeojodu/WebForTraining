@@ -12,7 +12,7 @@
 @if (Users != null)
 {
     <div class="table-responsive">
-        <table class="table table-bordered table-hover" id="tblUsers">
+        <table class="table table-striped responsive-utilities jambo_table dataTable" id="tblUsers">
             <thead>
                 <tr>
                     <th><strong>User Name</strong></th>
@@ -46,6 +46,9 @@ else
 {
     <div class="alert alert-warning">No record to display</div>
 }
+<script>
+    styleTable('tblUsers');
+</script>
 
 
 
