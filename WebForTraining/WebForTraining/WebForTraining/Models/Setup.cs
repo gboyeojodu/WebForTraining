@@ -15,7 +15,7 @@ namespace WebForTraining.Models
             {
                 using (var db = new tdoEntities())
                 {
-                    obj = db.uspAddEditCargoType(item.cargoTypeID, item.cargoTypeName,item.createdByID,item.sessionID).FirstOrDefault();
+                    obj = db.uspAddEditCargoType(item.cargoTypeID, item.cargoTypeName,item.createdByID).FirstOrDefault();
                 }
             }
             catch (Exception ex) { obj.Response = ex.Message; obj.IsSuccess = false; obj.ID = 0; }

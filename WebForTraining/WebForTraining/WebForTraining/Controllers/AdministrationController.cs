@@ -68,5 +68,98 @@ namespace WebForTraining.Controllers
             }
             return View();
         }
+        public ActionResult AddEditUserGroup()
+        {
+            if (!CheckSession())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            return View();
+        }
+        public ActionResult AddEditUser()
+        {
+            if (!CheckSession())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            return View();
+        }
+        public ActionResult changePassword()
+        {
+            if (!CheckSession())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            return View();
+        }
+        public JsonResult setUsersGroup(string userGroupID, string groupName, string description)
+        {
+
+            if (userGroupID == "") { userGroupID = "0"; }
+
+            Guid Session = new Guid(GetSession()); //do not hard code session ID and createdbyID
+            int _id = 0; 
+            try { _id = int.Parse(userGroupID.Trim()); }
+            catch { }
+            ClsUserGroups obj = new ClsUserGroups()
+            {
+                userGroupID = _id,
+                groupName = groupName,
+                description = description,
+                createdByID = GetID(),
+                sessionID = Session
+            };
+            ClsReturnValues k = Administration.setUsersGroup(obj, Session);
+            return Json(new { id = k.ID, isSuccess = k.IsSuccess ?? false ? 1 : 0, msg = k.Response });
+        }
+        [HttpPost]
+        public JsonResult setUsers(string userID, string userGroupID, string userName, string Password, int isLocked, int resetPassword)
+        {
+            Guid Session = new Guid(GetSession());
+            if (Password == "") Password = " ";
+            int _id = 0; try { _id = int.Parse(userID.Trim()); }
+            catch { }
+            int _grIid = 0; try { _grIid = int.Parse(userGroupID.Trim()); }
+            catch { }
+            bool Locked = false; bool reset = false;
+            if (isLocked == 1) Locked = true; if (resetPassword == 1) reset = true;
+            ClsUsers obj = new ClsUsers()
+            {
+                userID = _id,
+                userGroupID = _grIid,
+                userName = userName.Trim(),
+                resetPassword = reset,
+                password = Password,
+                isLocked = Locked,
+                createdByID = GetID(),
+                theme = "Default",
+                sessionID = Session
+            };
+            ClsReturnValues k = Administration.setUsers(obj);
+            return Json(new { id = k.ID, isSuccess = k.IsSuccess ?? false ? 1 : 0, msg = k.Response });
+        }
+        public JsonResult deleteUsersGroup(string ids)
+        {
+            int id = int.Parse(ids);
+            ClsReturnValues k = Administration.delUsersGroup(id);
+            return Json(new { id = k.ID, isSuccess = k.IsSuccess ?? false ? 1 : 0, msg = k.Response });
+        }
+        public JsonResult deleteUser(string ids)
+        {
+            int id = int.Parse(ids);
+            ClsReturnValues k = Administration.delUsers(id);
+            return Json(new { id = k.ID, isSuccess = k.IsSuccess ?? false ? 1 : 0, msg = k.Response });
+        }
+        public JsonResult setChangePassword(string userID, string oldPassword, string newPassword, string confirmNewPassword)
+        {
+            if (newPassword != confirmNewPassword)
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "Confirm password not correct." });
+            }
+            int id = int.Parse(userID);
+            
+            ClsReturnValues k = Administration.changePassword(id, oldPassword, newPassword);
+            return Json(new { id = k.ID, isSuccess = k.IsSuccess ?? false ? 1 : 0, msg = k.Response });
+        }
     }
 }

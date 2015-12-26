@@ -99,7 +99,7 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
                                     <li>
-                                        <a href="javascript:;">Change Password</a>
+                                        <a href="javascript:;" onclick="javascript: ld_modal_fm('/Administration/changePassword', 'modalContentLoad','0');">Change Password</a>
                                     </li>
                                     <li>
                                         <a href="/Login/LogOut"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
@@ -153,6 +153,7 @@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
     

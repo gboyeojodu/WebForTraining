@@ -9,6 +9,12 @@
           <Parameter Name="cargoTypeID" Type="int" Mode="In" />
           <Parameter Name="cargoTypeName" Type="varchar" Mode="In" />
           <Parameter Name="createdByID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="uspAddEditUserGroups" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userGroupID" Type="int" Mode="In" />
+          <Parameter Name="groupName" Type="varchar(max)" Mode="In" />
+          <Parameter Name="description" Type="varchar(max)" Mode="In" />
+          <Parameter Name="createdByID" Type="int" Mode="In" />
           <Parameter Name="sessionID" Type="uniqueidentifier" Mode="In" />
         </Function>
         <Function Name="uspAddEditUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -44,6 +50,17 @@
           <Parameter Name="deviceName" Type="varchar" Mode="In" />
           <Parameter Name="browser" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="uspChangePassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userID" Type="int" Mode="In" />
+          <Parameter Name="oldPassword" Type="varchar(max)" Mode="In" />
+          <Parameter Name="newPassword" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="uspDelUsergroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userGroupID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="uspDelUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userID" Type="int" Mode="In" />
+        </Function>
         <Function Name="uspDelUserSession" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="sessionID" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="userID" Type="int" Mode="In" />
@@ -75,7 +92,6 @@
             <Parameter Name="cargoTypeID" Mode="In" Type="Int32" />
             <Parameter Name="cargoTypeName" Mode="In" Type="String" />
             <Parameter Name="createdByID" Mode="In" Type="Int32" />
-            <Parameter Name="sessionID" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="uspGetCargoType" ReturnType="Collection(tdoModel.ClsCargoType)">
           <Parameter Name="cargoTypeID" Mode="In" Type="Int32" />
@@ -127,6 +143,10 @@
             <Parameter Name="deviceName" Mode="In" Type="String" />
             <Parameter Name="browser" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="uspGetUserGroups" ReturnType="Collection(tdoModel.ClsUserGroups)" />
+          <FunctionImport Name="uspGetUserDisplay" ReturnType="Collection(tdoModel.ClsUserDisplay)">
+          <Parameter Name="userID" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="uspAddEditUserGroups" ReturnType="Collection(tdoModel.ClsReturnValues)">
             <Parameter Name="userGroupID" Mode="In" Type="Int32" />
             <Parameter Name="groupName" Mode="In" Type="String" />
@@ -135,15 +155,16 @@
             <Parameter Name="sessionID" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="uspDelUsergroup" ReturnType="Collection(tdoModel.ClsReturnValues)">
-            <Parameter Name="userGroupID" Mode="In" Type="Int32" />
+          <Parameter Name="userGroupID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="uspDelUsers" ReturnType="Collection(tdoModel.ClsReturnValues)">
-            <Parameter Name="userID" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="uspGetUserDisplay" ReturnType="Collection(tdoModel.ClsUserDisplay)">
           <Parameter Name="userID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="uspGetUserGroups" ReturnType="Collection(tdoModel.ClsUserGroups)" />
+          <FunctionImport Name="uspChangePassword" ReturnType="Collection(tdoModel.ClsReturnValues)">
+            <Parameter Name="userID" Mode="In" Type="Int32" />
+            <Parameter Name="oldPassword" Mode="In" Type="String" />
+            <Parameter Name="newPassword" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="ClsReturnValues">
           <Property Type="Int32" Name="ID" Nullable="true" />
@@ -157,8 +178,8 @@
           <Property Type="Int32" Name="createdByID" Nullable="true" />
           <Property Type="DateTime" Name="dateModified" Nullable="true" Precision="23" />
           <Property Type="Int32" Name="modifiedByID" Nullable="true" />
-          <Property Type="String" Name="userName" Nullable="false" MaxLength="255" />
-          <Property Type="Guid" Name="sessionID" Nullable="true" />
+          <Property Type="Int32" Name="createdByID1" Nullable="true" />
+          <Property Type="String" Name="userName" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="ClsUsers">
           <Property Type="Int32" Name="userID" Nullable="false" />
@@ -176,6 +197,7 @@
           <Property Type="DateTime" Name="dateCreated" Nullable="false" Precision="23" />
           <Property Type="Int32" Name="createdByID" Nullable="true" />
           <Property Type="Guid" Name="sessionID" Nullable="false" />
+          <Property Type="Int32" Name="companyID" Nullable="true" />
           <Property Type="String" Name="salt" Nullable="true" />
         </ComplexType>
         <ComplexType Name="ClsUserSessionHistory">
@@ -250,8 +272,8 @@
                 <ScalarProperty Name="createdByID" ColumnName="createdByID" />
                 <ScalarProperty Name="dateModified" ColumnName="dateModified" />
                 <ScalarProperty Name="modifiedByID" ColumnName="modifiedByID" />
+                <ScalarProperty Name="createdByID1" ColumnName="createdByID1" />
                 <ScalarProperty Name="userName" ColumnName="userName" />
-                <ScalarProperty Name="sessionID" ColumnName="sessionID" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -309,6 +331,7 @@
                 <ScalarProperty Name="dateCreated" ColumnName="dateCreated" />
                 <ScalarProperty Name="createdByID" ColumnName="createdByID" />
                 <ScalarProperty Name="sessionID" ColumnName="sessionID" />
+                <ScalarProperty Name="companyID" ColumnName="companyID" />
                 <ScalarProperty Name="salt" ColumnName="salt" />
               </ComplexTypeMapping>
             </ResultMapping>
@@ -352,8 +375,21 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspGetUserGroups" FunctionName="tdoModel.Store.uspGetUserGroups">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="tdoModel.ClsUserGroups">
+                <ScalarProperty Name="userGroupID" ColumnName="userGroupID" />
+                <ScalarProperty Name="groupName" ColumnName="groupName" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="dateCreated" ColumnName="dateCreated" />
+                <ScalarProperty Name="createdByID" ColumnName="createdByID" />
+                <ScalarProperty Name="createdByName" ColumnName="createdByName" />
+                <ScalarProperty Name="sessionID" ColumnName="sessionID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="uspGetUserDisplay" FunctionName="tdoModel.Store.uspGetUserDisplay">
-            <ResultMapping>
+          <ResultMapping>
               <ComplexTypeMapping TypeName="tdoModel.ClsUserDisplay">
                 <ScalarProperty Name="userID" ColumnName="userID" />
                 <ScalarProperty Name="accessLevelID" ColumnName="accessLevelID" />
@@ -373,20 +409,43 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="uspGetUserGroups" FunctionName="tdoModel.Store.uspGetUserGroups">
+          <FunctionImportMapping FunctionImportName="uspAddEditUserGroups" FunctionName="tdoModel.Store.uspAddEditUserGroups">
           <ResultMapping>
-              <ComplexTypeMapping TypeName="tdoModel.ClsUserGroups">
-                <ScalarProperty Name="userGroupID" ColumnName="userGroupID" />
-                <ScalarProperty Name="groupName" ColumnName="groupName" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="dateCreated" ColumnName="dateCreated" />
-                <ScalarProperty Name="createdByID" ColumnName="createdByID" />
-                <ScalarProperty Name="createdByName" ColumnName="createdByName" />
-                <ScalarProperty Name="sessionID" ColumnName="sessionID" />
+              <ComplexTypeMapping TypeName="tdoModel.ClsReturnValues">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IsSuccess" ColumnName="IsSuccess" />
+                <ScalarProperty Name="Response" ColumnName="Response" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          </EntityContainerMapping>
+          <FunctionImportMapping FunctionImportName="uspDelUsergroup" FunctionName="tdoModel.Store.uspDelUsergroup">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="tdoModel.ClsReturnValues">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IsSuccess" ColumnName="IsSuccess" />
+                <ScalarProperty Name="Response" ColumnName="Response" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspDelUsers" FunctionName="tdoModel.Store.uspDelUsers">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="tdoModel.ClsReturnValues">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IsSuccess" ColumnName="IsSuccess" />
+                <ScalarProperty Name="Response" ColumnName="Response" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspChangePassword" FunctionName="tdoModel.Store.uspChangePassword">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="tdoModel.ClsReturnValues">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IsSuccess" ColumnName="IsSuccess" />
+                <ScalarProperty Name="Response" ColumnName="Response" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

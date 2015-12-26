@@ -19,8 +19,8 @@
           <ScalarProperty Name="createdByID" ColumnName="createdByID" />
           <ScalarProperty Name="dateModified" ColumnName="dateModified" />
           <ScalarProperty Name="modifiedByID" ColumnName="modifiedByID" />
+          <ScalarProperty Name="createdByID1" ColumnName="createdByID1" />
           <ScalarProperty Name="userName" ColumnName="userName" />
-          <ScalarProperty Name="sessionID" ColumnName="sessionID" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
@@ -78,6 +78,7 @@
           <ScalarProperty Name="dateCreated" ColumnName="dateCreated" />
           <ScalarProperty Name="createdByID" ColumnName="createdByID" />
           <ScalarProperty Name="sessionID" ColumnName="sessionID" />
+          <ScalarProperty Name="companyID" ColumnName="companyID" />
           <ScalarProperty Name="salt" ColumnName="salt" />
         </ComplexTypeMapping>
       </ResultMapping>
@@ -121,6 +122,19 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="uspGetUserGroups" FunctionName="tdoModel.Store.uspGetUserGroups">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="tdoModel.ClsUserGroups">
+          <ScalarProperty Name="userGroupID" ColumnName="userGroupID" />
+          <ScalarProperty Name="groupName" ColumnName="groupName" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="dateCreated" ColumnName="dateCreated" />
+          <ScalarProperty Name="createdByID" ColumnName="createdByID" />
+          <ScalarProperty Name="createdByName" ColumnName="createdByName" />
+          <ScalarProperty Name="sessionID" ColumnName="sessionID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="uspGetUserDisplay" FunctionName="tdoModel.Store.uspGetUserDisplay">
       <ResultMapping>
         <ComplexTypeMapping TypeName="tdoModel.ClsUserDisplay">
@@ -142,16 +156,39 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="uspGetUserGroups" FunctionName="tdoModel.Store.uspGetUserGroups">
+    <FunctionImportMapping FunctionImportName="uspAddEditUserGroups" FunctionName="tdoModel.Store.uspAddEditUserGroups">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="tdoModel.ClsUserGroups">
-          <ScalarProperty Name="userGroupID" ColumnName="userGroupID" />
-          <ScalarProperty Name="groupName" ColumnName="groupName" />
-          <ScalarProperty Name="description" ColumnName="description" />
-          <ScalarProperty Name="dateCreated" ColumnName="dateCreated" />
-          <ScalarProperty Name="createdByID" ColumnName="createdByID" />
-          <ScalarProperty Name="createdByName" ColumnName="createdByName" />
-          <ScalarProperty Name="sessionID" ColumnName="sessionID" />
+        <ComplexTypeMapping TypeName="tdoModel.ClsReturnValues">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="IsSuccess" ColumnName="IsSuccess" />
+          <ScalarProperty Name="Response" ColumnName="Response" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="uspDelUsergroup" FunctionName="tdoModel.Store.uspDelUsergroup">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="tdoModel.ClsReturnValues">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="IsSuccess" ColumnName="IsSuccess" />
+          <ScalarProperty Name="Response" ColumnName="Response" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="uspDelUsers" FunctionName="tdoModel.Store.uspDelUsers">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="tdoModel.ClsReturnValues">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="IsSuccess" ColumnName="IsSuccess" />
+          <ScalarProperty Name="Response" ColumnName="Response" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="uspChangePassword" FunctionName="tdoModel.Store.uspChangePassword">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="tdoModel.ClsReturnValues">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="IsSuccess" ColumnName="IsSuccess" />
+          <ScalarProperty Name="Response" ColumnName="Response" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

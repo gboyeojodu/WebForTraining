@@ -58,7 +58,7 @@ namespace WebForTraining.Models
             using (var db = new tdoEntities())
             {
 
-                lst = db.uspAddEditUsers(obj.userID, obj.userGroupID, obj.userName, obj.password,obj.salt,obj.passwordCanExpire, obj.passwordExpiryDate, obj.isLocked, obj.loginAttempts, obj.lastLoginDate, obj.theme, obj.resetPassword, obj.createdByID, obj.sessionID).FirstOrDefault();
+                lst = db.uspAddEditUsers(obj.userID, obj.userGroupID, obj.userName, obj.password, obj.password, obj.passwordCanExpire, obj.passwordExpiryDate, obj.isLocked, obj.loginAttempts, obj.lastLoginDate, obj.theme, obj.resetPassword, obj.createdByID, obj.sessionID).FirstOrDefault();
             }
             return lst;
         }
@@ -84,5 +84,16 @@ namespace WebForTraining.Models
         }
 
         #endregion users
+        public static ClsReturnValues changePassword(int userID, string oldPassword, string newPassword)
+        {
+            newPassword = Security.Encrypt(newPassword);
+            oldPassword = Security.Encrypt(oldPassword);
+            ClsReturnValues lst = new ClsReturnValues();
+            using (var db = new tdoEntities())
+            {
+                lst = db.uspChangePassword(userID, oldPassword, newPassword).FirstOrDefault();
+            }
+            return lst;
+        }
     }
 }

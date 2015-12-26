@@ -5,14 +5,14 @@
     //var token = Session["Token"].ToString();
     Layout = null;
     //List<string> AuthForms = (List<string>)Session["Forms"];
-    var UserGroup = Model.Administration.getUsersGroup();
+    var UserGroup = Administration.getUsersGroup();
 
 
 }
-@if (UserGroup.Length > 0)
+@if (UserGroup != null)
 {
     <div class="table-responsive">
-        <table class="table table-bordered table-hover" id="tbleducation">
+        <table class="table table-bordered table-hover" id="tblUsersGroup">
             <thead>
                 <tr>
                     <th><strong>Group Name</strong></th>
@@ -27,10 +27,10 @@
                         <td><span class="underline">@grp.groupName</span></td>
                         <td>@grp.description</td>
                         <td>
-                            <a data-id="@grp.educationID" class="btn btn-metro btn-info btn-xs educationRecord-edit">
+                            <a data-id="@grp.userGroupID" onclick="javascript: ld_modal_fm('/Administration/AddEditUserGroup', 'modalContentLoad', '@grp.userGroupID');" class="btn btn-metro btn-info btn-xs">
                                 <i class="fa fa-pencil"></i>
                             </a>
-                            <a data-id="@grp.educationID" class="btn btn-metro btn-danger btn-xs educationRecord-trash">
+                            <a data-id="@grp.userGroupID" onclick="javascript: delRecord('@grp.userGroupID','/Administration/deleteUsersGroup');" class="btn btn-metro btn-danger btn-xs">
                                 <i class="glyphicon glyphicon-remove"></i>
                             </a>
                         </td>

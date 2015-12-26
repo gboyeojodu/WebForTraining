@@ -28,7 +28,7 @@ namespace WebForTraining.Database
         }
     
     
-        public virtual ObjectResult<ClsReturnValues> uspAddEditCargoType(Nullable<int> cargoTypeID, string cargoTypeName, Nullable<int> createdByID, Nullable<System.Guid> sessionID)
+        public virtual ObjectResult<ClsReturnValues> uspAddEditCargoType(Nullable<int> cargoTypeID, string cargoTypeName, Nullable<int> createdByID)
         {
             var cargoTypeIDParameter = cargoTypeID.HasValue ?
                 new ObjectParameter("cargoTypeID", cargoTypeID) :
@@ -42,11 +42,7 @@ namespace WebForTraining.Database
                 new ObjectParameter("createdByID", createdByID) :
                 new ObjectParameter("createdByID", typeof(int));
     
-            var sessionIDParameter = sessionID.HasValue ?
-                new ObjectParameter("sessionID", sessionID) :
-                new ObjectParameter("sessionID", typeof(System.Guid));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspAddEditCargoType", cargoTypeIDParameter, cargoTypeNameParameter, createdByIDParameter, sessionIDParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspAddEditCargoType", cargoTypeIDParameter, cargoTypeNameParameter, createdByIDParameter);
         }
     
         public virtual ObjectResult<ClsCargoType> uspGetCargoType(Nullable<int> cargoTypeID)
@@ -234,6 +230,20 @@ namespace WebForTraining.Database
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspUserAuthentication", userNameParameter, passwordParameter, deviceTypeParameter, deviceNameParameter, browserParameter);
         }
     
+        public virtual ObjectResult<ClsUserGroups> uspGetUserGroups()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsUserGroups>("uspGetUserGroups");
+        }
+    
+        public virtual ObjectResult<ClsUserDisplay> uspGetUserDisplay(Nullable<int> userID)
+        {
+            var userIDParameter = userID.HasValue ?
+                new ObjectParameter("userID", userID) :
+                new ObjectParameter("userID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsUserDisplay>("uspGetUserDisplay", userIDParameter);
+        }
+    
         public virtual ObjectResult<ClsReturnValues> uspAddEditUserGroups(Nullable<int> userGroupID, string groupName, string description, Nullable<int> createdByID, Nullable<System.Guid> sessionID)
         {
             var userGroupIDParameter = userGroupID.HasValue ?
@@ -277,18 +287,21 @@ namespace WebForTraining.Database
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspDelUsers", userIDParameter);
         }
     
-        public virtual ObjectResult<ClsUserDisplay> uspGetUserDisplay(Nullable<int> userID)
+        public virtual ObjectResult<ClsReturnValues> uspChangePassword(Nullable<int> userID, string oldPassword, string newPassword)
         {
             var userIDParameter = userID.HasValue ?
                 new ObjectParameter("userID", userID) :
                 new ObjectParameter("userID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsUserDisplay>("uspGetUserDisplay", userIDParameter);
-        }
+            var oldPasswordParameter = oldPassword != null ?
+                new ObjectParameter("oldPassword", oldPassword) :
+                new ObjectParameter("oldPassword", typeof(string));
     
-        public virtual ObjectResult<ClsUserGroups> uspGetUserGroups()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsUserGroups>("uspGetUserGroups");
+            var newPasswordParameter = newPassword != null ?
+                new ObjectParameter("newPassword", newPassword) :
+                new ObjectParameter("newPassword", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspChangePassword", userIDParameter, oldPasswordParameter, newPasswordParameter);
         }
     }
 }

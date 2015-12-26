@@ -28,6 +28,7 @@ namespace WebForTraining.Database
         public System.DateTime dateCreated { get; set; }
         public Nullable<int> createdByID { get; set; }
         public System.Guid sessionID { get; set; }
+        public Nullable<int> companyID { get; set; }
         public string salt { get; set; }
     }
 }

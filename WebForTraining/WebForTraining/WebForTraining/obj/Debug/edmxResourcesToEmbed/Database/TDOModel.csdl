@@ -5,7 +5,6 @@
       <Parameter Name="cargoTypeID" Mode="In" Type="Int32" />
       <Parameter Name="cargoTypeName" Mode="In" Type="String" />
       <Parameter Name="createdByID" Mode="In" Type="Int32" />
-      <Parameter Name="sessionID" Mode="In" Type="Guid" />
     </FunctionImport>
     <FunctionImport Name="uspGetCargoType" ReturnType="Collection(tdoModel.ClsCargoType)">
       <Parameter Name="cargoTypeID" Mode="In" Type="Int32" />
@@ -57,6 +56,10 @@
       <Parameter Name="deviceName" Mode="In" Type="String" />
       <Parameter Name="browser" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="uspGetUserGroups" ReturnType="Collection(tdoModel.ClsUserGroups)" />
+    <FunctionImport Name="uspGetUserDisplay" ReturnType="Collection(tdoModel.ClsUserDisplay)">
+      <Parameter Name="userID" Mode="In" Type="Int32" />
+    </FunctionImport>
     <FunctionImport Name="uspAddEditUserGroups" ReturnType="Collection(tdoModel.ClsReturnValues)">
       <Parameter Name="userGroupID" Mode="In" Type="Int32" />
       <Parameter Name="groupName" Mode="In" Type="String" />
@@ -70,10 +73,11 @@
     <FunctionImport Name="uspDelUsers" ReturnType="Collection(tdoModel.ClsReturnValues)">
       <Parameter Name="userID" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="uspGetUserDisplay" ReturnType="Collection(tdoModel.ClsUserDisplay)">
+    <FunctionImport Name="uspChangePassword" ReturnType="Collection(tdoModel.ClsReturnValues)">
       <Parameter Name="userID" Mode="In" Type="Int32" />
+      <Parameter Name="oldPassword" Mode="In" Type="String" />
+      <Parameter Name="newPassword" Mode="In" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="uspGetUserGroups" ReturnType="Collection(tdoModel.ClsUserGroups)" />
   </EntityContainer>
   <ComplexType Name="ClsReturnValues">
     <Property Type="Int32" Name="ID" Nullable="true" />
@@ -87,8 +91,8 @@
     <Property Type="Int32" Name="createdByID" Nullable="true" />
     <Property Type="DateTime" Name="dateModified" Nullable="true" Precision="23" />
     <Property Type="Int32" Name="modifiedByID" Nullable="true" />
-    <Property Type="String" Name="userName" Nullable="false" MaxLength="255" />
-    <Property Type="Guid" Name="sessionID" Nullable="true" />
+    <Property Type="Int32" Name="createdByID1" Nullable="true" />
+    <Property Type="String" Name="userName" Nullable="true" MaxLength="50" />
   </ComplexType>
   <ComplexType Name="ClsUsers">
     <Property Type="Int32" Name="userID" Nullable="false" />
@@ -106,6 +110,7 @@
     <Property Type="DateTime" Name="dateCreated" Nullable="false" Precision="23" />
     <Property Type="Int32" Name="createdByID" Nullable="true" />
     <Property Type="Guid" Name="sessionID" Nullable="false" />
+    <Property Type="Int32" Name="companyID" Nullable="true" />
     <Property Type="String" Name="salt" Nullable="true" />
   </ComplexType>
   <ComplexType Name="ClsUserSessionHistory">
