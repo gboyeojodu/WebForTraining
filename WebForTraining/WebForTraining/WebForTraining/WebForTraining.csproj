@@ -208,6 +208,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TDOModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Database\uspDelCargoType_Result.cs">
+      <DependentUpon>TDOModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1081,9 +1084,11 @@
     <Content Include="Views\Administration\AddEditUser.cshtml" />
     <Content Include="Views\Administration\changePassword.cshtml" />
     <Content Include="Views\Administration\getCargoTypeDisplay.cshtml" />
+    <Content Include="Views\Administration\AddEditCargoType.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Resources\" />
     <Folder Include="Views\Setup\" />
   </ItemGroup>
   <ItemGroup>
