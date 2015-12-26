@@ -1,8 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="tdoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <Function Name="uspAddEditAccessLevels" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="accessLevelID" Type="int" Mode="In" />
+    <Parameter Name="userGroupID" Type="int" Mode="In" />
+    <Parameter Name="formID" Type="int" Mode="In" />
+    <Parameter Name="canAdd" Type="bit" Mode="In" />
+    <Parameter Name="canView" Type="bit" Mode="In" />
+    <Parameter Name="canEdit" Type="bit" Mode="In" />
+    <Parameter Name="canDelete" Type="bit" Mode="In" />
+    <Parameter Name="canApprove" Type="bit" Mode="In" />
+    <Parameter Name="createdByID" Type="int" Mode="In" />
+    <Parameter Name="sessionID" Type="uniqueidentifier" Mode="In" />
+  </Function>
   <Function Name="uspAddEditCargoType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="cargoTypeID" Type="int" Mode="In" />
     <Parameter Name="cargoTypeName" Type="varchar" Mode="In" />
+    <Parameter Name="createdByID" Type="int" Mode="In" />
+    <Parameter Name="sessionID" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="uspAddEditCity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="cityID" Type="int" Mode="In" />
+    <Parameter Name="cityName" Type="varchar" Mode="In" />
+    <Parameter Name="cityCode" Type="varchar" Mode="In" />
+    <Parameter Name="stateID" Type="int" Mode="In" />
+    <Parameter Name="createdByID" Type="int" Mode="In" />
+    <Parameter Name="sessionID" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="uspAddEditUserGroups" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userGroupID" Type="int" Mode="In" />
+    <Parameter Name="groupName" Type="varchar(max)" Mode="In" />
+    <Parameter Name="description" Type="varchar(max)" Mode="In" />
     <Parameter Name="createdByID" Type="int" Mode="In" />
     <Parameter Name="sessionID" Type="uniqueidentifier" Mode="In" />
   </Function>
@@ -39,11 +66,28 @@
     <Parameter Name="deviceName" Type="varchar" Mode="In" />
     <Parameter Name="browser" Type="varchar" Mode="In" />
   </Function>
+  <Function Name="uspDelAccessLevels" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="accesslevelID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="uspDelUsergroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userGroupID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="uspDelUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userID" Type="int" Mode="In" />
+  </Function>
   <Function Name="uspDelUserSession" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="sessionID" Type="uniqueidentifier" Mode="In" />
     <Parameter Name="userID" Type="int" Mode="In" />
   </Function>
+  <Function Name="uspGetAccessLevels" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="accessLevelID" Type="int" Mode="In" />
+    <Parameter Name="userGroupID" Type="int" Mode="In" />
+    <Parameter Name="formID" Type="int" Mode="In" />
+  </Function>
   <Function Name="uspGetCargoType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="cargoTypeID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="uspGetCity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="cargoTypeID" Type="int" Mode="In" />
   </Function>
   <Function Name="uspGetUserDisplay" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">

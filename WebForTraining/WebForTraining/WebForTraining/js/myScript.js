@@ -132,9 +132,9 @@ function setForm($form,url) {
 }
 
 function delRecord(id, url) {
-    if (!confirm('Are you sure you want to delete this record?')) {
-        return;
-    }
+    //if (!confirm('Are you sure you want to delete this record?')) {
+    //    return;
+    //}
     $.ajax({
         type: "POST",
         url: url,
@@ -210,7 +210,7 @@ function styleTable(tb_id) {
 
 function checkAll(ele, cls) {
     //var checkboxes = document.getElementsByTagName('input');
-    alert(cls);
+    //alert(cls);
     var checkboxes = document.getElementsByClassName(cls);
     if (ele.checked) {
         for (var i = 0; i < checkboxes.length; i++) {
@@ -226,4 +226,35 @@ function checkAll(ele, cls) {
             }
         }
     }
+}
+
+function countCheckBox(tbody_id, btn_id) {
+    if ($('#' + tbody_id + ' input:checkbox:checked').length > 0) {
+        $('#'+ btn_id).fadeIn();
+    }
+    else {
+        //$('#chkAllTaxFormula').checked = false;
+        $('#' + btn_id).fadeOut();
+    }
+}
+
+
+function splitCheckboxIdDelete(tb_cls,body_id, url) {
+    if ($('#' + body_id + ' input:checkbox:checked').length < 1) {
+        alertMsg('Notification', 'please check the item to delete...', 'error');
+        return;
+    }
+    if (!confirm('Do you want to delete ' + $('#' + body_id + ' input:checkbox:checked').length + ' record(s)')) {
+        return
+    }
+      
+    var sel_IDs = "";
+    $('.' + tb_cls).each(function () {
+        if (this.checked) {
+            sel_IDs += $(this).val() + ",";
+        }
+    });
+
+    delRecord(sel_IDs, url);
+
 }

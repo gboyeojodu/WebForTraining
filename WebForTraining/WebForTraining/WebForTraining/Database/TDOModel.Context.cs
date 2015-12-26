@@ -307,5 +307,114 @@ namespace WebForTraining.Database
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspChangePassword", userIDParameter, oldPasswordParameter, newPasswordParameter);
         }
+    
+        public virtual ObjectResult<ClsReturnValues> uspAddEditAccessLevels(Nullable<int> accessLevelID, Nullable<int> userGroupID, Nullable<int> formID, Nullable<bool> canAdd, Nullable<bool> canView, Nullable<bool> canEdit, Nullable<bool> canDelete, Nullable<bool> canApprove, Nullable<int> createdByID, Nullable<System.Guid> sessionID)
+        {
+            var accessLevelIDParameter = accessLevelID.HasValue ?
+                new ObjectParameter("accessLevelID", accessLevelID) :
+                new ObjectParameter("accessLevelID", typeof(int));
+    
+            var userGroupIDParameter = userGroupID.HasValue ?
+                new ObjectParameter("userGroupID", userGroupID) :
+                new ObjectParameter("userGroupID", typeof(int));
+    
+            var formIDParameter = formID.HasValue ?
+                new ObjectParameter("formID", formID) :
+                new ObjectParameter("formID", typeof(int));
+    
+            var canAddParameter = canAdd.HasValue ?
+                new ObjectParameter("canAdd", canAdd) :
+                new ObjectParameter("canAdd", typeof(bool));
+    
+            var canViewParameter = canView.HasValue ?
+                new ObjectParameter("canView", canView) :
+                new ObjectParameter("canView", typeof(bool));
+    
+            var canEditParameter = canEdit.HasValue ?
+                new ObjectParameter("canEdit", canEdit) :
+                new ObjectParameter("canEdit", typeof(bool));
+    
+            var canDeleteParameter = canDelete.HasValue ?
+                new ObjectParameter("canDelete", canDelete) :
+                new ObjectParameter("canDelete", typeof(bool));
+    
+            var canApproveParameter = canApprove.HasValue ?
+                new ObjectParameter("canApprove", canApprove) :
+                new ObjectParameter("canApprove", typeof(bool));
+    
+            var createdByIDParameter = createdByID.HasValue ?
+                new ObjectParameter("createdByID", createdByID) :
+                new ObjectParameter("createdByID", typeof(int));
+    
+            var sessionIDParameter = sessionID.HasValue ?
+                new ObjectParameter("sessionID", sessionID) :
+                new ObjectParameter("sessionID", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspAddEditAccessLevels", accessLevelIDParameter, userGroupIDParameter, formIDParameter, canAddParameter, canViewParameter, canEditParameter, canDeleteParameter, canApproveParameter, createdByIDParameter, sessionIDParameter);
+        }
+    
+        public virtual ObjectResult<ClsReturnValues> uspAddEditCity(Nullable<int> cityID, string cityName, string cityCode, Nullable<int> stateID, Nullable<int> createdByID, Nullable<System.Guid> sessionID)
+        {
+            var cityIDParameter = cityID.HasValue ?
+                new ObjectParameter("cityID", cityID) :
+                new ObjectParameter("cityID", typeof(int));
+    
+            var cityNameParameter = cityName != null ?
+                new ObjectParameter("cityName", cityName) :
+                new ObjectParameter("cityName", typeof(string));
+    
+            var cityCodeParameter = cityCode != null ?
+                new ObjectParameter("cityCode", cityCode) :
+                new ObjectParameter("cityCode", typeof(string));
+    
+            var stateIDParameter = stateID.HasValue ?
+                new ObjectParameter("stateID", stateID) :
+                new ObjectParameter("stateID", typeof(int));
+    
+            var createdByIDParameter = createdByID.HasValue ?
+                new ObjectParameter("createdByID", createdByID) :
+                new ObjectParameter("createdByID", typeof(int));
+    
+            var sessionIDParameter = sessionID.HasValue ?
+                new ObjectParameter("sessionID", sessionID) :
+                new ObjectParameter("sessionID", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspAddEditCity", cityIDParameter, cityNameParameter, cityCodeParameter, stateIDParameter, createdByIDParameter, sessionIDParameter);
+        }
+    
+        public virtual ObjectResult<ClsReturnValues> uspDelAccessLevels(Nullable<int> accesslevelID)
+        {
+            var accesslevelIDParameter = accesslevelID.HasValue ?
+                new ObjectParameter("accesslevelID", accesslevelID) :
+                new ObjectParameter("accesslevelID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspDelAccessLevels", accesslevelIDParameter);
+        }
+    
+        public virtual ObjectResult<ClsAccessLevels> uspGetAccessLevels(Nullable<int> accessLevelID, Nullable<int> userGroupID, Nullable<int> formID)
+        {
+            var accessLevelIDParameter = accessLevelID.HasValue ?
+                new ObjectParameter("accessLevelID", accessLevelID) :
+                new ObjectParameter("accessLevelID", typeof(int));
+    
+            var userGroupIDParameter = userGroupID.HasValue ?
+                new ObjectParameter("userGroupID", userGroupID) :
+                new ObjectParameter("userGroupID", typeof(int));
+    
+            var formIDParameter = formID.HasValue ?
+                new ObjectParameter("formID", formID) :
+                new ObjectParameter("formID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsAccessLevels>("uspGetAccessLevels", accessLevelIDParameter, userGroupIDParameter, formIDParameter);
+        }
+    
+        public virtual ObjectResult<ClsCity> uspGetCity(Nullable<int> cargoTypeID)
+        {
+            var cargoTypeIDParameter = cargoTypeID.HasValue ?
+                new ObjectParameter("cargoTypeID", cargoTypeID) :
+                new ObjectParameter("cargoTypeID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsCity>("uspGetCity", cargoTypeIDParameter);
+        }
     }
 }

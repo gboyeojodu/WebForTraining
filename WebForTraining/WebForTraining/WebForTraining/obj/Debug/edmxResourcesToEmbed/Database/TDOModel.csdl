@@ -79,6 +79,37 @@
       <Parameter Name="oldPassword" Mode="In" Type="String" />
       <Parameter Name="newPassword" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="uspAddEditAccessLevels" ReturnType="Collection(tdoModel.ClsReturnValues)">
+      <Parameter Name="accessLevelID" Mode="In" Type="Int32" />
+      <Parameter Name="userGroupID" Mode="In" Type="Int32" />
+      <Parameter Name="formID" Mode="In" Type="Int32" />
+      <Parameter Name="canAdd" Mode="In" Type="Boolean" />
+      <Parameter Name="canView" Mode="In" Type="Boolean" />
+      <Parameter Name="canEdit" Mode="In" Type="Boolean" />
+      <Parameter Name="canDelete" Mode="In" Type="Boolean" />
+      <Parameter Name="canApprove" Mode="In" Type="Boolean" />
+      <Parameter Name="createdByID" Mode="In" Type="Int32" />
+      <Parameter Name="sessionID" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="uspAddEditCity" ReturnType="Collection(tdoModel.ClsReturnValues)">
+      <Parameter Name="cityID" Mode="In" Type="Int32" />
+      <Parameter Name="cityName" Mode="In" Type="String" />
+      <Parameter Name="cityCode" Mode="In" Type="String" />
+      <Parameter Name="stateID" Mode="In" Type="Int32" />
+      <Parameter Name="createdByID" Mode="In" Type="Int32" />
+      <Parameter Name="sessionID" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="uspDelAccessLevels" ReturnType="Collection(tdoModel.ClsReturnValues)">
+      <Parameter Name="accesslevelID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspGetAccessLevels" ReturnType="Collection(tdoModel.ClsAccessLevels)">
+      <Parameter Name="accessLevelID" Mode="In" Type="Int32" />
+      <Parameter Name="userGroupID" Mode="In" Type="Int32" />
+      <Parameter Name="formID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspGetCity" ReturnType="Collection(tdoModel.ClsCity)">
+      <Parameter Name="cargoTypeID" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="ClsReturnValues">
     <Property Type="Int32" Name="ID" Nullable="true" />
@@ -159,5 +190,32 @@
     <Property Type="Boolean" Name="canView" Nullable="false" />
     <Property Type="Boolean" Name="canEdit" Nullable="false" />
     <Property Type="Boolean" Name="canDelete" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="ClsCity">
+    <Property Type="Int32" Name="cargoTypeID" Nullable="false" />
+    <Property Type="String" Name="cargoTypeName" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="dateCreated" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="dateModified" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="modifiedByID" Nullable="true" />
+    <Property Type="Int32" Name="createdByID" Nullable="true" />
+    <Property Type="String" Name="userName" Nullable="false" MaxLength="255" />
+  </ComplexType>
+  <ComplexType Name="ClsAccessLevels">
+    <Property Type="Int32" Name="accessLevelID" Nullable="false" />
+    <Property Type="Int32" Name="userGroupID" Nullable="true" />
+    <Property Type="String" Name="menuName" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="menuItemName" Nullable="true" MaxLength="255" />
+    <Property Type="Int32" Name="formID" Nullable="true" />
+    <Property Type="Boolean" Name="canAdd" Nullable="true" />
+    <Property Type="Boolean" Name="canView" Nullable="true" />
+    <Property Type="Boolean" Name="canEdit" Nullable="true" />
+    <Property Type="Boolean" Name="canDelete" Nullable="true" />
+    <Property Type="Boolean" Name="canApprove" Nullable="true" />
+    <Property Type="DateTime" Name="dateCreated" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="createdByID" Nullable="true" />
+    <Property Type="String" Name="formName" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="createdByName" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="groupName" Nullable="false" MaxLength="50" />
+    <Property Type="Guid" Name="sessionID" Nullable="true" />
   </ComplexType>
 </Schema>

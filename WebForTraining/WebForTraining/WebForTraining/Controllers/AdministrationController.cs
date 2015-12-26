@@ -148,15 +148,53 @@ namespace WebForTraining.Controllers
         }
         public JsonResult deleteUsersGroup(string ids)
         {
-            int id = int.Parse(ids);
-            ClsReturnValues k = Administration.delUsersGroup(id);
-            return Json(new { id = k.ID, isSuccess = k.IsSuccess ?? false ? 1 : 0, msg = k.Response });
+            string[] id_s = ids.Trim().Split(',');
+            string message = "";
+            List<ClsReturnValues> obj = new List<ClsReturnValues>();
+            foreach (var id in id_s)
+            {
+                int _id = 0; try { _id = int.Parse(id.Trim()); }
+                catch { }
+                if (_id > 0)
+                    obj.Add(Administration.delUsersGroup(_id));
+            }
+
+            bool isSuccess = obj.Count(p => p.IsSuccess == false) > 0 ? false : true;
+            if (obj.Count(p => p.IsSuccess == true) > 1)
+            {
+                message = obj.Count(p => p.IsSuccess == true).ToString() + " records deleted";
+            }
+            else
+            {
+                message = obj.Count(p => p.IsSuccess == true).ToString() + " record deleted";
+            }
+
+            return Json(new { id = isSuccess ? 1 : 0, isSuccess = isSuccess ? 1 : 0, msg = message });
         }
         public JsonResult deleteUser(string ids)
         {
-            int id = int.Parse(ids);
-            ClsReturnValues k = Administration.delUsers(id);
-            return Json(new { id = k.ID, isSuccess = k.IsSuccess ?? false ? 1 : 0, msg = k.Response });
+            string[] id_s = ids.Trim().Split(',');
+            string message = "";
+            List<ClsReturnValues> obj = new List<ClsReturnValues>();
+            foreach (var id in id_s)
+            {
+                int _id = 0; try { _id = int.Parse(id.Trim()); }
+                catch { }
+                if (_id > 0)
+                    obj.Add(Administration.delUsers(_id));
+            }
+
+            bool isSuccess = obj.Count(p => p.IsSuccess == false) > 0 ? false : true;
+            if (obj.Count(p => p.IsSuccess == true) > 1)
+            {
+                message = obj.Count(p => p.IsSuccess == true).ToString() + " records deleted";
+            }
+            else
+            {
+                message = obj.Count(p => p.IsSuccess == true).ToString() + " record deleted";
+            }
+
+            return Json(new { id = isSuccess ? 1 : 0, isSuccess = isSuccess ? 1 : 0, msg = message });
         }
         public JsonResult setChangePassword(string userID, string oldPassword, string newPassword, string confirmNewPassword)
         {

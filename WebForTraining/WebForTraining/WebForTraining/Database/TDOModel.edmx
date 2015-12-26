@@ -5,9 +5,36 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="tdoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="uspAddEditAccessLevels" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="accessLevelID" Type="int" Mode="In" />
+          <Parameter Name="userGroupID" Type="int" Mode="In" />
+          <Parameter Name="formID" Type="int" Mode="In" />
+          <Parameter Name="canAdd" Type="bit" Mode="In" />
+          <Parameter Name="canView" Type="bit" Mode="In" />
+          <Parameter Name="canEdit" Type="bit" Mode="In" />
+          <Parameter Name="canDelete" Type="bit" Mode="In" />
+          <Parameter Name="canApprove" Type="bit" Mode="In" />
+          <Parameter Name="createdByID" Type="int" Mode="In" />
+          <Parameter Name="sessionID" Type="uniqueidentifier" Mode="In" />
+        </Function>
         <Function Name="uspAddEditCargoType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="cargoTypeID" Type="int" Mode="In" />
           <Parameter Name="cargoTypeName" Type="varchar" Mode="In" />
+          <Parameter Name="createdByID" Type="int" Mode="In" />
+          <Parameter Name="sessionID" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="uspAddEditCity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cityID" Type="int" Mode="In" />
+          <Parameter Name="cityName" Type="varchar" Mode="In" />
+          <Parameter Name="cityCode" Type="varchar" Mode="In" />
+          <Parameter Name="stateID" Type="int" Mode="In" />
+          <Parameter Name="createdByID" Type="int" Mode="In" />
+          <Parameter Name="sessionID" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="uspAddEditUserGroups" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userGroupID" Type="int" Mode="In" />
+          <Parameter Name="groupName" Type="varchar(max)" Mode="In" />
+          <Parameter Name="description" Type="varchar(max)" Mode="In" />
           <Parameter Name="createdByID" Type="int" Mode="In" />
           <Parameter Name="sessionID" Type="uniqueidentifier" Mode="In" />
         </Function>
@@ -44,11 +71,28 @@
           <Parameter Name="deviceName" Type="varchar" Mode="In" />
           <Parameter Name="browser" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="uspDelAccessLevels" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="accesslevelID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="uspDelUsergroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userGroupID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="uspDelUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userID" Type="int" Mode="In" />
+        </Function>
         <Function Name="uspDelUserSession" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="sessionID" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="userID" Type="int" Mode="In" />
         </Function>
+        <Function Name="uspGetAccessLevels" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="accessLevelID" Type="int" Mode="In" />
+          <Parameter Name="userGroupID" Type="int" Mode="In" />
+          <Parameter Name="formID" Type="int" Mode="In" />
+        </Function>
         <Function Name="uspGetCargoType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cargoTypeID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="uspGetCity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="cargoTypeID" Type="int" Mode="In" />
         </Function>
         <Function Name="uspGetUserDisplay" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -149,6 +193,37 @@
             <Parameter Name="oldPassword" Mode="In" Type="String" />
             <Parameter Name="newPassword" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="uspAddEditAccessLevels" ReturnType="Collection(tdoModel.ClsReturnValues)">
+            <Parameter Name="accessLevelID" Mode="In" Type="Int32" />
+            <Parameter Name="userGroupID" Mode="In" Type="Int32" />
+            <Parameter Name="formID" Mode="In" Type="Int32" />
+            <Parameter Name="canAdd" Mode="In" Type="Boolean" />
+            <Parameter Name="canView" Mode="In" Type="Boolean" />
+            <Parameter Name="canEdit" Mode="In" Type="Boolean" />
+            <Parameter Name="canDelete" Mode="In" Type="Boolean" />
+            <Parameter Name="canApprove" Mode="In" Type="Boolean" />
+            <Parameter Name="createdByID" Mode="In" Type="Int32" />
+            <Parameter Name="sessionID" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="uspAddEditCity" ReturnType="Collection(tdoModel.ClsReturnValues)">
+            <Parameter Name="cityID" Mode="In" Type="Int32" />
+            <Parameter Name="cityName" Mode="In" Type="String" />
+            <Parameter Name="cityCode" Mode="In" Type="String" />
+            <Parameter Name="stateID" Mode="In" Type="Int32" />
+            <Parameter Name="createdByID" Mode="In" Type="Int32" />
+            <Parameter Name="sessionID" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="uspDelAccessLevels" ReturnType="Collection(tdoModel.ClsReturnValues)">
+          <Parameter Name="accesslevelID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="uspGetAccessLevels" ReturnType="Collection(tdoModel.ClsAccessLevels)">
+            <Parameter Name="accessLevelID" Mode="In" Type="Int32" />
+            <Parameter Name="userGroupID" Mode="In" Type="Int32" />
+            <Parameter Name="formID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="uspGetCity" ReturnType="Collection(tdoModel.ClsCity)">
+          <Parameter Name="cargoTypeID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="ClsReturnValues">
           <Property Type="Int32" Name="ID" Nullable="true" />
@@ -229,6 +304,33 @@
           <Property Type="Boolean" Name="canView" Nullable="false" />
           <Property Type="Boolean" Name="canEdit" Nullable="false" />
           <Property Type="Boolean" Name="canDelete" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="ClsCity">
+          <Property Type="Int32" Name="cargoTypeID" Nullable="false" />
+          <Property Type="String" Name="cargoTypeName" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="dateCreated" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="dateModified" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="modifiedByID" Nullable="true" />
+          <Property Type="Int32" Name="createdByID" Nullable="true" />
+          <Property Type="String" Name="userName" Nullable="false" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="ClsAccessLevels">
+          <Property Type="Int32" Name="accessLevelID" Nullable="false" />
+          <Property Type="Int32" Name="userGroupID" Nullable="true" />
+          <Property Type="String" Name="menuName" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="menuItemName" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="formID" Nullable="true" />
+          <Property Type="Boolean" Name="canAdd" Nullable="true" />
+          <Property Type="Boolean" Name="canView" Nullable="true" />
+          <Property Type="Boolean" Name="canEdit" Nullable="true" />
+          <Property Type="Boolean" Name="canDelete" Nullable="true" />
+          <Property Type="Boolean" Name="canApprove" Nullable="true" />
+          <Property Type="DateTime" Name="dateCreated" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="createdByID" Nullable="true" />
+          <Property Type="String" Name="formName" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="createdByName" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="groupName" Nullable="false" MaxLength="50" />
+          <Property Type="Guid" Name="sessionID" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -386,6 +488,95 @@
                 <ScalarProperty Name="canView" ColumnName="canView" />
                 <ScalarProperty Name="canEdit" ColumnName="canEdit" />
                 <ScalarProperty Name="canDelete" ColumnName="canDelete" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspAddEditAccessLevels" FunctionName="tdoModel.Store.uspAddEditAccessLevels">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="tdoModel.ClsReturnValues">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IsSuccess" ColumnName="IsSuccess" />
+                <ScalarProperty Name="Response" ColumnName="Response" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspAddEditCity" FunctionName="tdoModel.Store.uspAddEditCity">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="tdoModel.ClsReturnValues">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IsSuccess" ColumnName="IsSuccess" />
+                <ScalarProperty Name="Response" ColumnName="Response" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspDelAccessLevels" FunctionName="tdoModel.Store.uspDelAccessLevels" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="tdoModel.ClsReturnValues">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IsSuccess" ColumnName="IsSuccess" />
+                <ScalarProperty Name="Response" ColumnName="Response" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspGetAccessLevels" FunctionName="tdoModel.Store.uspGetAccessLevels">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="tdoModel.ClsAccessLevels">
+                <ScalarProperty Name="accessLevelID" ColumnName="accessLevelID" />
+                <ScalarProperty Name="userGroupID" ColumnName="userGroupID" />
+                <ScalarProperty Name="menuName" ColumnName="menuName" />
+                <ScalarProperty Name="menuItemName" ColumnName="menuItemName" />
+                <ScalarProperty Name="formID" ColumnName="formID" />
+                <ScalarProperty Name="canAdd" ColumnName="canAdd" />
+                <ScalarProperty Name="canView" ColumnName="canView" />
+                <ScalarProperty Name="canEdit" ColumnName="canEdit" />
+                <ScalarProperty Name="canDelete" ColumnName="canDelete" />
+                <ScalarProperty Name="canApprove" ColumnName="canApprove" />
+                <ScalarProperty Name="dateCreated" ColumnName="dateCreated" />
+                <ScalarProperty Name="createdByID" ColumnName="createdByID" />
+                <ScalarProperty Name="formName" ColumnName="formName" />
+                <ScalarProperty Name="createdByName" ColumnName="createdByName" />
+                <ScalarProperty Name="groupName" ColumnName="groupName" />
+                <ScalarProperty Name="sessionID" ColumnName="sessionID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspGetCity" FunctionName="tdoModel.Store.uspGetCity">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="tdoModel.ClsCity">
+                <ScalarProperty Name="cargoTypeID" ColumnName="cargoTypeID" />
+                <ScalarProperty Name="cargoTypeName" ColumnName="cargoTypeName" />
+                <ScalarProperty Name="dateCreated" ColumnName="dateCreated" />
+                <ScalarProperty Name="dateModified" ColumnName="dateModified" />
+                <ScalarProperty Name="modifiedByID" ColumnName="modifiedByID" />
+                <ScalarProperty Name="createdByID" ColumnName="createdByID" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspAddEditUserGroups" FunctionName="tdoModel.Store.uspAddEditUserGroups">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="tdoModel.ClsReturnValues">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IsSuccess" ColumnName="IsSuccess" />
+                <ScalarProperty Name="Response" ColumnName="Response" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspDelUsergroup" FunctionName="tdoModel.Store.uspDelUsergroup">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="tdoModel.ClsReturnValues">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IsSuccess" ColumnName="IsSuccess" />
+                <ScalarProperty Name="Response" ColumnName="Response" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspDelUsers" FunctionName="tdoModel.Store.uspDelUsers">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="tdoModel.ClsReturnValues">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IsSuccess" ColumnName="IsSuccess" />
+                <ScalarProperty Name="Response" ColumnName="Response" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
