@@ -1,11 +1,9 @@
 ﻿@using WebForTraining.Models;
 @using WebForTraining.Database;
 @{
-    //var employeeID = Request.Params["employeeID"];
-    //var token = Session["Token"].ToString();
+    var cargoTypeID = Request.Params["cargoTypeID"];
     Layout = null;
-    //List<string> AuthForms = (List<string>)Session["Forms"];
-    var CargoType = Administration.getCargoType();
+    var CargoType = Administration.getCargoType(cargoTypeID);
 
 
 }
