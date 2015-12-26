@@ -68,7 +68,14 @@ namespace WebForTraining.Controllers
             }
             return View();
         }
-        
+        public ActionResult getCargoTypeDisplay()
+        {
+            if (!CheckSession())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            return View();
+        }
         public ActionResult AddEditUserGroup()
         {
             if (!CheckSession())
@@ -113,8 +120,6 @@ namespace WebForTraining.Controllers
             ClsReturnValues k = Administration.setUsersGroup(obj, Session);
             return Json(new { id = k.ID, isSuccess = k.IsSuccess ?? false ? 1 : 0, msg = k.Response });
         }
-
-
         [HttpPost]
         public JsonResult setUsers(string userID, string userGroupID, string userName, string Password, int isLocked, int resetPassword)
         {
@@ -191,7 +196,6 @@ namespace WebForTraining.Controllers
 
             return Json(new { id = isSuccess ? 1 : 0, isSuccess = isSuccess ? 1 : 0, msg = message });
         }
-
         public JsonResult setChangePassword(string userID, string oldPassword, string newPassword, string confirmNewPassword)
         {
             if (newPassword != confirmNewPassword)
@@ -203,58 +207,5 @@ namespace WebForTraining.Controllers
             ClsReturnValues k = Administration.changePassword(id, oldPassword, newPassword);
             return Json(new { id = k.ID, isSuccess = k.IsSuccess ?? false ? 1 : 0, msg = k.Response });
         }
-
-
-        #region CargoType
-
-            public ActionResult getCargoTypeDisplay()
-            {
-                if (!CheckSession())
-                {
-                    return RedirectToAction("Index", "Login");
-                }
-                return View();
-            }
-
-            public ActionResult AddEditCargoType()
-            {
-                if (!CheckSession())
-                {
-                    return RedirectToAction("Index", "Login");
-                }
-                return View();
-            }
-
-            public JsonResult setCargoType(string cargoTypeID, string cargoTypeName)
-            {
-
-                if (cargoTypeID == "") { cargoTypeID = "0"; }
-
-                Guid Session = new Guid(GetSession()); //do not hard code session ID and createdbyID
-                int _id = 0;
-                try { _id = int.Parse(cargoTypeID.Trim()); }
-                catch { }
-                ClsCargoType obj = new ClsCargoType()
-                {
-                    cargoTypeID = _id,
-                    cargoTypeName = cargoTypeName,
-                    createdByID = GetID(),
-                    sessionID = Session
-                };
-                ClsReturnValues k = Administration.setCargoType(obj, Session);
-                return Json(new { id = k.ID, isSuccess = k.IsSuccess ?? false ? 1 : 0, msg = k.Response });
-            }
-
-            public JsonResult deleteCargoType(string ids)
-            {
-                int id = int.Parse(ids);
-                ClsReturnValues k = Administration.delCargoType(id);
-                return Json(new { id = k.ID, isSuccess = k.IsSuccess ?? false ? 1 : 0, msg = k.Response });
-            }
-
-        #endregion
-
-
-
     }
 }
