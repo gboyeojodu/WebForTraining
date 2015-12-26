@@ -19,7 +19,7 @@ namespace WebForTraining.Database
         public Nullable<int> createdByID { get; set; }
         public Nullable<System.DateTime> dateModified { get; set; }
         public Nullable<int> modifiedByID { get; set; }
-        public Nullable<int> createdByID1 { get; set; }
         public string userName { get; set; }
+        public Nullable<System.Guid> sessionID { get; set; }
     }
 }

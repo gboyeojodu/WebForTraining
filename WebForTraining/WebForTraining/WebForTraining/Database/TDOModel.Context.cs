@@ -28,7 +28,7 @@ namespace WebForTraining.Database
         }
     
     
-        public virtual ObjectResult<ClsReturnValues> uspAddEditCargoType(Nullable<int> cargoTypeID, string cargoTypeName, Nullable<int> createdByID)
+        public virtual ObjectResult<ClsReturnValues> uspAddEditCargoType(Nullable<int> cargoTypeID, string cargoTypeName, Nullable<int> createdByID, Nullable<System.Guid> sessionID)
         {
             var cargoTypeIDParameter = cargoTypeID.HasValue ?
                 new ObjectParameter("cargoTypeID", cargoTypeID) :
@@ -42,7 +42,11 @@ namespace WebForTraining.Database
                 new ObjectParameter("createdByID", createdByID) :
                 new ObjectParameter("createdByID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspAddEditCargoType", cargoTypeIDParameter, cargoTypeNameParameter, createdByIDParameter);
+            var sessionIDParameter = sessionID.HasValue ?
+                new ObjectParameter("sessionID", sessionID) :
+                new ObjectParameter("sessionID", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspAddEditCargoType", cargoTypeIDParameter, cargoTypeNameParameter, createdByIDParameter, sessionIDParameter);
         }
     
         public virtual ObjectResult<ClsCargoType> uspGetCargoType(Nullable<int> cargoTypeID)

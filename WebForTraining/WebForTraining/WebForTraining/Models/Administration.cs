@@ -47,7 +47,7 @@ namespace WebForTraining.Models
 
         #endregion
 
-        #region users
+        #region Users
 
         public static ClsReturnValues setUsers(ClsUsers obj)
         {
@@ -84,6 +84,42 @@ namespace WebForTraining.Models
         }
 
         #endregion users
+
+        #region CargoType
+        public static ClsReturnValues setCargoType(ClsCargoType obj, Guid SessionID)
+        {
+            ClsReturnValues lst = new ClsReturnValues();
+
+            using (var db = new tdoEntities())
+            {
+
+                lst = db.uspAddEditCargoType(obj.cargoTypeID, obj.cargoTypeName, obj.createdByID, SessionID).FirstOrDefault();
+            }
+            return lst;
+        }
+
+        public static List<ClsCargoType> getCargoType(int cargoTypeID)
+        {
+            List<ClsCargoType> lst = new List<ClsCargoType>();
+            using (var db = new tdoEntities())
+            {
+                lst = db.uspGetCargoType(cargoTypeID).ToList<ClsCargoType>();
+            }
+            return lst;
+        }
+
+        //public static ClsReturnValues delCargoType(int cargoTypeID)
+        //{
+        //    ClsReturnValues lst = new ClsReturnValues();
+        //    using (var db = new tdoEntities())
+        //    {
+        //        lst = db.uspDelCargoType(cargoTypeID).FirstOrDefault();
+        //    }
+        //    return lst;
+        //}
+
+        #endregion
+
         public static ClsReturnValues changePassword(int userID, string oldPassword, string newPassword)
         {
             newPassword = Security.Encrypt(newPassword);

@@ -5,6 +5,7 @@
       <Parameter Name="cargoTypeID" Mode="In" Type="Int32" />
       <Parameter Name="cargoTypeName" Mode="In" Type="String" />
       <Parameter Name="createdByID" Mode="In" Type="Int32" />
+      <Parameter Name="sessionID" Mode="In" Type="Guid" />
     </FunctionImport>
     <FunctionImport Name="uspGetCargoType" ReturnType="Collection(tdoModel.ClsCargoType)">
       <Parameter Name="cargoTypeID" Mode="In" Type="Int32" />
@@ -91,8 +92,8 @@
     <Property Type="Int32" Name="createdByID" Nullable="true" />
     <Property Type="DateTime" Name="dateModified" Nullable="true" Precision="23" />
     <Property Type="Int32" Name="modifiedByID" Nullable="true" />
-    <Property Type="Int32" Name="createdByID1" Nullable="true" />
-    <Property Type="String" Name="userName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="userName" Nullable="false" MaxLength="255" />
+    <Property Type="Guid" Name="sessionID" Nullable="true" />
   </ComplexType>
   <ComplexType Name="ClsUsers">
     <Property Type="Int32" Name="userID" Nullable="false" />
@@ -110,8 +111,6 @@
     <Property Type="DateTime" Name="dateCreated" Nullable="false" Precision="23" />
     <Property Type="Int32" Name="createdByID" Nullable="true" />
     <Property Type="Guid" Name="sessionID" Nullable="false" />
-    <Property Type="Int32" Name="companyID" Nullable="true" />
-    <Property Type="String" Name="salt" Nullable="true" />
   </ComplexType>
   <ComplexType Name="ClsUserSessionHistory">
     <Property Type="Guid" Name="sessionID" Nullable="false" />
