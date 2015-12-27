@@ -100,6 +100,14 @@ namespace WebForTraining.Controllers
             }
             return View();
         }
+        public ActionResult getAccessLevel()
+        {
+            if (!CheckSession())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            return View();
+        }
         public JsonResult setUsersGroup(string userGroupID, string groupName, string description)
         {
 
@@ -206,6 +214,43 @@ namespace WebForTraining.Controllers
             
             ClsReturnValues k = Administration.changePassword(id, oldPassword, newPassword);
             return Json(new { id = k.ID, isSuccess = k.IsSuccess ?? false ? 1 : 0, msg = k.Response });
+        }
+        public JsonResult setAccessLevel(string accessLevelID, string userGroupID, string formID, string canAdd, string canView, string canEdit, string canDelete, string canApprove)
+        {
+
+            Guid Session = new Guid(GetSession()); 
+            List<ClsReturnValues> returnObjs = new List<ClsReturnValues>();
+
+            var accessLevelID_ = StringToArray.PutInList(StringToArray.seperateCommaValues(accessLevelID, ','));
+            var userGroupID_ = int.Parse(userGroupID);
+            var formID_ = StringToArray.PutInList(StringToArray.seperateCommaValues(formID, ','));
+            var canAdd_ = StringToArray.PutInList(StringToArray.seperateCommaValues(canAdd, ','));
+            var canView_ = StringToArray.PutInList(StringToArray.seperateCommaValues(canView, ','));
+            var canEdit_ = StringToArray.PutInList(StringToArray.seperateCommaValues(canEdit, ','));
+            var canDelete_ = StringToArray.PutInList(StringToArray.seperateCommaValues(canDelete, ','));
+            var canApprove_ = StringToArray.PutInList(StringToArray.seperateCommaValues(canApprove, ','));
+
+            for (int i = 0; i < accessLevelID_.Count; i++)
+            {
+                if (formID_[i] == "") continue;
+                ClsAccessLevels obj = new ClsAccessLevels()
+                {
+                    accessLevelID = int.Parse(accessLevelID_[i]),
+                    formID = int.Parse(formID_[i]),
+                    canAdd = bool.Parse(canAdd_[i]),
+                    canView = bool.Parse(canView_[i]),
+                    canEdit = bool.Parse(canEdit_[i]),
+                    canDelete = bool.Parse(canDelete_[i]),
+                    canApprove = bool.Parse(canApprove_[i]),
+                    userGroupID = userGroupID_,
+                    createdByID = GetID(),
+                    sessionID = Session
+                };
+
+                returnObjs.Add(Administration.setAccessLevel(obj));
+            }
+            bool isSuccess = returnObjs.Count(p => p.IsSuccess == false) > 0 ? false : true;
+            return Json(new { id = isSuccess ? 1 : 0, isSuccess = isSuccess ? 1 : 0, msg = returnObjs.Count(p => p.IsSuccess == true).ToString() });
         }
     }
 }

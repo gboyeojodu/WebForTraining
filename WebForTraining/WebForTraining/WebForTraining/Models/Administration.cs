@@ -120,6 +120,7 @@ namespace WebForTraining.Models
 
         #endregion
 
+        #region Change Password
         public static ClsReturnValues changePassword(int userID, string oldPassword, string newPassword)
         {
             newPassword = Security.Encrypt(newPassword);
@@ -131,5 +132,28 @@ namespace WebForTraining.Models
             }
             return lst;
         }
+        #endregion
+
+        #region Access Level
+        public static ClsReturnValues setAccessLevel(ClsAccessLevels obj)
+        {
+            ClsReturnValues lst = new ClsReturnValues();
+            using (var db = new tdoEntities())
+            {
+
+                lst = db.uspAddEditAccessLevels(obj.accessLevelID,obj.userGroupID,obj.formID,obj.canAdd,obj.canView,obj.canEdit,obj.canDelete,obj.canApprove,obj.createdByID,obj.sessionID).FirstOrDefault();
+            }
+            return lst;
+        }
+        public static List<ClsAccessLevels> getAccessLevel(int accessLevelID, int userGroupID, int formID)
+        {
+            List<ClsAccessLevels> lst = new List<ClsAccessLevels>();
+            using (var db = new tdoEntities())
+            {
+                lst = db.uspGetAccessLevels(accessLevelID, userGroupID, formID).ToList<ClsAccessLevels>();
+            }
+            return lst;
+        }
+        #endregion
     }
 }

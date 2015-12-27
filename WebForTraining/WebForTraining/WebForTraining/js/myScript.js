@@ -60,6 +60,23 @@ function ld_fm(url, container) {
     );
     return false;
 }
+function ld_fm_with_id(ids, url, container) {
+    //alert(url + " " + container);
+    var link = url;
+    var cnt = container;
+    $("." + cnt).html(loading);
+    $("." + cnt).load(link, { id: ids }, function (response, status, xhr) {
+        if (status == "error") {
+            var msg = "Sorry but there was an error: " + xhr.status + " " + xhr.statusText;
+            //$("." + cnt).html(msg + xhr.status + " " + xhr.statusText);
+            alertMsg('Notification', msg, 'error');
+
+        }
+        //alertMsg('Notification', 'Successfully processed!', 'success');
+    }
+    );
+    return false;
+}
 
 function ld_modal_fm(url, container, id) {
     //alert(url + " " + container);
@@ -257,4 +274,121 @@ function splitCheckboxIdDelete(tb_cls,body_id, url) {
 
     delRecord(sel_IDs, url);
 
+}
+
+function checkAllTableBox(elem, tbl_id) {
+    //alert("I got called");
+    if (elem.checked) {
+        //alert("I got called");
+        $('#'+tbl_id).find('tr').each(function () {
+           // alert("I got called");
+            var row = $(this);
+            row.find('input[type="checkbox"]').each(function () {
+                //this is the current checkbox
+                //alert("I got called");
+                this.checked = true;
+                this.value = 'true';
+            });
+        });
+    } else {
+        $('#'+tbl_id).find('tr').each(function () {
+            var row = $(this);
+            row.find('input[type="checkbox"]').each(function () {
+                //this is the current checkbox
+                this.checked = false;
+                this.value = 'false';
+            });
+        });
+    }
+}
+
+function checkAllRow(elem,elem_id) {
+    //alert("I got called");
+//$(this).parents('tr').find(':checkbox').prop('checked', this.checked);
+    if (elem.checked) {
+        $('#' + elem_id).parents('tr').find('input[type="checkbox"]').each(function () {
+            //this is the current checkbox
+            //alert("I got called");
+            this.checked = true;
+            this.value = 'true';
+        });
+    } else {
+        $('#' + elem_id).parents('tr').find('input[type="checkbox"]').each(function () {
+            //this is the current checkbox
+            //alert("I got called");
+            this.checked = false;
+            this.value = 'false';
+        });
+    }
+    
+}
+
+function tog(elem) {
+    if (elem.checked) {
+        elem.value = 'true';
+    } else {
+        elem.value = 'false';
+    }
+}
+
+function setAccessLevel() {
+    var accessLevelID = '';
+    var userGroupID = $('#userGroupID').val();
+    var formID = '';
+    var canAdd = '';
+    var canView = '';
+    var canEdit = '';
+    var canDelete = '';
+    var canApprove = '';
+
+    $('#tblAccessLevel').find("tr").find("td").each(function () {
+
+        $(this).children('#accessLevelID').each(function () {
+
+            accessLevelID += $(this).val().toString() + ',';
+        });
+        $(this).children('#formID').each(function () {
+
+            formID += $(this).val().toString() + ',';
+        });
+        $(this).children('.canAddCls').each(function () {
+            canAdd += $(this).val().toString() + ',';
+        });
+        $(this).children('.canViewCls').each(function () {
+            canView += $(this).val().toString() + ',';
+        });
+        $(this).children('.canEditCls').each(function () {
+            canEdit += $(this).val().toString() + ',';
+        });
+        $(this).children('.canDeleteCls').each(function () {
+            canDelete += $(this).val().toString() + ',';
+        });
+        $(this).children('.canApproveCls').each(function () {
+            canApprove += $(this).val().toString() + ',';
+        });
+    });
+
+    $.ajax({
+        type: "POST",
+        url: "/Administration/setAccessLevel",
+        dataType: 'json',
+        data: { accessLevelID: accessLevelID, userGroupID: userGroupID, formID: formID, canAdd: canAdd, canView: canView, canEdit: canEdit, canDelete: canDelete, canApprove: canApprove }
+    }).done(function (dt) {
+        //alert(dt);
+        //console.log(dt);
+        if (dt.isSuccess == 1) {
+            alertMsg('Notification', 'Record saved successfully.', 'success');
+        }
+        else {
+            alertMsg('Notification', 'Oops! Record could not be saved.', 'error');
+            //alert(dt.msg);
+        }
+    }).fail(function (jqXHR, textStatus) {
+        alertMsg('Notification', textStatus, 'error');
+        //alert(textStatus);
+    });
+
+    //alert('called finally');
+    return false;
+    
 }
