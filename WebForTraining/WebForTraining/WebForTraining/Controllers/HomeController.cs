@@ -46,6 +46,7 @@ namespace WebForTraining.Controllers
             return View();
         }
 
+
         [HttpPost]
         public JsonResult setCargoType(int cargoTypeID, string cargoTypeName, int createdByID)
         {

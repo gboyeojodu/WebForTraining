@@ -243,5 +243,46 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="uspDelCargoType" FunctionName="tdoModel.Store.uspDelCargoType">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="tdoModel.ClsReturnValues">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="IsSuccess" ColumnName="IsSuccess" />
+          <ScalarProperty Name="Response" ColumnName="Response" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="uspAddEditTruckType" FunctionName="tdoModel.Store.uspAddEditTruckType">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="tdoModel.ClsReturnValues">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="IsSuccess" ColumnName="IsSuccess" />
+          <ScalarProperty Name="Response" ColumnName="Response" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="uspDelTruckType" FunctionName="tdoModel.Store.uspDelTruckType">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="tdoModel.ClsReturnValues">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="IsSuccess" ColumnName="IsSuccess" />
+          <ScalarProperty Name="Response" ColumnName="Response" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="uspGetTruckType" FunctionName="tdoModel.Store.uspGetTruckType">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="tdoModel.ClsTruckType">
+          <ScalarProperty Name="truckTypeID" ColumnName="truckTypeID" />
+          <ScalarProperty Name="truckTypeName" ColumnName="truckTypeName" />
+          <ScalarProperty Name="dateCreated" ColumnName="dateCreated" />
+          <ScalarProperty Name="dateModified" ColumnName="dateModified" />
+          <ScalarProperty Name="modifiedByID" ColumnName="modifiedByID" />
+          <ScalarProperty Name="createdByID" ColumnName="createdByID" />
+          <ScalarProperty Name="sessionID" ColumnName="sessionID" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

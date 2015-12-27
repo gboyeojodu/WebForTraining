@@ -7,9 +7,7 @@
       <Parameter Name="createdByID" Mode="In" Type="Int32" />
       <Parameter Name="sessionID" Mode="In" Type="Guid" />
     </FunctionImport>
-    <FunctionImport Name="uspGetCargoType" ReturnType="Collection(tdoModel.ClsCargoType)">
-      <Parameter Name="cargoTypeID" Mode="In" Type="Int32" />
-    </FunctionImport>
+    <FunctionImport Name="uspGetCargoType" ReturnType="Collection(tdoModel.ClsCargoType)" />
     <FunctionImport Name="uspAddEditUsers" ReturnType="Collection(tdoModel.ClsReturnValues)">
       <Parameter Name="userID" Mode="In" Type="Int32" />
       <Parameter Name="userGroupID" Mode="In" Type="Int32" />
@@ -110,6 +108,19 @@
     <FunctionImport Name="uspGetCity" ReturnType="Collection(tdoModel.ClsCity)">
       <Parameter Name="cargoTypeID" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="uspDelCargoType" ReturnType="Collection(tdoModel.ClsReturnValues)">
+      <Parameter Name="cargoTypeID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspAddEditTruckType" ReturnType="Collection(tdoModel.ClsReturnValues)">
+      <Parameter Name="truckTypeID" Mode="In" Type="Int32" />
+      <Parameter Name="truckTypeName" Mode="In" Type="String" />
+      <Parameter Name="createdByID" Mode="In" Type="Int32" />
+      <Parameter Name="sessionID" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="uspDelTruckType" ReturnType="Collection(tdoModel.ClsReturnValues)">
+      <Parameter Name="truckTypeID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspGetTruckType" ReturnType="Collection(tdoModel.ClsTruckType)" />
   </EntityContainer>
   <ComplexType Name="ClsReturnValues">
     <Property Type="Int32" Name="ID" Nullable="true" />
@@ -217,5 +228,15 @@
     <Property Type="String" Name="createdByName" Nullable="false" MaxLength="255" />
     <Property Type="String" Name="groupName" Nullable="false" MaxLength="50" />
     <Property Type="Guid" Name="sessionID" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ClsTruckType">
+    <Property Type="Int32" Name="truckTypeID" Nullable="false" />
+    <Property Type="String" Name="truckTypeName" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="dateCreated" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="dateModified" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="modifiedByID" Nullable="true" />
+    <Property Type="Int32" Name="createdByID" Nullable="true" />
+    <Property Type="Guid" Name="sessionID" Nullable="true" />
+    <Property Type="String" Name="userName" Nullable="false" MaxLength="255" />
   </ComplexType>
 </Schema>

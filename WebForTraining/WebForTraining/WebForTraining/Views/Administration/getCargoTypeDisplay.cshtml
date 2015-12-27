@@ -1,46 +1,51 @@
 ﻿@using WebForTraining.Models;
 @using WebForTraining.Database;
 @{
-    var cargoTypeID = Request.Params["cargoTypeID"];
+    
     Layout = null;
-    var CargoType = Administration.getCargoType(cargoTypeID);
-
+    var CargoType = Administration.getCargoType();
 
 }
 @if (CargoType != null)
 {
-    <div class="table-responsive">
-        <table class="table table-bordered table-hover" id="tblCargoType">
-            <thead>
+   
+    @*<div class="table-responsive">*@
+
+    <table class="table table-striped responsive-utilities jambo_table dataTables" id="tblCargoType">
+        <thead>
+            <tr>
+                <th style="width:7%"><input type="checkbox" class="selCargoType" onclick="checkAll(this, 'selCargoType');" /></th>
+                <th style="width:inherit" align="left">Cargo Type</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var cgt in CargoType)
+            {
                 <tr>
-                    <th><strong>Cargo Type Name</strong></th>
-                    <th><strong></strong></th>
+                    <td style="width:7%"><input type="checkbox" value="@cgt.cargoTypeID" class="selCargoType" /></td>
+                    <td><span class="underline">@cgt.cargoTypeName</span></td>
+                    <td style="width:7%">
+                        <a data-id="@cgt.cargoTypeID" onclick="javascript: ld_modal_fm('/Administration/AddEditCargoType', 'modalContentLoad', '@cgt.cargoTypeID');" class="btn btn-metro btn-info btn-xs">
+                            <i class="fa fa-pencil"></i>
+                        </a>
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach (var obj in CargoType)
-                {
-                    <tr>
-                        <td><span class="underline">@obj.cargoTypeName</span></td>
-                        <td>
-                            <a data-id="@obj.cargoTypeID" onclick="javascript: ld_modal_fm('/Administration/AddEditCargoType', 'modalContentLoad', '@obj.cargoTypeID');" class="btn btn-metro btn-info btn-xs">
-                                <i class="fa fa-pencil"></i>
-                            </a>
-                            <a data-id="@obj.cargoTypeID" onclick="javascript: delRecord('@obj.cargoTypeID','/Administration/deleteCargoType');" class="btn btn-metro btn-danger btn-xs">
-                                <i class="glyphicon glyphicon-remove"></i>
-                            </a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+            }
+        </tbody>
+    </table>
+
+    @*</div>*@
+    
 }
 else
 {
     <div class="alert alert-warning">No record to display</div>
 }
 
+<script>
+    styleTable('tblCargoType');
+</script>
 
 
 

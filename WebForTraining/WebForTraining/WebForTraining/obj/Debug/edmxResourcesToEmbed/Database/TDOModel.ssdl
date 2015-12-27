@@ -26,6 +26,12 @@
     <Parameter Name="createdByID" Type="int" Mode="In" />
     <Parameter Name="sessionID" Type="uniqueidentifier" Mode="In" />
   </Function>
+  <Function Name="uspAddEditTruckType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="truckTypeID" Type="int" Mode="In" />
+    <Parameter Name="truckTypeName" Type="varchar" Mode="In" />
+    <Parameter Name="createdByID" Type="int" Mode="In" />
+    <Parameter Name="sessionID" Type="uniqueidentifier" Mode="In" />
+  </Function>
   <Function Name="uspAddEditUserGroups" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="userGroupID" Type="int" Mode="In" />
     <Parameter Name="groupName" Type="varchar(max)" Mode="In" />
@@ -69,6 +75,12 @@
   <Function Name="uspDelAccessLevels" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="accesslevelID" Type="int" Mode="In" />
   </Function>
+  <Function Name="uspDelCargoType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="cargoTypeID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="uspDelTruckType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="truckTypeID" Type="int" Mode="In" />
+  </Function>
   <Function Name="uspDelUsergroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="userGroupID" Type="int" Mode="In" />
   </Function>
@@ -84,12 +96,11 @@
     <Parameter Name="userGroupID" Type="int" Mode="In" />
     <Parameter Name="formID" Type="int" Mode="In" />
   </Function>
-  <Function Name="uspGetCargoType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="cargoTypeID" Type="int" Mode="In" />
-  </Function>
+  <Function Name="uspGetCargoType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="uspGetCity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="cargoTypeID" Type="int" Mode="In" />
   </Function>
+  <Function Name="uspGetTruckType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="uspGetUserDisplay" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="userID" Type="int" Mode="In" />
   </Function>

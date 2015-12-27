@@ -31,6 +31,12 @@
           <Parameter Name="createdByID" Type="int" Mode="In" />
           <Parameter Name="sessionID" Type="uniqueidentifier" Mode="In" />
         </Function>
+        <Function Name="uspAddEditTruckType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="truckTypeID" Type="int" Mode="In" />
+          <Parameter Name="truckTypeName" Type="varchar" Mode="In" />
+          <Parameter Name="createdByID" Type="int" Mode="In" />
+          <Parameter Name="sessionID" Type="uniqueidentifier" Mode="In" />
+        </Function>
         <Function Name="uspAddEditUserGroups" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userGroupID" Type="int" Mode="In" />
           <Parameter Name="groupName" Type="varchar(max)" Mode="In" />
@@ -74,6 +80,12 @@
         <Function Name="uspDelAccessLevels" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="accesslevelID" Type="int" Mode="In" />
         </Function>
+        <Function Name="uspDelCargoType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cargoTypeID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="uspDelTruckType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="truckTypeID" Type="int" Mode="In" />
+        </Function>
         <Function Name="uspDelUsergroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userGroupID" Type="int" Mode="In" />
         </Function>
@@ -89,12 +101,11 @@
           <Parameter Name="userGroupID" Type="int" Mode="In" />
           <Parameter Name="formID" Type="int" Mode="In" />
         </Function>
-        <Function Name="uspGetCargoType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="cargoTypeID" Type="int" Mode="In" />
-        </Function>
+        <Function Name="uspGetCargoType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="uspGetCity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="cargoTypeID" Type="int" Mode="In" />
         </Function>
+        <Function Name="uspGetTruckType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="uspGetUserDisplay" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userID" Type="int" Mode="In" />
         </Function>
@@ -122,7 +133,6 @@
             <Parameter Name="sessionID" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="uspGetCargoType" ReturnType="Collection(tdoModel.ClsCargoType)">
-          <Parameter Name="cargoTypeID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="uspAddEditUsers" ReturnType="Collection(tdoModel.ClsReturnValues)">
             <Parameter Name="userID" Mode="In" Type="Int32" />
@@ -224,6 +234,19 @@
           <FunctionImport Name="uspGetCity" ReturnType="Collection(tdoModel.ClsCity)">
           <Parameter Name="cargoTypeID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="uspDelCargoType" ReturnType="Collection(tdoModel.ClsReturnValues)">
+          <Parameter Name="cargoTypeID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="uspAddEditTruckType" ReturnType="Collection(tdoModel.ClsReturnValues)">
+            <Parameter Name="truckTypeID" Mode="In" Type="Int32" />
+            <Parameter Name="truckTypeName" Mode="In" Type="String" />
+            <Parameter Name="createdByID" Mode="In" Type="Int32" />
+            <Parameter Name="sessionID" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="uspDelTruckType" ReturnType="Collection(tdoModel.ClsReturnValues)">
+            <Parameter Name="truckTypeID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="uspGetTruckType" ReturnType="Collection(tdoModel.ClsTruckType)" />
         </EntityContainer>
         <ComplexType Name="ClsReturnValues">
           <Property Type="Int32" Name="ID" Nullable="true" />
@@ -331,6 +354,16 @@
           <Property Type="String" Name="createdByName" Nullable="false" MaxLength="255" />
           <Property Type="String" Name="groupName" Nullable="false" MaxLength="50" />
           <Property Type="Guid" Name="sessionID" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ClsTruckType">
+          <Property Type="Int32" Name="truckTypeID" Nullable="false" />
+          <Property Type="String" Name="truckTypeName" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="dateCreated" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="dateModified" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="modifiedByID" Nullable="true" />
+          <Property Type="Int32" Name="createdByID" Nullable="true" />
+          <Property Type="Guid" Name="sessionID" Nullable="true" />
+          <Property Type="String" Name="userName" Nullable="false" MaxLength="255" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -577,6 +610,47 @@
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="IsSuccess" ColumnName="IsSuccess" />
                 <ScalarProperty Name="Response" ColumnName="Response" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspDelCargoType" FunctionName="tdoModel.Store.uspDelCargoType">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="tdoModel.ClsReturnValues">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IsSuccess" ColumnName="IsSuccess" />
+                <ScalarProperty Name="Response" ColumnName="Response" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspAddEditTruckType" FunctionName="tdoModel.Store.uspAddEditTruckType">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="tdoModel.ClsReturnValues">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IsSuccess" ColumnName="IsSuccess" />
+                <ScalarProperty Name="Response" ColumnName="Response" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspDelTruckType" FunctionName="tdoModel.Store.uspDelTruckType">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="tdoModel.ClsReturnValues">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IsSuccess" ColumnName="IsSuccess" />
+                <ScalarProperty Name="Response" ColumnName="Response" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspGetTruckType" FunctionName="tdoModel.Store.uspGetTruckType">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="tdoModel.ClsTruckType">
+                <ScalarProperty Name="truckTypeID" ColumnName="truckTypeID" />
+                <ScalarProperty Name="truckTypeName" ColumnName="truckTypeName" />
+                <ScalarProperty Name="dateCreated" ColumnName="dateCreated" />
+                <ScalarProperty Name="dateModified" ColumnName="dateModified" />
+                <ScalarProperty Name="modifiedByID" ColumnName="modifiedByID" />
+                <ScalarProperty Name="createdByID" ColumnName="createdByID" />
+                <ScalarProperty Name="sessionID" ColumnName="sessionID" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

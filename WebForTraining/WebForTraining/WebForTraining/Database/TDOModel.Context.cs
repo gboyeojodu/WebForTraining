@@ -49,13 +49,9 @@ namespace WebForTraining.Database
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspAddEditCargoType", cargoTypeIDParameter, cargoTypeNameParameter, createdByIDParameter, sessionIDParameter);
         }
     
-        public virtual ObjectResult<ClsCargoType> uspGetCargoType(Nullable<int> cargoTypeID)
+        public virtual ObjectResult<ClsCargoType> uspGetCargoType()
         {
-            var cargoTypeIDParameter = cargoTypeID.HasValue ?
-                new ObjectParameter("cargoTypeID", cargoTypeID) :
-                new ObjectParameter("cargoTypeID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsCargoType>("uspGetCargoType", cargoTypeIDParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsCargoType>("uspGetCargoType");
         }
     
         public virtual ObjectResult<ClsReturnValues> uspAddEditUsers(Nullable<int> userID, Nullable<int> userGroupID, string userName, string password, string salt, Nullable<bool> passwordCanExpire, Nullable<System.DateTime> passwordExpiryDate, Nullable<bool> isLocked, Nullable<int> loginAttempts, Nullable<System.DateTime> lastLoginDate, string theme, Nullable<bool> resetPassword, Nullable<int> createdByID, Nullable<System.Guid> sessionID)
@@ -415,6 +411,50 @@ namespace WebForTraining.Database
                 new ObjectParameter("cargoTypeID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsCity>("uspGetCity", cargoTypeIDParameter);
+        }
+    
+        public virtual ObjectResult<ClsReturnValues> uspDelCargoType(Nullable<int> cargoTypeID)
+        {
+            var cargoTypeIDParameter = cargoTypeID.HasValue ?
+                new ObjectParameter("cargoTypeID", cargoTypeID) :
+                new ObjectParameter("cargoTypeID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspDelCargoType", cargoTypeIDParameter);
+        }
+    
+        public virtual ObjectResult<ClsReturnValues> uspAddEditTruckType(Nullable<int> truckTypeID, string truckTypeName, Nullable<int> createdByID, Nullable<System.Guid> sessionID)
+        {
+            var truckTypeIDParameter = truckTypeID.HasValue ?
+                new ObjectParameter("truckTypeID", truckTypeID) :
+                new ObjectParameter("truckTypeID", typeof(int));
+    
+            var truckTypeNameParameter = truckTypeName != null ?
+                new ObjectParameter("truckTypeName", truckTypeName) :
+                new ObjectParameter("truckTypeName", typeof(string));
+    
+            var createdByIDParameter = createdByID.HasValue ?
+                new ObjectParameter("createdByID", createdByID) :
+                new ObjectParameter("createdByID", typeof(int));
+    
+            var sessionIDParameter = sessionID.HasValue ?
+                new ObjectParameter("sessionID", sessionID) :
+                new ObjectParameter("sessionID", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspAddEditTruckType", truckTypeIDParameter, truckTypeNameParameter, createdByIDParameter, sessionIDParameter);
+        }
+    
+        public virtual ObjectResult<ClsReturnValues> uspDelTruckType(Nullable<int> truckTypeID)
+        {
+            var truckTypeIDParameter = truckTypeID.HasValue ?
+                new ObjectParameter("truckTypeID", truckTypeID) :
+                new ObjectParameter("truckTypeID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspDelTruckType", truckTypeIDParameter);
+        }
+    
+        public virtual ObjectResult<ClsTruckType> uspGetTruckType()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsTruckType>("uspGetTruckType");
         }
     }
 }

@@ -68,14 +68,6 @@ namespace WebForTraining.Controllers
             }
             return View();
         }
-        public ActionResult getCargoTypeDisplay()
-        {
-            if (!CheckSession())
-            {
-                return RedirectToAction("Index", "Login");
-            }
-            return View();
-        }
         public ActionResult AddEditUserGroup()
         {
             if (!CheckSession())
@@ -207,5 +199,142 @@ namespace WebForTraining.Controllers
             ClsReturnValues k = Administration.changePassword(id, oldPassword, newPassword);
             return Json(new { id = k.ID, isSuccess = k.IsSuccess ?? false ? 1 : 0, msg = k.Response });
         }
+
+        #region CargoType
+
+        public ActionResult getCargoTypeDisplay()
+        {
+            if (!CheckSession())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            return View();
+        }
+
+        public ActionResult AddEditCargoType()
+        {
+            if (!CheckSession())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            return View();
+        }
+
+        public JsonResult setCargoType(string cargoTypeID, string cargoTypeName)
+        {
+
+            if (cargoTypeID == "") { cargoTypeID = "0"; }
+
+            Guid Session = new Guid(GetSession()); //do not hard code session ID and createdbyID
+            int _id = 0;
+            try { _id = int.Parse(cargoTypeID.Trim()); }
+            catch { }
+            ClsCargoType obj = new ClsCargoType()
+            {
+                cargoTypeID = _id,
+                cargoTypeName = cargoTypeName,
+                createdByID = GetID(),
+                sessionID = Session
+            };
+            ClsReturnValues k = Administration.setCargoType(obj, Session);
+            return Json(new { id = k.ID, isSuccess = k.IsSuccess ?? false ? 1 : 0, msg = k.Response });
+        }
+
+        public JsonResult deleteCargoType(string ids)
+        {
+            string[] id_s = ids.Trim().Split(',');
+            string message = "";
+            List<ClsReturnValues> obj = new List<ClsReturnValues>();
+            foreach (var id in id_s)
+            {
+                int _id = 0; try { _id = int.Parse(id.Trim()); }
+                catch { }
+                if (_id > 0)
+                    obj.Add(Administration.delCargoType(_id));
+            }
+
+            bool isSuccess = obj.Count(p => p.IsSuccess == false) > 0 ? false : true;
+            if (obj.Count(p => p.IsSuccess == true) > 1)
+            {
+                message = obj.Count(p => p.IsSuccess == true).ToString() + " records deleted";
+            }
+            else
+            {
+                message = obj.Count(p => p.IsSuccess == true).ToString() + " record deleted";
+            }
+
+            return Json(new { id = isSuccess ? 1 : 0, isSuccess = isSuccess ? 1 : 0, msg = message });
+        }
+
+        #endregion
+
+        #region TruckType
+
+        public ActionResult getTruckTypeDisplay()
+        {
+            if (!CheckSession())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            return View();
+        }
+
+        public ActionResult AddEditTruckType()
+        {
+            if (!CheckSession())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            return View();
+        }
+
+        public JsonResult setTruckType(string truckTypeID, string truckTypeName)
+        {
+
+            if (truckTypeID == "") { truckTypeID = "0"; }
+
+            Guid Session = new Guid(GetSession()); //do not hard code session ID and createdbyID
+            int _id = 0;
+            try { _id = int.Parse(truckTypeID.Trim()); }
+            catch { }
+            ClsTruckType obj = new ClsTruckType()
+            {
+                truckTypeID = _id,
+                truckTypeName = truckTypeName,
+                createdByID = GetID(),
+                sessionID = Session
+            };
+            ClsReturnValues k = Administration.setTruckType(obj, Session);
+            return Json(new { id = k.ID, isSuccess = k.IsSuccess ?? false ? 1 : 0, msg = k.Response });
+        }
+
+        public JsonResult deleteTruckType(string ids)
+        {
+            string[] id_s = ids.Trim().Split(',');
+            string message = "";
+            List<ClsReturnValues> obj = new List<ClsReturnValues>();
+            foreach (var id in id_s)
+            {
+                int _id = 0; try { _id = int.Parse(id.Trim()); }
+                catch { }
+                if (_id > 0)
+                    obj.Add(Administration.delTruckType(_id));
+            }
+
+            bool isSuccess = obj.Count(p => p.IsSuccess == false) > 0 ? false : true;
+            if (obj.Count(p => p.IsSuccess == true) > 1)
+            {
+                message = obj.Count(p => p.IsSuccess == true).ToString() + " records deleted";
+            }
+            else
+            {
+                message = obj.Count(p => p.IsSuccess == true).ToString() + " record deleted";
+            }
+
+            return Json(new { id = isSuccess ? 1 : 0, isSuccess = isSuccess ? 1 : 0, msg = message });
+        }
+
+        #endregion
+
     }
 }
