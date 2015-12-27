@@ -56,7 +56,9 @@
                         <a href="#accesslevel_tab" role="tab" id="accesslevel-tab" data-toggle="tab" aria-expanded="false">Access Levels</a>
                     </li>
                 </ul>
+
                 <div id="myTabContent" class="tab-content">
+
                     <div role="tabpanel" class="tab-pane fade active in" id="usergroup_tab" aria-labelledby="usergroup-tab">
                         <button type="button" id="btnRefreshUserGroup" class="btn btn-primary refresh" onclick="javascript:ld_fm('/Administration/getUserGroupDisplay', 'userGroupDetail');" title="Click to refresh">
                             <i class="fa fa-refresh"></i>
@@ -70,6 +72,7 @@
                         <div id="userGroupDetail" class="userGroupDetail">
                         </div>
                     </div>
+
                     <div role="tabpanel" class="tab-pane fade" id="users_tab" aria-labelledby="users-tab">
                         <button type="button" id="btnRefreshUsers" class="btn btn-primary refresh" onclick="javascript:ld_fm('/Administration/getUserDisplay', 'userDetail');" title="Click to refresh">
                             <i class="fa fa-refresh"></i>
@@ -139,6 +142,7 @@
                             <div id="accessLevelDetail" class="accessLevelDetail">
                             </div>
                     </div>
+
                 </div>
             </div>
         </div>

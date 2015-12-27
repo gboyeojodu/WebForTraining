@@ -98,25 +98,60 @@ namespace WebForTraining.Models
             return lst;
         }
 
-        public static List<ClsCargoType> getCargoType(int cargoTypeID)
+        public static List<ClsCargoType> getCargoType()
         {
             List<ClsCargoType> lst = new List<ClsCargoType>();
             using (var db = new tdoEntities())
             {
-                lst = db.uspGetCargoType(cargoTypeID).ToList<ClsCargoType>();
+                lst = db.uspGetCargoType().ToList<ClsCargoType>();
             }
             return lst;
         }
 
-        //public static ClsReturnValues delCargoType(int cargoTypeID)
-        //{
-        //    ClsReturnValues lst = new ClsReturnValues();
-        //    using (var db = new tdoEntities())
-        //    {
-        //        lst = db.uspDelCargoType(cargoTypeID).FirstOrDefault();
-        //    }
-        //    return lst;
-        //}
+        public static ClsReturnValues delCargoType(int cargoTypeID)
+        {
+            ClsReturnValues lst = new ClsReturnValues();
+            using (var db = new tdoEntities())
+            {
+                lst = db.uspDelCargoType(cargoTypeID).FirstOrDefault();
+            }
+            return lst;
+        }
+
+        #endregion
+
+        #region TruckType
+        public static ClsReturnValues setTruckType(ClsTruckType obj, Guid SessionID)
+        {
+            ClsReturnValues lst = new ClsReturnValues();
+
+            using (var db = new tdoEntities())
+            {
+
+                lst = db.uspAddEditTruckType(obj.truckTypeID, obj.truckTypeName, obj.createdByID, SessionID).FirstOrDefault();
+            }
+            return lst;
+        }
+
+        public static List<ClsTruckType> getTruckType()
+        {
+            List<ClsTruckType> lst = new List<ClsTruckType>();
+            using (var db = new tdoEntities())
+            {
+                lst = db.uspGetTruckType().ToList<ClsTruckType>();
+            }
+            return lst;
+        }
+
+        public static ClsReturnValues delTruckType(int truckTypeID)
+        {
+            ClsReturnValues lst = new ClsReturnValues();
+            using (var db = new tdoEntities())
+            {
+                lst = db.uspDelTruckType(truckTypeID).FirstOrDefault();
+            }
+            return lst;
+        }
 
         #endregion
 

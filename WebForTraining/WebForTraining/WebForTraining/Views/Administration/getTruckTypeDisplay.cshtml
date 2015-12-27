@@ -1,0 +1,51 @@
+﻿@using WebForTraining.Models;
+@using WebForTraining.Database;
+@{
+
+    Layout = null;
+    var TruckType = Administration.getTruckType();
+
+}
+@if (TruckType != null)
+{
+
+    @*<div class="table-responsive">*@
+
+    <table class="table table-striped responsive-utilities jambo_table dataTables" id="tblTruckType">
+        <thead>
+            <tr>
+                <th style="width:7%"><input type="checkbox" class="selTruckType" onclick="checkAll(this, 'selTruckType');" /></th>
+                <th style="width:inherit" align="left">Truck Type</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var trk in TruckType)
+            {
+                <tr>
+                    <td style="width:7%"><input type="checkbox" value="@trk.truckTypeID" class="selTruckType" /></td>
+                    <td><span class="underline">@trk.truckTypeName</span></td>
+                    <td style="width:7%">
+                        <a data-id="@trk.truckTypeID" onclick="javascript: ld_modal_fm('/Administration/AddEditTruckType', 'modalContentLoad', '@trk.truckTypeID');" class="btn btn-metro btn-info btn-xs">
+                            <i class="fa fa-pencil"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @*</div>*@
+
+}
+else
+{
+    <div class="alert alert-warning">No record to display</div>
+}
+
+<script>
+    styleTable('tblTruckType');
+</script>
+
+
+
