@@ -440,6 +440,7 @@
           <Property Type="Boolean" Name="canView" Nullable="false" />
           <Property Type="Boolean" Name="canEdit" Nullable="false" />
           <Property Type="Boolean" Name="canDelete" Nullable="false" />
+          <Property Type="Boolean" Name="canApprove" Nullable="false" />
         </ComplexType>
         <ComplexType Name="ClsCity">
           <Property Type="Int32" Name="cargoTypeID" Nullable="false" />
@@ -672,6 +673,7 @@
                 <ScalarProperty Name="canView" ColumnName="canView" />
                 <ScalarProperty Name="canEdit" ColumnName="canEdit" />
                 <ScalarProperty Name="canDelete" ColumnName="canDelete" />
+                <ScalarProperty Name="canApprove" ColumnName="canApprove" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -13,7 +13,7 @@ namespace WebForTraining.Controllers
         // GET: Administration
         private string GetSession() { return Session["SessionID"].ToString(); }
         private int GetID() { return int.Parse(Session["UserID"].ToString()); }
-        private int GetCompanyID() { return int.Parse(Session["CompanyID"].ToString()); }
+        private string GetUserName() { return Session["Username"].ToString(); }
 
 
         private bool CheckSession()
@@ -166,6 +166,22 @@ namespace WebForTraining.Controllers
         }
         public JsonResult setUsersGroup(string userGroupID, string groupName, string description)
         {
+            List<ClsUserDisplay> userDisplay = new List<ClsUserDisplay>();
+            using (tdoEntities db = new tdoEntities())
+            {
+                userDisplay = db.uspGetUserDisplay(GetID()).ToList<ClsUserDisplay>();
+            }
+            List<string> editableForms = Restriction.GetEditableForms(userDisplay);
+            List<string> addableForms = Restriction.GetAddableForms(userDisplay);
+
+            if (int.Parse(userGroupID) == 0 && !addableForms.Contains("UsersGroup"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to add new records." });
+            }
+            else if (int.Parse(userGroupID) != 0 && !editableForms.Contains("UsersGroup"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to edit records." });
+            }
 
             if (userGroupID == "") { userGroupID = "0"; }
 
@@ -187,6 +203,23 @@ namespace WebForTraining.Controllers
         [HttpPost]
         public JsonResult setUsers(string userID, string userGroupID, string userName, string Password, int isLocked, int resetPassword)
         {
+            List<ClsUserDisplay> userDisplay = new List<ClsUserDisplay>();
+            using (tdoEntities db = new tdoEntities())
+            {
+                userDisplay = db.uspGetUserDisplay(GetID()).ToList<ClsUserDisplay>();
+            }
+            List<string> editableForms = Restriction.GetEditableForms(userDisplay);
+            List<string> addableForms = Restriction.GetAddableForms(userDisplay);
+
+            if (int.Parse(userID) == 0 && !addableForms.Contains("Users"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to add new records." });
+            }
+            else if (int.Parse(userID) != 0 && !editableForms.Contains("Users"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to edit records." });
+            }
+
             Guid Session = new Guid(GetSession());
             if (Password == "") Password = " ";
             int _id = 0; try { _id = int.Parse(userID.Trim()); }
@@ -212,6 +245,18 @@ namespace WebForTraining.Controllers
         }
         public JsonResult deleteUsersGroup(string ids)
         {
+            List<ClsUserDisplay> userDisplay = new List<ClsUserDisplay>();
+            using (tdoEntities db = new tdoEntities())
+            {
+                userDisplay = db.uspGetUserDisplay(GetID()).ToList<ClsUserDisplay>();
+            }
+            List<string> deleteableForms = Restriction.GetDeletableForms(userDisplay);
+
+            if (!deleteableForms.Contains("UsersGroup"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to delete records here" });
+            }
+
             string[] id_s = ids.Trim().Split(',');
             string message = "";
             List<ClsReturnValues> obj = new List<ClsReturnValues>();
@@ -237,6 +282,18 @@ namespace WebForTraining.Controllers
         }
         public JsonResult deleteUser(string ids)
         {
+            List<ClsUserDisplay> userDisplay = new List<ClsUserDisplay>();
+            using (tdoEntities db = new tdoEntities())
+            {
+                userDisplay = db.uspGetUserDisplay(GetID()).ToList<ClsUserDisplay>();
+            }
+            List<string> deleteableForms = Restriction.GetDeletableForms(userDisplay);
+
+            if (!deleteableForms.Contains("Users"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to delete records here" });
+            }
+
             string[] id_s = ids.Trim().Split(',');
             string message = "";
             List<ClsReturnValues> obj = new List<ClsReturnValues>();
@@ -273,6 +330,18 @@ namespace WebForTraining.Controllers
         }
         public JsonResult setAccessLevel(string accessLevelID, string userGroupID, string formID, string canAdd, string canView, string canEdit, string canDelete, string canApprove)
         {
+            List<ClsUserDisplay> userDisplay = new List<ClsUserDisplay>();
+            using (tdoEntities db = new tdoEntities())
+            {
+                userDisplay = db.uspGetUserDisplay(GetID()).ToList<ClsUserDisplay>();
+            }
+            List<string> editableForms = Restriction.GetEditableForms(userDisplay);
+            List<string> addableForms = Restriction.GetAddableForms(userDisplay);
+
+            if (!addableForms.Contains("AccessLevels") && GetUserName() != "Admin")
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to add new records." });
+            }
 
             Guid Session = new Guid(GetSession()); 
             List<ClsReturnValues> returnObjs = new List<ClsReturnValues>();
@@ -330,6 +399,22 @@ namespace WebForTraining.Controllers
 
         public JsonResult setCargoType(string cargoTypeID, string cargoTypeName)
         {
+            List<ClsUserDisplay> userDisplay = new List<ClsUserDisplay>();
+            using (tdoEntities db = new tdoEntities())
+            {
+                userDisplay = db.uspGetUserDisplay(GetID()).ToList<ClsUserDisplay>();
+            }
+            List<string> editableForms = Restriction.GetEditableForms(userDisplay);
+            List<string> addableForms = Restriction.GetAddableForms(userDisplay);
+
+            if (int.Parse(cargoTypeID) == 0 && !addableForms.Contains("CargoType"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to add new records." });
+            }
+            else if (int.Parse(cargoTypeID) != 0 && !editableForms.Contains("CargoType"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to edit records." });
+            }
 
             if (cargoTypeID == "") { cargoTypeID = "0"; }
 
@@ -350,6 +435,18 @@ namespace WebForTraining.Controllers
 
         public JsonResult deleteCargoType(string ids)
         {
+            List<ClsUserDisplay> userDisplay = new List<ClsUserDisplay>();
+            using (tdoEntities db = new tdoEntities())
+            {
+                userDisplay = db.uspGetUserDisplay(GetID()).ToList<ClsUserDisplay>();
+            }
+            List<string> deleteableForms = Restriction.GetDeletableForms(userDisplay);
+
+            if (!deleteableForms.Contains("CargoType"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to delete records here" });
+            }
+
             string[] id_s = ids.Trim().Split(',');
             string message = "";
             List<ClsReturnValues> obj = new List<ClsReturnValues>();
@@ -398,6 +495,22 @@ namespace WebForTraining.Controllers
 
         public JsonResult setTruckType(string truckTypeID, string truckTypeName)
         {
+            List<ClsUserDisplay> userDisplay = new List<ClsUserDisplay>();
+            using (tdoEntities db = new tdoEntities())
+            {
+                userDisplay = db.uspGetUserDisplay(GetID()).ToList<ClsUserDisplay>();
+            }
+            List<string> editableForms = Restriction.GetEditableForms(userDisplay);
+            List<string> addableForms = Restriction.GetAddableForms(userDisplay);
+
+            if (int.Parse(truckTypeID) == 0 && !addableForms.Contains("TruckType"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to add new records." });
+            }
+            else if (int.Parse(truckTypeID) != 0 && !editableForms.Contains("TruckType"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to edit records." });
+            }
 
             if (truckTypeID == "") { truckTypeID = "0"; }
 
@@ -418,6 +531,19 @@ namespace WebForTraining.Controllers
 
         public JsonResult deleteTruckType(string ids)
         {
+
+            List<ClsUserDisplay> userDisplay = new List<ClsUserDisplay>();
+            using (tdoEntities db = new tdoEntities())
+            {
+                userDisplay = db.uspGetUserDisplay(GetID()).ToList<ClsUserDisplay>();
+            }
+            List<string> deleteableForms = Restriction.GetDeletableForms(userDisplay);
+
+            if (!deleteableForms.Contains("TruckType"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to delete records here" });
+            }
+
             string[] id_s = ids.Trim().Split(',');
             string message = "";
             List<ClsReturnValues> obj = new List<ClsReturnValues>();
@@ -446,6 +572,22 @@ namespace WebForTraining.Controllers
 
         public JsonResult setMenus(string menuID, string menuName, string menuDesc, string menuRanking)
         {
+            List<ClsUserDisplay> userDisplay = new List<ClsUserDisplay>();
+            using (tdoEntities db = new tdoEntities())
+            {
+                userDisplay = db.uspGetUserDisplay(GetID()).ToList<ClsUserDisplay>();
+            }
+            List<string> editableForms = Restriction.GetEditableForms(userDisplay);
+            List<string> addableForms = Restriction.GetAddableForms(userDisplay);
+
+            if (int.Parse(menuID) == 0 && !addableForms.Contains("Menus"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to add new records." });
+            }
+            else if (int.Parse(menuID) != 0 && !editableForms.Contains("Menus"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to edit records." });
+            }
 
             if (menuID == "") { menuID = "0"; }
 
@@ -468,6 +610,17 @@ namespace WebForTraining.Controllers
 
         public JsonResult deleteMenus(string ids)
         {
+            List<ClsUserDisplay> userDisplay = new List<ClsUserDisplay>();
+            using (tdoEntities db = new tdoEntities())
+            {
+                userDisplay = db.uspGetUserDisplay(GetID()).ToList<ClsUserDisplay>();
+            }
+            List<string> deleteableForms = Restriction.GetDeletableForms(userDisplay);
+
+            if (!deleteableForms.Contains("Menus"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to delete records here" });
+            }
             string[] id_s = ids.Trim().Split(',');
             string message = "";
             List<ClsReturnValues> obj = new List<ClsReturnValues>();
@@ -494,6 +647,22 @@ namespace WebForTraining.Controllers
 
         public JsonResult setMenuItems(string menuItemID, string menuID, string menuItemName, string menuItemDescription, string menuItemRanking)
         {
+            List<ClsUserDisplay> userDisplay = new List<ClsUserDisplay>();
+            using (tdoEntities db = new tdoEntities())
+            {
+                userDisplay = db.uspGetUserDisplay(GetID()).ToList<ClsUserDisplay>();
+            }
+            List<string> editableForms = Restriction.GetEditableForms(userDisplay);
+            List<string> addableForms = Restriction.GetAddableForms(userDisplay);
+
+            if (int.Parse(menuItemID) == 0 && !addableForms.Contains("MenuItems"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to add new records." });
+            }
+            else if (int.Parse(menuItemID) != 0 && !editableForms.Contains("MenuItems"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to edit records." });
+            }
 
             if (menuItemID == "") { menuItemID = "0"; }
 
@@ -517,6 +686,17 @@ namespace WebForTraining.Controllers
 
         public JsonResult deleteMenuItems(string ids)
         {
+            List<ClsUserDisplay> userDisplay = new List<ClsUserDisplay>();
+            using (tdoEntities db = new tdoEntities())
+            {
+                userDisplay = db.uspGetUserDisplay(GetID()).ToList<ClsUserDisplay>();
+            }
+            List<string> deleteableForms = Restriction.GetDeletableForms(userDisplay);
+
+            if (!deleteableForms.Contains("MenuItems"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to delete records here" });
+            }
             string[] id_s = ids.Trim().Split(',');
             string message = "";
             List<ClsReturnValues> obj = new List<ClsReturnValues>();
@@ -542,6 +722,22 @@ namespace WebForTraining.Controllers
         }
         public JsonResult setMenuIcons(string menuIconID, string menuID, string menuIconName)
         {
+            List<ClsUserDisplay> userDisplay = new List<ClsUserDisplay>();
+            using (tdoEntities db = new tdoEntities())
+            {
+                userDisplay = db.uspGetUserDisplay(GetID()).ToList<ClsUserDisplay>();
+            }
+            List<string> editableForms = Restriction.GetEditableForms(userDisplay);
+            List<string> addableForms = Restriction.GetAddableForms(userDisplay);
+
+            if (int.Parse(menuIconID) == 0 && !addableForms.Contains("MenuIcons"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to add new records." });
+            }
+            else if (int.Parse(menuIconID) != 0 && !editableForms.Contains("MenuIcons"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to edit records." });
+            }
 
             if (menuIconID == "") { menuIconID = "0"; }
 
@@ -561,6 +757,18 @@ namespace WebForTraining.Controllers
 
         public JsonResult deleteMenuIcons(string ids)
         {
+            List<ClsUserDisplay> userDisplay = new List<ClsUserDisplay>();
+            using (tdoEntities db = new tdoEntities())
+            {
+                userDisplay = db.uspGetUserDisplay(GetID()).ToList<ClsUserDisplay>();
+            }
+            List<string> deleteableForms = Restriction.GetDeletableForms(userDisplay);
+
+            if (!deleteableForms.Contains("MenuIcons"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to delete records here" });
+            }
+
             string[] id_s = ids.Trim().Split(',');
             string message = "";
             List<ClsReturnValues> obj = new List<ClsReturnValues>();
@@ -586,6 +794,22 @@ namespace WebForTraining.Controllers
         }
         public JsonResult setForms(string formID, string menuItemID, string formName, string formDescription)
         {
+            List<ClsUserDisplay> userDisplay = new List<ClsUserDisplay>();
+            using (tdoEntities db = new tdoEntities())
+            {
+                userDisplay = db.uspGetUserDisplay(GetID()).ToList<ClsUserDisplay>();
+            }
+            List<string> editableForms = Restriction.GetEditableForms(userDisplay);
+            List<string> addableForms = Restriction.GetAddableForms(userDisplay);
+
+            if (int.Parse(formID) == 0 && !addableForms.Contains("Forms"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to add new records." });
+            }
+            else if (int.Parse(formID) != 0 && !editableForms.Contains("Forms"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to edit records." });
+            }
 
             if (formID == "") { formID = "0"; }
 
@@ -608,6 +832,19 @@ namespace WebForTraining.Controllers
 
         public JsonResult deleteForms(string ids)
         {
+            List<ClsUserDisplay> userDisplay = new List<ClsUserDisplay>();
+            using (tdoEntities db = new tdoEntities())
+            {
+                userDisplay = db.uspGetUserDisplay(GetID()).ToList<ClsUserDisplay>();
+            }
+            List<string> deleteableForms = Restriction.GetDeletableForms(userDisplay);
+
+            if (!deleteableForms.Contains("Forms"))
+            {
+                return Json(new{ id = 0, isSuccess = false, msg = "You are not allowed to delete records here" });
+            }
+             
+
             string[] id_s = ids.Trim().Split(',');
             string message = "";
             List<ClsReturnValues> obj = new List<ClsReturnValues>();
@@ -633,3 +870,13 @@ namespace WebForTraining.Controllers
         }
     }
 }
+
+//List<ClsUserDisplay> userDisplay = returnedTuple.Item2;
+
+//            List<string> editableForms = Restriction.GetEditableForms(userDisplay);
+
+//            if (editableForms.Contains("Formula Detail"))
+//            {
+//                return EnPeopleBAL.Payroll.setFormulaDetail(FormulaDetail);
+//            }
+//            else return new ClsReturnValues() { ID = 0, IsSuccess = false, Response = "You are not allowed to create or edit records here" };

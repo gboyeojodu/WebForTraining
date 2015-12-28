@@ -7,7 +7,25 @@
     //List<string> AuthForms = (List<string>)Session["Forms"];
 
     var MenuItems = Administration.getMenuItems(menuItemID);
+    var UserID = int.Parse(Session["UserID"].ToString());
+    List<ClsUserDisplay> userDisplay = new List<ClsUserDisplay>();
+    using (tdoEntities db = new tdoEntities())
+    {
+        userDisplay = db.uspGetUserDisplay(UserID).ToList<ClsUserDisplay>();
+    }
+    List<string> editableForms = Restriction.GetEditableForms(userDisplay);
+    List<string> addableForms = Restriction.GetAddableForms(userDisplay);
+}
 
+@if (menuItemID == 0 && !addableForms.Contains("MenuItems"))
+{
+    <div class="alert alert-warning">You are not allowed to add new record.</div>
+    return;
+}
+else if (menuItemID != 0 && !editableForms.Contains("MenuItems"))
+{
+    <div class="alert alert-warning">You are not allowed to edit record.</div>
+    return;
 }
 
 @if (menuItemID == 0)

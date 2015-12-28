@@ -28,5 +28,6 @@ namespace WebForTraining.Database
         public bool canView { get; set; }
         public bool canEdit { get; set; }
         public bool canDelete { get; set; }
+        public bool canApprove { get; set; }
     }
 }

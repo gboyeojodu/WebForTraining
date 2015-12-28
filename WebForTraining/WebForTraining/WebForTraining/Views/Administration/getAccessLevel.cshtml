@@ -6,8 +6,20 @@
     Layout = null;
     //List<string> AuthForms = (List<string>)Session["Forms"];
     var AccessLevel = Administration.getAccessLevel(0, userGroupID, 0);
+    var UserID = int.Parse(Session["UserID"].ToString());
+    var UserName = Session["Username"].ToString();
+    List<ClsUserDisplay> userDisplay = new List<ClsUserDisplay>();
+    using (tdoEntities db = new tdoEntities())
+    {
+        userDisplay = db.uspGetUserDisplay(UserID).ToList<ClsUserDisplay>();
+    }
+    List<string> viewableForms = Restriction.GetViewableForms(userDisplay);
+}
 
-
+@if (!viewableForms.Contains("AccessLevels") && UserName != "Admin")
+{
+    <div class="alert alert-warning">You do not have permision to view records.</div>
+    return;
 }
 @if (AccessLevel != null)
 {

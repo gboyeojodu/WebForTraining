@@ -151,6 +151,7 @@
           <ScalarProperty Name="canView" ColumnName="canView" />
           <ScalarProperty Name="canEdit" ColumnName="canEdit" />
           <ScalarProperty Name="canDelete" ColumnName="canDelete" />
+          <ScalarProperty Name="canApprove" ColumnName="canApprove" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

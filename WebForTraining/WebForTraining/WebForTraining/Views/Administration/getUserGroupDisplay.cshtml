@@ -6,9 +6,21 @@
     Layout = null;
     //List<string> AuthForms = (List<string>)Session["Forms"];
     var UserGroup = Administration.getUsersGroup();
-
-
+    var UserID = int.Parse(Session["UserID"].ToString());
+    List<ClsUserDisplay> userDisplay = new List<ClsUserDisplay>();
+    using (tdoEntities db = new tdoEntities())
+    {
+        userDisplay = db.uspGetUserDisplay(UserID).ToList<ClsUserDisplay>();
+    }
+    List<string> viewableForms = Restriction.GetViewableForms(userDisplay);
 }
+
+@if (!viewableForms.Contains("UsersGroup"))
+{
+    <div class="alert alert-warning">You do not have permision to view records.</div>
+    return;
+}
+
 @if (UserGroup != null)
 {
     <div class="table-resposive">
