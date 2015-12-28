@@ -103,7 +103,7 @@ namespace WebForTraining.Models
             List<ClsCargoType> lst = new List<ClsCargoType>();
             using (var db = new tdoEntities())
             {
-                lst = db.uspGetCargoType().ToList<ClsCargoType>();
+                lst = db.uspGetCargoType(0).ToList<ClsCargoType>();
             }
             return lst;
         }
@@ -186,6 +186,121 @@ namespace WebForTraining.Models
             using (var db = new tdoEntities())
             {
                 lst = db.uspGetAccessLevels(accessLevelID, userGroupID, formID).ToList<ClsAccessLevels>();
+            }
+            return lst;
+        }
+        #endregion
+
+        #region Menu, Menu Item, Forms, Icons
+        public static ClsReturnValues setMenus(ClsMenus obj)
+        {
+            ClsReturnValues lst = new ClsReturnValues();
+            using (var db = new tdoEntities())
+            {
+
+                lst = db.uspAddEditMenus(obj.menuID,obj.menuName,obj.menuDesc, obj.createdByID,obj.menuRanking, obj.sessionID).FirstOrDefault();
+            }
+            return lst;
+        }
+        public static List<ClsMenus> getMenus(int menuID)
+        {
+            List<ClsMenus> lst = new List<ClsMenus>();
+            using (var db = new tdoEntities())
+            {
+                lst = db.uspGetMenus(menuID).ToList<ClsMenus>();
+            }
+            return lst;
+        }
+        public static ClsReturnValues delMenus(int menuID)
+        {
+            ClsReturnValues lst = new ClsReturnValues();
+            using (var db = new tdoEntities())
+            {
+                lst = db.uspDelMenus(menuID).FirstOrDefault();
+            }
+            return lst;
+        }
+        public static ClsReturnValues setMenuItems(ClsMenuItems obj)
+        {
+            ClsReturnValues lst = new ClsReturnValues();
+            using (var db = new tdoEntities())
+            {
+
+                lst = db.uspAddEditMenuItems(obj.menuItemID,obj.menuID,obj.menuItemName, obj.menuItemDescription, obj.menuItemRanking, obj.createdByID, obj.sessionID).FirstOrDefault();
+            }
+            return lst;
+        }
+        public static List<ClsMenuItems> getMenuItems(int menuItemID)
+        {
+            List<ClsMenuItems> lst = new List<ClsMenuItems>();
+            using (var db = new tdoEntities())
+            {
+                lst = db.uspGetMenuItems(menuItemID).ToList<ClsMenuItems>();
+            }
+            return lst;
+        }
+        public static ClsReturnValues delMenuItems(int menuItemID)
+        {
+            ClsReturnValues lst = new ClsReturnValues();
+            using (var db = new tdoEntities())
+            {
+                lst = db.uspDelMenuItems(menuItemID).FirstOrDefault();
+            }
+            return lst;
+        }
+        public static ClsReturnValues setMenuIcons(ClsMenuIcons obj)
+        {
+            ClsReturnValues lst = new ClsReturnValues();
+            using (var db = new tdoEntities())
+            {
+
+                lst = db.uspAddEditMenuIcons(obj.menuIconID, obj.menuID, obj.menuIconName).FirstOrDefault();
+            }
+            return lst;
+        }
+        public static List<ClsMenuIcons> getMenuIcons(int menuIconID)
+        {
+            List<ClsMenuIcons> lst = new List<ClsMenuIcons>();
+            using (var db = new tdoEntities())
+            {
+                lst = db.uspGetMenuIcons(menuIconID).ToList<ClsMenuIcons>();
+            }
+            return lst;
+        }
+        public static ClsReturnValues delMenuIcons(int menuIconID)
+        {
+            ClsReturnValues lst = new ClsReturnValues();
+            using (var db = new tdoEntities())
+            {
+                lst = db.uspDelMenuIcons(menuIconID).FirstOrDefault();
+            }
+            return lst;
+        }
+        public static ClsReturnValues setForms(ClsForms obj)
+        {
+            ClsReturnValues lst = new ClsReturnValues();
+            using (var db = new tdoEntities())
+            {
+
+                lst = db.uspAddEditForms(obj.formID,obj.menuItemID,obj.formName,obj.formDescription,obj.createdByID, obj.sessionID).FirstOrDefault();
+            }
+            return lst;
+        }
+        public static List<ClsForms> getForms(int formID)
+        {
+            List<ClsForms> lst = new List<ClsForms>();
+            using (var db = new tdoEntities())
+            {
+                lst = db.uspGetForms(formID).ToList<ClsForms>();
+            }
+            return lst;
+        }
+        public static ClsReturnValues delForms(int formID)
+        {
+            ClsReturnValues lst = new ClsReturnValues();
+            using (var db = new tdoEntities())
+            {
+                lst = db.uspDelForms(formID).FirstOrDefault();
             }
             return lst;
         }
