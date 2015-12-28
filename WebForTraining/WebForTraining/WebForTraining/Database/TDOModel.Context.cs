@@ -49,9 +49,13 @@ namespace WebForTraining.Database
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspAddEditCargoType", cargoTypeIDParameter, cargoTypeNameParameter, createdByIDParameter, sessionIDParameter);
         }
     
-        public virtual ObjectResult<ClsCargoType> uspGetCargoType()
+        public virtual ObjectResult<ClsCargoType> uspGetCargoType(Nullable<int> cargoTypeID)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsCargoType>("uspGetCargoType");
+            var cargoTypeIDParameter = cargoTypeID.HasValue ?
+                new ObjectParameter("cargoTypeID", cargoTypeID) :
+                new ObjectParameter("cargoTypeID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsCargoType>("uspGetCargoType", cargoTypeIDParameter);
         }
     
         public virtual ObjectResult<ClsReturnValues> uspAddEditUsers(Nullable<int> userID, Nullable<int> userGroupID, string userName, string password, string salt, Nullable<bool> passwordCanExpire, Nullable<System.DateTime> passwordExpiryDate, Nullable<bool> isLocked, Nullable<int> loginAttempts, Nullable<System.DateTime> lastLoginDate, string theme, Nullable<bool> resetPassword, Nullable<int> createdByID, Nullable<System.Guid> sessionID)
@@ -455,6 +459,186 @@ namespace WebForTraining.Database
         public virtual ObjectResult<ClsTruckType> uspGetTruckType()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsTruckType>("uspGetTruckType");
+        }
+    
+        public virtual ObjectResult<ClsReturnValues> uspAddEditForms(Nullable<int> formID, Nullable<int> menuItemID, string formName, string formDescription, Nullable<int> createdByID, Nullable<System.Guid> sessionID)
+        {
+            var formIDParameter = formID.HasValue ?
+                new ObjectParameter("formID", formID) :
+                new ObjectParameter("formID", typeof(int));
+    
+            var menuItemIDParameter = menuItemID.HasValue ?
+                new ObjectParameter("menuItemID", menuItemID) :
+                new ObjectParameter("menuItemID", typeof(int));
+    
+            var formNameParameter = formName != null ?
+                new ObjectParameter("formName", formName) :
+                new ObjectParameter("formName", typeof(string));
+    
+            var formDescriptionParameter = formDescription != null ?
+                new ObjectParameter("formDescription", formDescription) :
+                new ObjectParameter("formDescription", typeof(string));
+    
+            var createdByIDParameter = createdByID.HasValue ?
+                new ObjectParameter("createdByID", createdByID) :
+                new ObjectParameter("createdByID", typeof(int));
+    
+            var sessionIDParameter = sessionID.HasValue ?
+                new ObjectParameter("sessionID", sessionID) :
+                new ObjectParameter("sessionID", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspAddEditForms", formIDParameter, menuItemIDParameter, formNameParameter, formDescriptionParameter, createdByIDParameter, sessionIDParameter);
+        }
+    
+        public virtual ObjectResult<ClsReturnValues> uspAddEditMenuItems(Nullable<int> menuItemID, Nullable<int> menuID, string menuItemName, string menuItemDescription, Nullable<int> menuItemRanking, Nullable<int> createdByID, Nullable<System.Guid> sessionID)
+        {
+            var menuItemIDParameter = menuItemID.HasValue ?
+                new ObjectParameter("menuItemID", menuItemID) :
+                new ObjectParameter("menuItemID", typeof(int));
+    
+            var menuIDParameter = menuID.HasValue ?
+                new ObjectParameter("menuID", menuID) :
+                new ObjectParameter("menuID", typeof(int));
+    
+            var menuItemNameParameter = menuItemName != null ?
+                new ObjectParameter("menuItemName", menuItemName) :
+                new ObjectParameter("menuItemName", typeof(string));
+    
+            var menuItemDescriptionParameter = menuItemDescription != null ?
+                new ObjectParameter("menuItemDescription", menuItemDescription) :
+                new ObjectParameter("menuItemDescription", typeof(string));
+    
+            var menuItemRankingParameter = menuItemRanking.HasValue ?
+                new ObjectParameter("menuItemRanking", menuItemRanking) :
+                new ObjectParameter("menuItemRanking", typeof(int));
+    
+            var createdByIDParameter = createdByID.HasValue ?
+                new ObjectParameter("createdByID", createdByID) :
+                new ObjectParameter("createdByID", typeof(int));
+    
+            var sessionIDParameter = sessionID.HasValue ?
+                new ObjectParameter("sessionID", sessionID) :
+                new ObjectParameter("sessionID", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspAddEditMenuItems", menuItemIDParameter, menuIDParameter, menuItemNameParameter, menuItemDescriptionParameter, menuItemRankingParameter, createdByIDParameter, sessionIDParameter);
+        }
+    
+        public virtual ObjectResult<ClsReturnValues> uspAddEditMenus(Nullable<int> menuID, string menuName, string menuDesc, Nullable<int> createdByID, Nullable<int> menuRanking, Nullable<System.Guid> sessionID)
+        {
+            var menuIDParameter = menuID.HasValue ?
+                new ObjectParameter("menuID", menuID) :
+                new ObjectParameter("menuID", typeof(int));
+    
+            var menuNameParameter = menuName != null ?
+                new ObjectParameter("menuName", menuName) :
+                new ObjectParameter("menuName", typeof(string));
+    
+            var menuDescParameter = menuDesc != null ?
+                new ObjectParameter("menuDesc", menuDesc) :
+                new ObjectParameter("menuDesc", typeof(string));
+    
+            var createdByIDParameter = createdByID.HasValue ?
+                new ObjectParameter("createdByID", createdByID) :
+                new ObjectParameter("createdByID", typeof(int));
+    
+            var menuRankingParameter = menuRanking.HasValue ?
+                new ObjectParameter("menuRanking", menuRanking) :
+                new ObjectParameter("menuRanking", typeof(int));
+    
+            var sessionIDParameter = sessionID.HasValue ?
+                new ObjectParameter("sessionID", sessionID) :
+                new ObjectParameter("sessionID", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspAddEditMenus", menuIDParameter, menuNameParameter, menuDescParameter, createdByIDParameter, menuRankingParameter, sessionIDParameter);
+        }
+    
+        public virtual ObjectResult<ClsReturnValues> uspDelForms(Nullable<int> formID)
+        {
+            var formIDParameter = formID.HasValue ?
+                new ObjectParameter("formID", formID) :
+                new ObjectParameter("formID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspDelForms", formIDParameter);
+        }
+    
+        public virtual ObjectResult<ClsReturnValues> uspDelMenuItems(Nullable<int> menuItemID)
+        {
+            var menuItemIDParameter = menuItemID.HasValue ?
+                new ObjectParameter("menuItemID", menuItemID) :
+                new ObjectParameter("menuItemID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspDelMenuItems", menuItemIDParameter);
+        }
+    
+        public virtual ObjectResult<ClsReturnValues> uspDelMenus(Nullable<int> menuID)
+        {
+            var menuIDParameter = menuID.HasValue ?
+                new ObjectParameter("menuID", menuID) :
+                new ObjectParameter("menuID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspDelMenus", menuIDParameter);
+        }
+    
+        public virtual ObjectResult<ClsForms> uspGetForms(Nullable<int> formID)
+        {
+            var formIDParameter = formID.HasValue ?
+                new ObjectParameter("formID", formID) :
+                new ObjectParameter("formID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsForms>("uspGetForms", formIDParameter);
+        }
+    
+        public virtual ObjectResult<ClsMenuItems> uspGetMenuItems(Nullable<int> menuItemID)
+        {
+            var menuItemIDParameter = menuItemID.HasValue ?
+                new ObjectParameter("menuItemID", menuItemID) :
+                new ObjectParameter("menuItemID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsMenuItems>("uspGetMenuItems", menuItemIDParameter);
+        }
+    
+        public virtual ObjectResult<ClsMenus> uspGetMenus(Nullable<int> menuID)
+        {
+            var menuIDParameter = menuID.HasValue ?
+                new ObjectParameter("menuID", menuID) :
+                new ObjectParameter("menuID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsMenus>("uspGetMenus", menuIDParameter);
+        }
+    
+        public virtual ObjectResult<ClsReturnValues> uspAddEditMenuIcons(Nullable<int> menuIconID, Nullable<int> menuID, string menuIconName)
+        {
+            var menuIconIDParameter = menuIconID.HasValue ?
+                new ObjectParameter("menuIconID", menuIconID) :
+                new ObjectParameter("menuIconID", typeof(int));
+    
+            var menuIDParameter = menuID.HasValue ?
+                new ObjectParameter("menuID", menuID) :
+                new ObjectParameter("menuID", typeof(int));
+    
+            var menuIconNameParameter = menuIconName != null ?
+                new ObjectParameter("menuIconName", menuIconName) :
+                new ObjectParameter("menuIconName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspAddEditMenuIcons", menuIconIDParameter, menuIDParameter, menuIconNameParameter);
+        }
+    
+        public virtual ObjectResult<ClsReturnValues> uspDelMenuIcons(Nullable<int> menuIconID)
+        {
+            var menuIconIDParameter = menuIconID.HasValue ?
+                new ObjectParameter("menuIconID", menuIconID) :
+                new ObjectParameter("menuIconID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspDelMenuIcons", menuIconIDParameter);
+        }
+    
+        public virtual ObjectResult<ClsMenuIcons> uspGetMenuIcons(Nullable<int> menuIconID)
+        {
+            var menuIconIDParameter = menuIconID.HasValue ?
+                new ObjectParameter("menuIconID", menuIconID) :
+                new ObjectParameter("menuIconID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsMenuIcons>("uspGetMenuIcons", menuIconIDParameter);
         }
     }
 }

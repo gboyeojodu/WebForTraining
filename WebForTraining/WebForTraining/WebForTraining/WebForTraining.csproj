@@ -218,6 +218,7 @@
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Security.cs" />
     <Compile Include="Models\Setup.cs" />
+    <Compile Include="Models\StringToArray.cs" />
     <Compile Include="Models\TokenIssuer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -1081,6 +1082,9 @@
     <Content Include="Views\Administration\AddEditUser.cshtml" />
     <Content Include="Views\Administration\changePassword.cshtml" />
     <Content Include="Views\Administration\getCargoTypeDisplay.cshtml" />
+    <Content Include="Views\Administration\AddEditCargoType.cshtml" />
+    <Content Include="Views\Administration\Setup2.cshtml" />
+    <Content Include="Views\Administration\getAccessLevel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

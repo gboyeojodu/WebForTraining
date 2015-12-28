@@ -11,23 +11,11 @@ namespace WebForTraining.Database
 {
     using System;
     
-    public partial class ClsUserDisplay
+    public partial class ClsMenuIcons
     {
-        public int userID { get; set; }
-        public int accessLevelID { get; set; }
-        public int userGroupID { get; set; }
-        public string groupName { get; set; }
-        public int formID { get; set; }
-        public string formName { get; set; }
-        public int menuItemID { get; set; }
-        public string menuItemName { get; set; }
+        public int menuIconID { get; set; }
         public int menuID { get; set; }
         public string menuName { get; set; }
         public string menuIconName { get; set; }
-        public bool canAdd { get; set; }
-        public bool canView { get; set; }
-        public bool canEdit { get; set; }
-        public bool canDelete { get; set; }
-        public bool canApprove { get; set; }
     }
 }

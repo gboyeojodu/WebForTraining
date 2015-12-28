@@ -7,7 +7,9 @@
       <Parameter Name="createdByID" Mode="In" Type="Int32" />
       <Parameter Name="sessionID" Mode="In" Type="Guid" />
     </FunctionImport>
-    <FunctionImport Name="uspGetCargoType" ReturnType="Collection(tdoModel.ClsCargoType)" />
+    <FunctionImport Name="uspGetCargoType" ReturnType="Collection(tdoModel.ClsCargoType)">
+      <Parameter Name="cargoTypeID" Mode="In" Type="Int32" />
+    </FunctionImport>
     <FunctionImport Name="uspAddEditUsers" ReturnType="Collection(tdoModel.ClsReturnValues)">
       <Parameter Name="userID" Mode="In" Type="Int32" />
       <Parameter Name="userGroupID" Mode="In" Type="Int32" />
@@ -121,6 +123,60 @@
       <Parameter Name="truckTypeID" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="uspGetTruckType" ReturnType="Collection(tdoModel.ClsTruckType)" />
+    <FunctionImport Name="uspAddEditForms" ReturnType="Collection(tdoModel.ClsReturnValues)">
+      <Parameter Name="formID" Mode="In" Type="Int32" />
+      <Parameter Name="menuItemID" Mode="In" Type="Int32" />
+      <Parameter Name="formName" Mode="In" Type="String" />
+      <Parameter Name="formDescription" Mode="In" Type="String" />
+      <Parameter Name="createdByID" Mode="In" Type="Int32" />
+      <Parameter Name="sessionID" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="uspAddEditMenuItems" ReturnType="Collection(tdoModel.ClsReturnValues)">
+      <Parameter Name="menuItemID" Mode="In" Type="Int32" />
+      <Parameter Name="menuID" Mode="In" Type="Int32" />
+      <Parameter Name="menuItemName" Mode="In" Type="String" />
+      <Parameter Name="menuItemDescription" Mode="In" Type="String" />
+      <Parameter Name="menuItemRanking" Mode="In" Type="Int32" />
+      <Parameter Name="createdByID" Mode="In" Type="Int32" />
+      <Parameter Name="sessionID" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="uspAddEditMenus" ReturnType="Collection(tdoModel.ClsReturnValues)">
+      <Parameter Name="menuID" Mode="In" Type="Int32" />
+      <Parameter Name="menuName" Mode="In" Type="String" />
+      <Parameter Name="menuDesc" Mode="In" Type="String" />
+      <Parameter Name="createdByID" Mode="In" Type="Int32" />
+      <Parameter Name="menuRanking" Mode="In" Type="Int32" />
+      <Parameter Name="sessionID" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="uspDelForms" ReturnType="Collection(tdoModel.ClsReturnValues)">
+      <Parameter Name="formID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspDelMenuItems" ReturnType="Collection(tdoModel.ClsReturnValues)">
+      <Parameter Name="menuItemID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspDelMenus" ReturnType="Collection(tdoModel.ClsReturnValues)">
+      <Parameter Name="menuID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspGetForms" ReturnType="Collection(tdoModel.ClsForms)">
+      <Parameter Name="formID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspGetMenuItems" ReturnType="Collection(tdoModel.ClsMenuItems)">
+      <Parameter Name="menuItemID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspGetMenus" ReturnType="Collection(tdoModel.ClsMenus)">
+      <Parameter Name="menuID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspAddEditMenuIcons" ReturnType="Collection(tdoModel.ClsReturnValues)">
+      <Parameter Name="menuIconID" Mode="In" Type="Int32" />
+      <Parameter Name="menuID" Mode="In" Type="Int32" />
+      <Parameter Name="menuIconName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="uspDelMenuIcons" ReturnType="Collection(tdoModel.ClsReturnValues)">
+      <Parameter Name="menuIconID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspGetMenuIcons" ReturnType="Collection(tdoModel.ClsMenuIcons)">
+      <Parameter Name="menuIconID" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="ClsReturnValues">
     <Property Type="Int32" Name="ID" Nullable="true" />
@@ -201,6 +257,7 @@
     <Property Type="Boolean" Name="canView" Nullable="false" />
     <Property Type="Boolean" Name="canEdit" Nullable="false" />
     <Property Type="Boolean" Name="canDelete" Nullable="false" />
+    <Property Type="Boolean" Name="canApprove" Nullable="false" />
   </ComplexType>
   <ComplexType Name="ClsCity">
     <Property Type="Int32" Name="cargoTypeID" Nullable="false" />
@@ -238,5 +295,43 @@
     <Property Type="Int32" Name="createdByID" Nullable="true" />
     <Property Type="Guid" Name="sessionID" Nullable="true" />
     <Property Type="String" Name="userName" Nullable="false" MaxLength="255" />
+  </ComplexType>
+  <ComplexType Name="ClsForms">
+    <Property Type="Int32" Name="formID" Nullable="false" />
+    <Property Type="Int32" Name="menuItemID" Nullable="true" />
+    <Property Type="String" Name="formName" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="menuItemName" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="formDescription" Nullable="true" MaxLength="255" />
+    <Property Type="DateTime" Name="dateCreated" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="createdByID" Nullable="true" />
+    <Property Type="String" Name="username" Nullable="false" MaxLength="255" />
+    <Property Type="Guid" Name="sessionID" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ClsMenuItems">
+    <Property Type="Int32" Name="menuItemID" Nullable="false" />
+    <Property Type="Int32" Name="menuID" Nullable="true" />
+    <Property Type="String" Name="menuName" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="menuItemName" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="menuItemDescription" Nullable="true" MaxLength="255" />
+    <Property Type="DateTime" Name="dateCreated" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="createdByID" Nullable="true" />
+    <Property Type="String" Name="createdByName" Nullable="false" MaxLength="255" />
+    <Property Type="Guid" Name="sessionID" Nullable="true" />
+    <Property Type="Int32" Name="menuItemRanking" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ClsMenus">
+    <Property Type="Int32" Name="menuID" Nullable="false" />
+    <Property Type="String" Name="menuName" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="menuDesc" Nullable="true" MaxLength="255" />
+    <Property Type="DateTime" Name="dateCreated" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="createdByID" Nullable="true" />
+    <Property Type="Int32" Name="menuRanking" Nullable="true" />
+    <Property Type="Guid" Name="sessionID" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ClsMenuIcons">
+    <Property Type="Int32" Name="menuIconID" Nullable="false" />
+    <Property Type="Int32" Name="menuID" Nullable="false" />
+    <Property Type="String" Name="menuName" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="menuIconName" Nullable="false" MaxLength="255" />
   </ComplexType>
 </Schema>

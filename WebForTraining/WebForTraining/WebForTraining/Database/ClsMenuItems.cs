@@ -11,15 +11,17 @@ namespace WebForTraining.Database
 {
     using System;
     
-    public partial class ClsTruckType
+    public partial class ClsMenuItems
     {
-        public int truckTypeID { get; set; }
-        public string truckTypeName { get; set; }
+        public int menuItemID { get; set; }
+        public Nullable<int> menuID { get; set; }
+        public string menuName { get; set; }
+        public string menuItemName { get; set; }
+        public string menuItemDescription { get; set; }
         public Nullable<System.DateTime> dateCreated { get; set; }
-        public Nullable<System.DateTime> dateModified { get; set; }
-        public Nullable<int> modifiedByID { get; set; }
         public Nullable<int> createdByID { get; set; }
+        public string createdByName { get; set; }
         public Nullable<System.Guid> sessionID { get; set; }
-        public string userName { get; set; }
+        public Nullable<int> menuItemRanking { get; set; }
     }
 }
