@@ -178,9 +178,6 @@
     <Compile Include="Database\ClsReturnValues.cs">
       <DependentUpon>TDOModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\ClsTruckType.cs">
-      <DependentUpon>TDOModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Database\ClsUserDisplay.cs">
       <DependentUpon>TDOModel.tt</DependentUpon>
     </Compile>
@@ -1084,15 +1081,6 @@
     <Content Include="Views\Administration\AddEditUser.cshtml" />
     <Content Include="Views\Administration\changePassword.cshtml" />
     <Content Include="Views\Administration\getCargoTypeDisplay.cshtml" />
-    <Content Include="Views\Administration\AddEditCargoType.cshtml" />
-    <Content Include="Views\Administration\AddEditTruckType.cshtml" />
-    <Content Include="Views\Administration\getTruckTypeDisplay.cshtml" />
-    <Content Include="Views\Administration\AddEditDriver.cshtml" />
-    <Content Include="Views\Administration\AddEditRegion.cshtml" />
-    <Content Include="Views\Administration\AddEditState.cshtml" />
-    <Content Include="Views\Administration\getDriverDisplay.cshtml" />
-    <Content Include="Views\Administration\getRegionDisplay.cshtml" />
-    <Content Include="Views\Administration\getStateDisplay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

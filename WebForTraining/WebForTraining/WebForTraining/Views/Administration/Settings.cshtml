@@ -24,14 +24,13 @@
                         <a href="#trucktype_tab" role="tab" id="trucktype-tab" data-toggle="tab" aria-expanded="false" onclick="javascript: ld_fm('/Administration/getTruckTypeDisplay', 'truckTypeDetail');">Truck Type</a>
                     </li>
                     <li role="presentation" class="">
-                        <a href="#driver_tab" role="tab" id="driver-tab" data-toggle="tab" aria-expanded="false" onclick="javascript: ld_fm('/Administration/getDriverDisplay', 'driverDetail');">Driver</a>
+                        <a href="#driver_tab" role="tab" id="driver-tab" data-toggle="tab" aria-expanded="false">Driver</a>
                     </li>
                     <li role="presentation" class="">
-                        <a href="#region_tab" role="tab" id="region-tab" data-toggle="tab" aria-expanded="false" onclick="javascript: ld_fm('/Administration/getRegionDisplay', 'regionDetail');">Region</a>
+                        <a href="#region_tab" role="tab" id="region-tab" data-toggle="tab" aria-expanded="false">Region</a>
                     </li>
                     <li role="presentation" class="">
-                        <a href="#state_tab" role="tab" id="state-tab" data-toggle="tab" aria-expanded="false"
-                           onclick="javascript: ld_fm('/Administration/getStateDisplay', 'stateDetail');">State</a>
+                        <a href="#state_tab" role="tab" id="state-tab" data-toggle="tab" aria-expanded="false">State</a>
                     </li>
                     <li role="presentation" class="">
                         <a href="#city_tab" role="tab" id="city-tab" data-toggle="tab" aria-expanded="false">City</a>
@@ -59,7 +58,7 @@
                         <button data-toggle="modal" id="btnAddCargoType" type="button" onclick="javascript: ld_modal_fm('/Administration/AddEditCargoType', 'modalContentLoad', '0');" class="btn btn-primary" title="Click to Add New Record">
                             <i class=" fa fa-plus"></i>
                         </button>
-                        <button id="btnDelCargoType" type="button" onclick="javascript: splitCheckboxIdDelete('selCargoType', 'tblCargoType', '/Administration/deleteCargoType');" class="btn btn-danger" title="Click to Delete Record">
+                        <button id="btnDelUserGroup" type="button" onclick="javascript: splitCheckboxIdDelete('selCargoType', 'tblCargoType', '/Administration/deleteCargoType');" class="btn btn-danger" title="Click to Delete Record">
                             <i class=" fa fa-trash"></i>
                         </button>
                         <div id="cargoTypeDetail" class="cargoTypeDetail">
@@ -73,7 +72,7 @@
                         <button data-toggle="modal" id="btnAddTruckType" type="button" onclick="javascript: ld_modal_fm('/Administration/AddEditTruckType', 'modalContentLoad', '0');" class="btn btn-primary" title="Click to Add New Record">
                             <i class=" fa fa-plus"></i>
                         </button>
-                        <button id="btnDelTruckType" type="button" onclick="javascript: splitCheckboxIdDelete('selTruckType', 'tblTruckType', '/Administration/deleteTruckType');" class="btn btn-danger" title="Click to Delete Record">
+                        <button id="btnDelUserGroup" type="button" onclick="javascript: splitCheckboxIdDelete('selTruckType', 'tblTruckType', '/Administration/deleteTruckType');" class="btn btn-danger" title="Click to Delete Record">
                             <i class=" fa fa-trash"></i>
                         </button>
                         <div id="truckTypeDetail" class="truckTypeDetail">
@@ -82,49 +81,13 @@
 
                     <div role="tabpanel" class="tab-pane fade" id="driver_tab" aria-labelledby="driver-tab">
 
-                        <button type="button" id="btnRefreshDriver" class="btn btn-primary refresh" onclick="javascript: ld_fm('/Administration/getDriverDisplay', 'driverDetail');" title="Click to refresh">
-                            <i class="fa fa-refresh"></i>
-                        </button>
-                        <button data-toggle="modal" id="btnAddDriver" type="button" onclick="javascript: ld_modal_fm('/Administration/AddEditDriver', 'modalContentLoad', '0');" class="btn btn-primary" title="Click to Add New Record">
-                            <i class=" fa fa-plus"></i>
-                        </button>
-                        <button id="btnDelDriver" type="button" onclick="javascript: splitCheckboxIdDelete('selDriver', 'tblDriver', '/Administration/deleteDriver');" class="btn btn-danger" title="Click to Delete Record">
-                            <i class=" fa fa-trash"></i>
-                        </button>
-                        <div id="driverDetail" class="driverDetail">
-                        </div>
-
                     </div>
 
                     <div role="tabpanel" class="tab-pane fade" id="region_tab" aria-labelledby="region-tab">
 
-                        <button type="button" id="btnRefreshRegion" class="btn btn-primary refresh" onclick="javascript: ld_fm('/Administration/getRegionDisplay', 'regionDetail');" title="Click to refresh">
-                            <i class="fa fa-refresh"></i>
-                        </button>
-                        <button data-toggle="modal" id="btnAddRegion" type="button" onclick="javascript: ld_modal_fm('/Administration/AddEditRegion', 'modalContentLoad', '0');" class="btn btn-primary" title="Click to Add New Record">
-                            <i class=" fa fa-plus"></i>
-                        </button>
-                        <button id="btnDelRegion" type="button" onclick="javascript: splitCheckboxIdDelete('selRegion', 'tblRegion', '/Administration/deleteRegion');" class="btn btn-danger" title="Click to Delete Record">
-                            <i class=" fa fa-trash"></i>
-                        </button>
-                        <div id="regionDetail" class="regionDetail">
-                        </div>
-
                     </div>
 
                     <div role="tabpanel" class="tab-pane fade" id="state_tab" aria-labelledby="state-tab">
-
-                        <button type="button" id="btnRefreshState" class="btn btn-primary refresh" onclick="javascript: ld_fm('/Administration/getStateDisplay', 'stateDetail');" title="Click to refresh">
-                            <i class="fa fa-refresh"></i>
-                        </button>
-                        <button data-toggle="modal" id="btnAddState" type="button" onclick="javascript: ld_modal_fm('/Administration/AddEditState', 'modalContentLoad', '0');" class="btn btn-primary" title="Click to Add New Record">
-                            <i class=" fa fa-plus"></i>
-                        </button>
-                        <button id="btnDelState" type="button" onclick="javascript: splitCheckboxIdDelete('selState', 'tblState', '/Administration/deleteState');" class="btn btn-danger" title="Click to Delete Record">
-                            <i class=" fa fa-trash"></i>
-                        </button>
-                        <div id="stateDetail" class="stateDetail">
-                        </div>
 
                     </div>
 
