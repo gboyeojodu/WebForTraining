@@ -336,5 +336,213 @@ namespace WebForTraining.Controllers
 
         #endregion
 
+        #region Driver
+
+        public ActionResult getDriverDisplay()
+        {
+            if (!CheckSession())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            return View();
+        }
+
+        public ActionResult AddEditDriver()
+        {
+            if (!CheckSession())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            return View();
+        }
+
+        //public JsonResult setDriver(string driverID, string driverCode, string firstName, string middleName, string lastName)
+        //{
+
+        //    if (driverID == "") { driverID = "0"; }
+
+        //    Guid Session = new Guid(GetSession()); //do not hard code session ID and createdbyID
+        //    int _id = 0;
+        //    try { _id = int.Parse(driverID.Trim()); }
+        //    catch { }
+        //    ClsDriver obj = new ClsDriver()
+        //    {
+        //        driverID = _id,
+        //        driverCode = driverCode,
+        //        firstName = firstName,
+        //        middleName = middleName,
+        //        lastName = lastName,
+        //        createdByID = GetID(),
+        //        sessionID = Session
+        //    };
+        //    ClsReturnValues k = Administration.setDriver(obj, Session);
+        //    return Json(new { id = k.ID, isSuccess = k.IsSuccess ?? false ? 1 : 0, msg = k.Response });
+        //}
+
+        //public JsonResult deleteDriver(string ids)
+        //{
+        //    string[] id_s = ids.Trim().Split(',');
+        //    string message = "";
+        //    List<ClsReturnValues> obj = new List<ClsReturnValues>();
+        //    foreach (var id in id_s)
+        //    {
+        //        int _id = 0; try { _id = int.Parse(id.Trim()); }
+        //        catch { }
+        //        if (_id > 0)
+        //            obj.Add(Administration.delDriver(_id));
+        //    }
+
+        //    bool isSuccess = obj.Count(p => p.IsSuccess == false) > 0 ? false : true;
+        //    if (obj.Count(p => p.IsSuccess == true) > 1)
+        //    {
+        //        message = obj.Count(p => p.IsSuccess == true).ToString() + " records deleted";
+        //    }
+        //    else
+        //    {
+        //        message = obj.Count(p => p.IsSuccess == true).ToString() + " record deleted";
+        //    }
+
+        //    return Json(new { id = isSuccess ? 1 : 0, isSuccess = isSuccess ? 1 : 0, msg = message });
+        //}
+
+        #endregion
+
+        #region Region
+
+        public ActionResult getRegionDisplay()
+        {
+            if (!CheckSession())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            return View();
+        }
+
+        public ActionResult AddEditRegion()
+        {
+            if (!CheckSession())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            return View();
+        }
+
+        //public JsonResult setRegion(string regionID, string region)
+        //{
+
+        //    if (regionID == "") { regionID = "0"; }
+
+        //    Guid Session = new Guid(GetSession()); //do not hard code session ID and createdbyID
+        //    int _id = 0;
+        //    try { _id = int.Parse(regionID.Trim()); }
+        //    catch { }
+        //    ClsRegion obj = new ClsRegion()
+        //    {
+        //        regionID = _id,
+        //        region = region,
+        //        createdByID = GetID(),
+        //        sessionID = Session
+        //    };
+        //    ClsReturnValues k = Administration.setRegion(obj, Session);
+        //    return Json(new { id = k.ID, isSuccess = k.IsSuccess ?? false ? 1 : 0, msg = k.Response });
+        //}
+
+        //public JsonResult deleteRegion(string ids)
+        //{
+        //    string[] id_s = ids.Trim().Split(',');
+        //    string message = "";
+        //    List<ClsReturnValues> obj = new List<ClsReturnValues>();
+        //    foreach (var id in id_s)
+        //    {
+        //        int _id = 0; try { _id = int.Parse(id.Trim()); }
+        //        catch { }
+        //        if (_id > 0)
+        //            obj.Add(Administration.delRegion(_id));
+        //    }
+
+        //    bool isSuccess = obj.Count(p => p.IsSuccess == false) > 0 ? false : true;
+        //    if (obj.Count(p => p.IsSuccess == true) > 1)
+        //    {
+        //        message = obj.Count(p => p.IsSuccess == true).ToString() + " records deleted";
+        //    }
+        //    else
+        //    {
+        //        message = obj.Count(p => p.IsSuccess == true).ToString() + " record deleted";
+        //    }
+
+        //    return Json(new { id = isSuccess ? 1 : 0, isSuccess = isSuccess ? 1 : 0, msg = message });
+        //}
+
+        #endregion
+
+        #region State
+
+        public ActionResult getStateDisplay()
+        {
+            if (!CheckSession())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            return View();
+        }
+
+        public ActionResult AddEditState()
+        {
+            if (!CheckSession())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            return View();
+        }
+
+        //public JsonResult setState(string stateID, string stateName, string stateCode)
+        //{
+
+        //    if (stateID == "") { stateID = "0"; }
+
+        //    Guid Session = new Guid(GetSession()); //do not hard code session ID and createdbyID
+        //    int _id = 0;
+        //    try { _id = int.Parse(stateID.Trim()); }
+        //    catch { }
+        //    ClsState obj = new ClsState()
+        //    {
+        //        stateID = _id,
+        //        stateName = stateName,  
+        //        stateCode = stateCode, 
+        //        createdByID = GetID(),
+        //        sessionID = Session
+        //    };
+        //    ClsReturnValues k = Administration.setState(obj, Session);
+        //    return Json(new { id = k.ID, isSuccess = k.IsSuccess ?? false ? 1 : 0, msg = k.Response });
+        //}
+
+        //public JsonResult deleteState(string ids)
+        //{
+        //    string[] id_s = ids.Trim().Split(',');
+        //    string message = "";
+        //    List<ClsReturnValues> obj = new List<ClsReturnValues>();
+        //    foreach (var id in id_s)
+        //    {
+        //        int _id = 0; try { _id = int.Parse(id.Trim()); }
+        //        catch { }
+        //        if (_id > 0)
+        //            obj.Add(Administration.delState(_id));
+        //    }
+
+        //    bool isSuccess = obj.Count(p => p.IsSuccess == false) > 0 ? false : true;
+        //    if (obj.Count(p => p.IsSuccess == true) > 1)
+        //    {
+        //        message = obj.Count(p => p.IsSuccess == true).ToString() + " records deleted";
+        //    }
+        //    else
+        //    {
+        //        message = obj.Count(p => p.IsSuccess == true).ToString() + " record deleted";
+        //    }
+
+        //    return Json(new { id = isSuccess ? 1 : 0, isSuccess = isSuccess ? 1 : 0, msg = message });
+        //}
+
+        #endregion
+
     }
 }

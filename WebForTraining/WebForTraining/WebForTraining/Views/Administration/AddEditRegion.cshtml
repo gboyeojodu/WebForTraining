@@ -1,0 +1,76 @@
+﻿@using WebForTraining.Models;
+@using WebForTraining.Database;
+@{
+    var regionID = int.Parse(Request.Params["id"]);
+    Layout = null;
+
+    var Region = Administration.getRegion().Where(p => p.regionID == regionID);
+
+}
+
+@if (regionID == 0)
+{
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel2">Add/Edit Region</h4>
+        </div>
+        <form method="post" id="addRegionForm" class="form-horizontal form-label-left">
+            <div class="modal-body ">
+
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="region">
+                        Region <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="region" name="region" data-validation="required" class="form-control col-md-7 col-xs-12">
+                        <input type="hidden" id="regionID" name="regionID" value="0">
+                    </div>
+                </div>
+
+                <br />
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success" onclick="javascript: validate_form('addRegionForm', '/Administration/setRegion');">Save</button>
+            </div>
+        </form>
+    </div>
+}
+else
+{
+    foreach (var drv in Region)
+    {
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel2">Add/Edit Region</h4>
+            </div>
+            <form method="post" id="addRegionForm" class="form-horizontal form-label-left">
+                <div class="modal-body ">
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="region">
+                            Region <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" id="region" name="region" data-validation="required" class="form-control col-md-7 col-xs-12" value="@drv.region">
+                            <input type="hidden" id="regionID" name="regionID" value="@drv.regionID">
+                        </div>
+                    </div>
+
+                    <br />
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" onclick="javascript: validate_form('addRegionForm', '/Administration/setRegion');">Update</button>
+                </div>
+            </form>
+        </div>
+    }
+}
+
