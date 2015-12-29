@@ -408,22 +408,9 @@ namespace WebForTraining.Database
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsAccessLevels>("uspGetAccessLevels", accessLevelIDParameter, userGroupIDParameter, formIDParameter);
         }
     
-        public virtual ObjectResult<ClsCity> uspGetCity(Nullable<int> cargoTypeID)
+        public virtual ObjectResult<ClsCity> uspGetCity()
         {
-            var cargoTypeIDParameter = cargoTypeID.HasValue ?
-                new ObjectParameter("cargoTypeID", cargoTypeID) :
-                new ObjectParameter("cargoTypeID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsCity>("uspGetCity", cargoTypeIDParameter);
-        }
-    
-        public virtual ObjectResult<ClsReturnValues> uspDelCargoType(Nullable<int> cargoTypeID)
-        {
-            var cargoTypeIDParameter = cargoTypeID.HasValue ?
-                new ObjectParameter("cargoTypeID", cargoTypeID) :
-                new ObjectParameter("cargoTypeID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspDelCargoType", cargoTypeIDParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsCity>("uspGetCity");
         }
     
         public virtual ObjectResult<ClsReturnValues> uspAddEditTruckType(Nullable<int> truckTypeID, string truckTypeName, Nullable<int> createdByID, Nullable<System.Guid> sessionID)
@@ -639,6 +626,145 @@ namespace WebForTraining.Database
                 new ObjectParameter("menuIconID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsMenuIcons>("uspGetMenuIcons", menuIconIDParameter);
+        }
+    
+        public virtual ObjectResult<ClsReturnValues> uspDelCargoType(Nullable<int> cargoTypeID)
+        {
+            var cargoTypeIDParameter = cargoTypeID.HasValue ?
+                new ObjectParameter("cargoTypeID", cargoTypeID) :
+                new ObjectParameter("cargoTypeID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspDelCargoType", cargoTypeIDParameter);
+        }
+    
+        public virtual ObjectResult<ClsReturnValues> uspAddEditDriver(Nullable<int> driverID, string driverCode, string firstName, string middleName, string lastName, Nullable<int> createdByID, Nullable<System.Guid> sessionID)
+        {
+            var driverIDParameter = driverID.HasValue ?
+                new ObjectParameter("driverID", driverID) :
+                new ObjectParameter("driverID", typeof(int));
+    
+            var driverCodeParameter = driverCode != null ?
+                new ObjectParameter("driverCode", driverCode) :
+                new ObjectParameter("driverCode", typeof(string));
+    
+            var firstNameParameter = firstName != null ?
+                new ObjectParameter("firstName", firstName) :
+                new ObjectParameter("firstName", typeof(string));
+    
+            var middleNameParameter = middleName != null ?
+                new ObjectParameter("middleName", middleName) :
+                new ObjectParameter("middleName", typeof(string));
+    
+            var lastNameParameter = lastName != null ?
+                new ObjectParameter("lastName", lastName) :
+                new ObjectParameter("lastName", typeof(string));
+    
+            var createdByIDParameter = createdByID.HasValue ?
+                new ObjectParameter("createdByID", createdByID) :
+                new ObjectParameter("createdByID", typeof(int));
+    
+            var sessionIDParameter = sessionID.HasValue ?
+                new ObjectParameter("sessionID", sessionID) :
+                new ObjectParameter("sessionID", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspAddEditDriver", driverIDParameter, driverCodeParameter, firstNameParameter, middleNameParameter, lastNameParameter, createdByIDParameter, sessionIDParameter);
+        }
+    
+        public virtual ObjectResult<ClsDriver> uspGetDriver()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsDriver>("uspGetDriver");
+        }
+    
+        public virtual ObjectResult<ClsReturnValues> uspDelDriver(Nullable<int> driverID)
+        {
+            var driverIDParameter = driverID.HasValue ?
+                new ObjectParameter("driverID", driverID) :
+                new ObjectParameter("driverID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspDelDriver", driverIDParameter);
+        }
+    
+        public virtual ObjectResult<ClsReturnValues> uspAddEditRegion(Nullable<int> regionID, string regionName, Nullable<int> createdByID, Nullable<System.Guid> sessionID)
+        {
+            var regionIDParameter = regionID.HasValue ?
+                new ObjectParameter("regionID", regionID) :
+                new ObjectParameter("regionID", typeof(int));
+    
+            var regionNameParameter = regionName != null ?
+                new ObjectParameter("regionName", regionName) :
+                new ObjectParameter("regionName", typeof(string));
+    
+            var createdByIDParameter = createdByID.HasValue ?
+                new ObjectParameter("createdByID", createdByID) :
+                new ObjectParameter("createdByID", typeof(int));
+    
+            var sessionIDParameter = sessionID.HasValue ?
+                new ObjectParameter("sessionID", sessionID) :
+                new ObjectParameter("sessionID", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspAddEditRegion", regionIDParameter, regionNameParameter, createdByIDParameter, sessionIDParameter);
+        }
+    
+        public virtual ObjectResult<ClsReturnValues> uspAddEditState(Nullable<int> stateID, string stateName, string stateCode, Nullable<int> createdByID, Nullable<System.Guid> sessionID)
+        {
+            var stateIDParameter = stateID.HasValue ?
+                new ObjectParameter("stateID", stateID) :
+                new ObjectParameter("stateID", typeof(int));
+    
+            var stateNameParameter = stateName != null ?
+                new ObjectParameter("stateName", stateName) :
+                new ObjectParameter("stateName", typeof(string));
+    
+            var stateCodeParameter = stateCode != null ?
+                new ObjectParameter("stateCode", stateCode) :
+                new ObjectParameter("stateCode", typeof(string));
+    
+            var createdByIDParameter = createdByID.HasValue ?
+                new ObjectParameter("createdByID", createdByID) :
+                new ObjectParameter("createdByID", typeof(int));
+    
+            var sessionIDParameter = sessionID.HasValue ?
+                new ObjectParameter("sessionID", sessionID) :
+                new ObjectParameter("sessionID", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspAddEditState", stateIDParameter, stateNameParameter, stateCodeParameter, createdByIDParameter, sessionIDParameter);
+        }
+    
+        public virtual ObjectResult<ClsReturnValues> uspDelRegion(Nullable<int> regionID)
+        {
+            var regionIDParameter = regionID.HasValue ?
+                new ObjectParameter("regionID", regionID) :
+                new ObjectParameter("regionID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspDelRegion", regionIDParameter);
+        }
+    
+        public virtual ObjectResult<ClsReturnValues> uspDelState(Nullable<int> stateID)
+        {
+            var stateIDParameter = stateID.HasValue ?
+                new ObjectParameter("stateID", stateID) :
+                new ObjectParameter("stateID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspDelState", stateIDParameter);
+        }
+    
+        public virtual ObjectResult<ClsRegion> uspGetRegion()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsRegion>("uspGetRegion");
+        }
+    
+        public virtual ObjectResult<ClsState> uspGetState()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsState>("uspGetState");
+        }
+    
+        public virtual ObjectResult<ClsReturnValues> uspDelCity(Nullable<int> cityID)
+        {
+            var cityIDParameter = cityID.HasValue ?
+                new ObjectParameter("cityID", cityID) :
+                new ObjectParameter("cityID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspDelCity", cityIDParameter);
         }
     }
 }

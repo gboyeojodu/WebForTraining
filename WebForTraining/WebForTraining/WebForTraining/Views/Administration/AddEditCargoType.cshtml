@@ -3,9 +3,28 @@
 @{
     var cargoTypeID = int.Parse(Request.Params["id"]);
     Layout = null;
-
     var CargoType = Administration.getCargoType().Where(p => p.cargoTypeID == cargoTypeID);
+
+    var UserID = int.Parse(Session["UserID"].ToString());
+    List<ClsUserDisplay> userDisplay = new List<ClsUserDisplay>();
+    using (tdoEntities db = new tdoEntities())
+    {
+        userDisplay = db.uspGetUserDisplay(UserID).ToList<ClsUserDisplay>();
+    }
+    List<string> editableForms = Restriction.GetEditableForms(userDisplay);
+    List<string> addableForms = Restriction.GetAddableForms(userDisplay);
     
+}
+
+@if (cargoTypeID == 0 && !addableForms.Contains("CargoType"))
+{
+    <div class="alert alert-warning">You are not allowed to add new record.</div>
+    return;
+}
+else if (cargoTypeID != 0 && !editableForms.Contains("CargoType"))
+{
+    <div class="alert alert-warning">You are not allowed to edit record.</div>
+    return;
 }
 
 @if (cargoTypeID == 0)

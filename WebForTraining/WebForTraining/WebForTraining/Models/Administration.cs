@@ -155,6 +155,146 @@ namespace WebForTraining.Models
 
         #endregion
 
+        #region Driver
+        public static ClsReturnValues setDriver(ClsDriver obj, Guid SessionID)
+        {
+            ClsReturnValues lst = new ClsReturnValues();
+
+            using (var db = new tdoEntities())
+            {
+
+                lst = db.uspAddEditDriver(obj.driverID, obj.driverCode, obj.firstName, obj.middleName, obj.lastName, obj.createdByID, SessionID).FirstOrDefault();
+            }
+            return lst;
+        }
+
+        public static List<ClsDriver> getDriver()
+        {
+            List<ClsDriver> lst = new List<ClsDriver>();
+            using (var db = new tdoEntities())
+            {
+                lst = db.uspGetDriver().ToList<ClsDriver>();
+            }
+            return lst;
+        }
+
+        public static ClsReturnValues delDriver(int driverID)
+        {
+            ClsReturnValues lst = new ClsReturnValues();
+            using (var db = new tdoEntities())
+            {
+                lst = db.uspDelDriver(driverID).FirstOrDefault();
+            }
+            return lst;
+        }
+
+        #endregion
+
+        #region Region
+        public static ClsReturnValues setRegion(ClsRegion obj, Guid SessionID)
+        {
+            ClsReturnValues lst = new ClsReturnValues();
+
+            using (var db = new tdoEntities())
+            {
+
+                lst = db.uspAddEditRegion(obj.regionID, obj.regionName, obj.createdByID, SessionID).FirstOrDefault();
+            }
+            return lst;
+        }
+
+        public static List<ClsRegion> getRegion()
+        {
+            List<ClsRegion> lst = new List<ClsRegion>();
+            using (var db = new tdoEntities())
+            {
+                lst = db.uspGetRegion().ToList<ClsRegion>();
+            }
+            return lst;
+        }
+
+        public static ClsReturnValues delRegion(int regionID)
+        {
+            ClsReturnValues lst = new ClsReturnValues();
+            using (var db = new tdoEntities())
+            {
+                lst = db.uspDelRegion(regionID).FirstOrDefault();
+            }
+            return lst;
+        }
+
+        #endregion
+
+        #region State
+        public static ClsReturnValues setState(ClsState obj, Guid SessionID)
+        {
+            ClsReturnValues lst = new ClsReturnValues();
+
+            using (var db = new tdoEntities())
+            {
+
+                lst = db.uspAddEditState(obj.stateID, obj.stateName, obj.stateCode, obj.createdByID, SessionID).FirstOrDefault();
+            }
+            return lst;
+        }
+
+        public static List<ClsState> getState()
+        {
+            List<ClsState> lst = new List<ClsState>();
+            using (var db = new tdoEntities())
+            {
+                lst = db.uspGetState().ToList<ClsState>();
+            }
+            return lst;
+        }
+
+        public static ClsReturnValues delState(int stateID)
+        {
+            ClsReturnValues lst = new ClsReturnValues();
+            using (var db = new tdoEntities())
+            {
+                lst = db.uspDelState(stateID).FirstOrDefault();
+            }
+            return lst;
+        }
+
+        #endregion
+
+        #region City
+        public static ClsReturnValues setCity(ClsCity obj, Guid SessionID)
+        {
+            ClsReturnValues lst = new ClsReturnValues();
+
+            using (var db = new tdoEntities())
+            {
+
+                lst = db.uspAddEditCity(obj.cityID, obj.cityName, obj.cityCode, obj.stateID, obj.createdByID, SessionID).FirstOrDefault();
+            }
+            return lst;
+        }
+
+        public static List<ClsCity> getCity()
+        {
+            List<ClsCity> lst = new List<ClsCity>();
+            using (var db = new tdoEntities())
+            {
+                lst = db.uspGetCity().ToList<ClsCity>();
+            }
+            return lst;
+        }
+
+        public static ClsReturnValues delCity(int cityID)
+        {
+            ClsReturnValues lst = new ClsReturnValues();
+            using (var db = new tdoEntities())
+            {
+                lst = db.uspDelCity(cityID).FirstOrDefault();
+            }
+            return lst;
+        }
+
+        #endregion
+
         #region Change Password
         public static ClsReturnValues changePassword(int userID, string oldPassword, string newPassword)
         {

@@ -175,7 +175,31 @@
     <Compile Include="Database\ClsCity.cs">
       <DependentUpon>TDOModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\ClsDriver.cs">
+      <DependentUpon>TDOModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\ClsForms.cs">
+      <DependentUpon>TDOModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\ClsMenuIcons.cs">
+      <DependentUpon>TDOModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\ClsMenuItems.cs">
+      <DependentUpon>TDOModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\ClsMenus.cs">
+      <DependentUpon>TDOModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\ClsRegion.cs">
+      <DependentUpon>TDOModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\ClsReturnValues.cs">
+      <DependentUpon>TDOModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\ClsState.cs">
+      <DependentUpon>TDOModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\ClsTruckType.cs">
       <DependentUpon>TDOModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\ClsUserDisplay.cs">
@@ -208,6 +232,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TDOModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Database\uspDelCity_Result.cs">
+      <DependentUpon>TDOModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -216,6 +243,7 @@
     <Compile Include="Models\Auction.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Login.cs" />
+    <Compile Include="Models\Restriction.cs" />
     <Compile Include="Models\Security.cs" />
     <Compile Include="Models\Setup.cs" />
     <Compile Include="Models\StringToArray.cs" />
@@ -1083,8 +1111,25 @@
     <Content Include="Views\Administration\changePassword.cshtml" />
     <Content Include="Views\Administration\getCargoTypeDisplay.cshtml" />
     <Content Include="Views\Administration\AddEditCargoType.cshtml" />
-    <Content Include="Views\Administration\Setup2.cshtml" />
     <Content Include="Views\Administration\getAccessLevel.cshtml" />
+    <Content Include="Views\Administration\AddEditForms.cshtml" />
+    <Content Include="Views\Administration\AddEditMenuIcons.cshtml" />
+    <Content Include="Views\Administration\AddEditMenuItems.cshtml" />
+    <Content Include="Views\Administration\AddEditMenus.cshtml" />
+    <Content Include="Views\Administration\AddEditTruckType.cshtml" />
+    <Content Include="Views\Administration\getFormsDisplay.cshtml" />
+    <Content Include="Views\Administration\getMenuIconsDisplay.cshtml" />
+    <Content Include="Views\Administration\getMenuItemsDisplay.cshtml" />
+    <Content Include="Views\Administration\getMenusDisplay.cshtml" />
+    <Content Include="Views\Administration\getTruckTypeDisplay.cshtml" />
+    <Content Include="Views\Administration\AddEditDriver.cshtml" />
+    <Content Include="Views\Administration\AddEditRegion.cshtml" />
+    <Content Include="Views\Administration\AddEditState.cshtml" />
+    <Content Include="Views\Administration\getDriverDisplay.cshtml" />
+    <Content Include="Views\Administration\getRegionDisplay.cshtml" />
+    <Content Include="Views\Administration\getStateDisplay.cshtml" />
+    <Content Include="Views\Administration\AddEditCity.cshtml" />
+    <Content Include="Views\Administration\getCityDisplay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
