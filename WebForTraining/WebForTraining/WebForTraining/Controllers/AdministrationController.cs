@@ -28,7 +28,7 @@ namespace WebForTraining.Controllers
                     return true;
             }
         }
-        private bool CheckResetSession()
+private bool CheckResetSession()
         {
             if (Session["ResetID"] == null) { 
                 return false;
@@ -38,7 +38,7 @@ namespace WebForTraining.Controllers
                 return true;
             }
         }
-        public ActionResult Index()
+public ActionResult Index()
         {
             if (!CheckSession())
             {
@@ -182,6 +182,119 @@ namespace WebForTraining.Controllers
             }
             return View();
         }
+        public ActionResult getCargoTypeDisplay()
+        {
+            if (!CheckSession())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            return View();
+        }
+
+        public ActionResult AddEditCargoType()
+        {
+            if (!CheckSession())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            return View();
+        }
+
+        public ActionResult getTruckTypeDisplay()
+        {
+            if (!CheckSession())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            return View();
+        }
+
+        public ActionResult AddEditTruckType()
+        {
+            if (!CheckSession())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            return View();
+        }
+
+        public ActionResult getDriverDisplay()
+        {
+            if (!CheckSession())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            return View();
+        }
+
+        public ActionResult AddEditDriver()
+        {
+            if (!CheckSession())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            return View();
+        }
+
+        public ActionResult getRegionDisplay()
+        {
+            if (!CheckSession())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            return View();
+        }
+
+        public ActionResult AddEditRegion()
+        {
+            if (!CheckSession())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            return View();
+        }
+
+
+        public ActionResult getStateDisplay()
+        {
+            if (!CheckSession())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            return View();
+        }
+
+        public ActionResult AddEditState()
+        {
+            if (!CheckSession())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            return View();
+        }
+
+        public ActionResult getCityDisplay()
+        {
+            if (!CheckSession())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            return View();
+        }
+
+        public ActionResult AddEditCity()
+        {
+            if (!CheckSession())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            return View();
+        }
+
+
+
+
+
         public JsonResult setUsersGroup(string userGroupID, string groupName, string description)
         {
             List<ClsUserDisplay> userDisplay = new List<ClsUserDisplay>();
@@ -406,25 +519,8 @@ namespace WebForTraining.Controllers
             bool isSuccess = returnObjs.Count(p => p.IsSuccess == false) > 0 ? false : true;
             return Json(new { id = isSuccess ? 1 : 0, isSuccess = isSuccess ? 1 : 0, msg = returnObjs.Count(p => p.IsSuccess == true).ToString() });
         }
+
         #region CargoType
-
-        public ActionResult getCargoTypeDisplay()
-        {
-            if (!CheckSession())
-            {
-                return RedirectToAction("Index", "Login");
-            }
-            return View();
-        }
-
-        public ActionResult AddEditCargoType()
-        {
-            if (!CheckSession())
-            {
-                return RedirectToAction("Index", "Login");
-            }
-            return View();
-        }
 
         public JsonResult setCargoType(string cargoTypeID, string cargoTypeName)
         {
@@ -504,24 +600,6 @@ namespace WebForTraining.Controllers
 
         #region TruckType
 
-        public ActionResult getTruckTypeDisplay()
-        {
-            if (!CheckSession())
-            {
-                return RedirectToAction("Index", "Login");
-            }
-            return View();
-        }
-
-        public ActionResult AddEditTruckType()
-        {
-            if (!CheckSession())
-            {
-                return RedirectToAction("Index", "Login");
-            }
-            return View();
-        }
-
         public JsonResult setTruckType(string truckTypeID, string truckTypeName)
         {
             List<ClsUserDisplay> userDisplay = new List<ClsUserDisplay>();
@@ -582,6 +660,328 @@ namespace WebForTraining.Controllers
                 catch { }
                 if (_id > 0)
                     obj.Add(Administration.delTruckType(_id));
+            }
+
+            bool isSuccess = obj.Count(p => p.IsSuccess == false) > 0 ? false : true;
+            if (obj.Count(p => p.IsSuccess == true) > 1)
+            {
+                message = obj.Count(p => p.IsSuccess == true).ToString() + " records deleted";
+            }
+            else
+            {
+                message = obj.Count(p => p.IsSuccess == true).ToString() + " record deleted";
+            }
+
+            return Json(new { id = isSuccess ? 1 : 0, isSuccess = isSuccess ? 1 : 0, msg = message });
+        }
+
+        #endregion
+
+        #region Driver
+
+        public JsonResult setDriver(string driverID, string driverCode, string firstName, string middleName, string lastName)
+        {
+            List<ClsUserDisplay> userDisplay = new List<ClsUserDisplay>();
+            using (tdoEntities db = new tdoEntities())
+            {
+                userDisplay = db.uspGetUserDisplay(GetID()).ToList<ClsUserDisplay>();
+            }
+            List<string> editableForms = Restriction.GetEditableForms(userDisplay);
+            List<string> addableForms = Restriction.GetAddableForms(userDisplay);
+
+            if (int.Parse(driverID) == 0 && !addableForms.Contains("Driver"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to add new records." });
+            }
+            else if (int.Parse(driverID) != 0 && !editableForms.Contains("Driver"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to edit records." });
+            }
+
+            if (driverID == "") { driverID = "0"; }
+
+            Guid Session = new Guid(GetSession()); //do not hard code session ID and createdbyID
+            int _id = 0;
+            try { _id = int.Parse(driverID.Trim()); }
+            catch { }
+            ClsDriver obj = new ClsDriver()
+            {
+                driverID = _id,
+                driverCode = driverCode,
+                firstName = firstName,
+                middleName = middleName,
+                lastName = lastName,
+                createdByID = GetID(),
+                sessionID = Session
+            };
+            ClsReturnValues k = Administration.setDriver(obj, Session);
+            return Json(new { id = k.ID, isSuccess = k.IsSuccess ?? false ? 1 : 0, msg = k.Response });
+        }
+
+        public JsonResult deleteDriver(string ids)
+        {
+
+            List<ClsUserDisplay> userDisplay = new List<ClsUserDisplay>();
+            using (tdoEntities db = new tdoEntities())
+            {
+                userDisplay = db.uspGetUserDisplay(GetID()).ToList<ClsUserDisplay>();
+            }
+            List<string> deleteableForms = Restriction.GetDeletableForms(userDisplay);
+
+            if (!deleteableForms.Contains("Driver"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to delete records here" });
+            }
+
+            string[] id_s = ids.Trim().Split(',');
+            string message = "";
+            List<ClsReturnValues> obj = new List<ClsReturnValues>();
+            foreach (var id in id_s)
+            {
+                int _id = 0; try { _id = int.Parse(id.Trim()); }
+                catch { }
+                if (_id > 0)
+                    obj.Add(Administration.delDriver(_id));
+            }
+
+            bool isSuccess = obj.Count(p => p.IsSuccess == false) > 0 ? false : true;
+            if (obj.Count(p => p.IsSuccess == true) > 1)
+            {
+                message = obj.Count(p => p.IsSuccess == true).ToString() + " records deleted";
+            }
+            else
+            {
+                message = obj.Count(p => p.IsSuccess == true).ToString() + " record deleted";
+            }
+
+            return Json(new { id = isSuccess ? 1 : 0, isSuccess = isSuccess ? 1 : 0, msg = message });
+        }
+
+        #endregion
+
+        #region Region
+
+        public JsonResult setRegion(string regionID, string regionName)
+        {
+            List<ClsUserDisplay> userDisplay = new List<ClsUserDisplay>();
+            using (tdoEntities db = new tdoEntities())
+            {
+                userDisplay = db.uspGetUserDisplay(GetID()).ToList<ClsUserDisplay>();
+            }
+            List<string> editableForms = Restriction.GetEditableForms(userDisplay);
+            List<string> addableForms = Restriction.GetAddableForms(userDisplay);
+
+            if (int.Parse(regionID) == 0 && !addableForms.Contains("Region"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to add new records." });
+            }
+            else if (int.Parse(regionID) != 0 && !editableForms.Contains("Region"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to edit records." });
+            }
+
+            if (regionID == "") { regionID = "0"; }
+
+            Guid Session = new Guid(GetSession()); //do not hard code session ID and createdbyID
+            int _id = 0;
+            try { _id = int.Parse(regionID.Trim()); }
+            catch { }
+            ClsRegion obj = new ClsRegion()
+            {
+                regionID = _id,
+                regionName = regionName,
+                createdByID = GetID(),
+                sessionID = Session
+            };
+            ClsReturnValues k = Administration.setRegion(obj, Session);
+            return Json(new { id = k.ID, isSuccess = k.IsSuccess ?? false ? 1 : 0, msg = k.Response });
+        }
+
+        public JsonResult deleteRegion(string ids)
+        {
+
+            List<ClsUserDisplay> userDisplay = new List<ClsUserDisplay>();
+            using (tdoEntities db = new tdoEntities())
+            {
+                userDisplay = db.uspGetUserDisplay(GetID()).ToList<ClsUserDisplay>();
+            }
+            List<string> deleteableForms = Restriction.GetDeletableForms(userDisplay);
+
+            if (!deleteableForms.Contains("Region"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to delete records here" });
+            }
+
+            string[] id_s = ids.Trim().Split(',');
+            string message = "";
+            List<ClsReturnValues> obj = new List<ClsReturnValues>();
+            foreach (var id in id_s)
+            {
+                int _id = 0; try { _id = int.Parse(id.Trim()); }
+                catch { }
+                if (_id > 0)
+                    obj.Add(Administration.delRegion(_id));
+            }
+
+            bool isSuccess = obj.Count(p => p.IsSuccess == false) > 0 ? false : true;
+            if (obj.Count(p => p.IsSuccess == true) > 1)
+            {
+                message = obj.Count(p => p.IsSuccess == true).ToString() + " records deleted";
+            }
+            else
+            {
+                message = obj.Count(p => p.IsSuccess == true).ToString() + " record deleted";
+            }
+
+            return Json(new { id = isSuccess ? 1 : 0, isSuccess = isSuccess ? 1 : 0, msg = message });
+        }
+
+        #endregion
+
+        #region State
+
+        public JsonResult setState(string stateID, string stateName, string stateCode)
+        {
+            List<ClsUserDisplay> userDisplay = new List<ClsUserDisplay>();
+            using (tdoEntities db = new tdoEntities())
+            {
+                userDisplay = db.uspGetUserDisplay(GetID()).ToList<ClsUserDisplay>();
+            }
+            List<string> editableForms = Restriction.GetEditableForms(userDisplay);
+            List<string> addableForms = Restriction.GetAddableForms(userDisplay);
+
+            if (int.Parse(stateID) == 0 && !addableForms.Contains("State"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to add new records." });
+            }
+            else if (int.Parse(stateID) != 0 && !editableForms.Contains("State"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to edit records." });
+            }
+
+            if (stateID == "") { stateID = "0"; }
+
+            Guid Session = new Guid(GetSession()); //do not hard code session ID and createdbyID
+            int _id = 0;
+            try { _id = int.Parse(stateID.Trim()); }
+            catch { }
+            ClsState obj = new ClsState()
+            {
+                stateID = _id,
+                stateName = stateName,
+                stateCode = stateCode, 
+                createdByID = GetID(),
+                sessionID = Session
+            };
+            ClsReturnValues k = Administration.setState(obj, Session);
+            return Json(new { id = k.ID, isSuccess = k.IsSuccess ?? false ? 1 : 0, msg = k.Response });
+        }
+
+        public JsonResult deleteState(string ids)
+        {
+
+            List<ClsUserDisplay> userDisplay = new List<ClsUserDisplay>();
+            using (tdoEntities db = new tdoEntities())
+            {
+                userDisplay = db.uspGetUserDisplay(GetID()).ToList<ClsUserDisplay>();
+            }
+            List<string> deleteableForms = Restriction.GetDeletableForms(userDisplay);
+
+            if (!deleteableForms.Contains("State"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to delete records here" });
+            }
+
+            string[] id_s = ids.Trim().Split(',');
+            string message = "";
+            List<ClsReturnValues> obj = new List<ClsReturnValues>();
+            foreach (var id in id_s)
+            {
+                int _id = 0; try { _id = int.Parse(id.Trim()); }
+                catch { }
+                if (_id > 0)
+                    obj.Add(Administration.delState(_id));
+            }
+
+            bool isSuccess = obj.Count(p => p.IsSuccess == false) > 0 ? false : true;
+            if (obj.Count(p => p.IsSuccess == true) > 1)
+            {
+                message = obj.Count(p => p.IsSuccess == true).ToString() + " records deleted";
+            }
+            else
+            {
+                message = obj.Count(p => p.IsSuccess == true).ToString() + " record deleted";
+            }
+
+            return Json(new { id = isSuccess ? 1 : 0, isSuccess = isSuccess ? 1 : 0, msg = message });
+        }
+
+        #endregion
+
+        #region City
+
+        public JsonResult setCity(string cityID, string cityName, string cityCode, string stateID)
+        {
+            List<ClsUserDisplay> userDisplay = new List<ClsUserDisplay>();
+            using (tdoEntities db = new tdoEntities())
+            {
+                userDisplay = db.uspGetUserDisplay(GetID()).ToList<ClsUserDisplay>();
+            }
+            List<string> editableForms = Restriction.GetEditableForms(userDisplay);
+            List<string> addableForms = Restriction.GetAddableForms(userDisplay);
+
+            if (int.Parse(cityID) == 0 && !addableForms.Contains("City"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to add new records." });
+            }
+            else if (int.Parse(cityID) != 0 && !editableForms.Contains("City"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to edit records." });
+            }
+
+            if (cityID == "") { cityID = "0"; }
+
+            Guid Session = new Guid(GetSession()); //do not hard code session ID and createdbyID
+            int _id = 0;
+            try { _id = int.Parse(cityID.Trim()); }
+            catch { }
+            ClsCity obj = new ClsCity()
+            {
+                cityID = _id,
+                cityName = cityName,
+                cityCode = cityCode,
+                stateID = int.Parse(stateID),
+                createdByID = GetID(),
+                sessionID = Session
+            };
+            ClsReturnValues k = Administration.setCity(obj, Session);
+            return Json(new { id = k.ID, isSuccess = k.IsSuccess ?? false ? 1 : 0, msg = k.Response });
+        }
+
+        public JsonResult deleteCity(string ids)
+        {
+
+            List<ClsUserDisplay> userDisplay = new List<ClsUserDisplay>();
+            using (tdoEntities db = new tdoEntities())
+            {
+                userDisplay = db.uspGetUserDisplay(GetID()).ToList<ClsUserDisplay>();
+            }
+            List<string> deleteableForms = Restriction.GetDeletableForms(userDisplay);
+
+            if (!deleteableForms.Contains("City"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to delete records here" });
+            }
+
+            string[] id_s = ids.Trim().Split(',');
+            string message = "";
+            List<ClsReturnValues> obj = new List<ClsReturnValues>();
+            foreach (var id in id_s)
+            {
+                int _id = 0; try { _id = int.Parse(id.Trim()); }
+                catch { }
+                if (_id > 0)
+                    obj.Add(Administration.delCity(_id));
             }
 
             bool isSuccess = obj.Count(p => p.IsSuccess == false) > 0 ? false : true;

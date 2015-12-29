@@ -13,12 +13,16 @@ namespace WebForTraining.Database
     
     public partial class ClsCity
     {
-        public int cargoTypeID { get; set; }
-        public string cargoTypeName { get; set; }
         public Nullable<System.DateTime> dateCreated { get; set; }
         public Nullable<System.DateTime> dateModified { get; set; }
         public Nullable<int> modifiedByID { get; set; }
         public Nullable<int> createdByID { get; set; }
         public string userName { get; set; }
+        public int cityID { get; set; }
+        public string cityName { get; set; }
+        public string cityCode { get; set; }
+        public int stateID { get; set; }
+        public string stateName { get; set; }
+        public Nullable<System.Guid> sessionID { get; set; }
     }
 }
