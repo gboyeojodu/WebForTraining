@@ -77,6 +77,21 @@ function ld_fm_with_id(ids, url, container) {
     );
     return false;
 }
+function ld_fm_no_id(url, container) {
+    //alert(url + " " + container);
+    var link = url;
+    var cnt = container;
+    $("." + cnt).html(loading);
+    $("." + cnt).load(link, function (response, status, xhr) {
+        if (status == "error") {
+            var msg = "Sorry but there was an error: " + xhr.status + " " + xhr.statusText;
+            //$("." + cnt).html(msg + xhr.status + " " + xhr.statusText);
+            alertMsg('Notification', msg, 'error');
+        }
+    }
+    );
+    return false;
+}
 
 function ld_modal_fm(url, container, id) {
     //alert(url + " " + container);
@@ -276,22 +291,25 @@ function splitCheckboxIdDelete(tb_cls,body_id, url) {
 
 }
 
-function checkAllTableBox(elem, tbl_id) {
+function checkAllTableBox(elem) {
     //alert("I got called");
-    if (elem.checked) {
+    elem = $(elem);
+    if (elem.prop("checked")) {
         //alert("I got called");
-        $('#'+tbl_id).find('tr').each(function () {
+        elem.parents('table').find('tr').each(function () {
            // alert("I got called");
             var row = $(this);
             row.find('input[type="checkbox"]').each(function () {
+            //row.find('input[type="checkbox"]:not(.firstcheck)').each(function () {
                 //this is the current checkbox
                 //alert("I got called");
                 this.checked = true;
+                //if(this.classList.contains("cscs"))
                 this.value = 'true';
             });
         });
     } else {
-        $('#'+tbl_id).find('tr').each(function () {
+        elem.parents('table').find('tr').each(function () {
             var row = $(this);
             row.find('input[type="checkbox"]').each(function () {
                 //this is the current checkbox
@@ -302,18 +320,19 @@ function checkAllTableBox(elem, tbl_id) {
     }
 }
 
-function checkAllRow(elem,elem_id) {
+function checkAllRow(elem) {
     //alert("I got called");
-//$(this).parents('tr').find(':checkbox').prop('checked', this.checked);
-    if (elem.checked) {
-        $('#' + elem_id).parents('tr').find('input[type="checkbox"]').each(function () {
+    //$(this).parents('tr').find(':checkbox').prop('checked', this.checked);
+    elem = $(elem);
+    if (elem.prop("checked")) {
+        elem.parents('tr').find('input[type="checkbox"]').each(function () {
             //this is the current checkbox
             //alert("I got called");
             this.checked = true;
             this.value = 'true';
         });
     } else {
-        $('#' + elem_id).parents('tr').find('input[type="checkbox"]').each(function () {
+       elem.parents('tr').find('input[type="checkbox"]').each(function () {
             //this is the current checkbox
             //alert("I got called");
             this.checked = false;

@@ -28,6 +28,16 @@ namespace WebForTraining.Controllers
                     return true;
             }
         }
+        private bool CheckResetSession()
+        {
+            if (Session["ResetID"] == null) { 
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
         public ActionResult Index()
         {
             if (!CheckSession())
@@ -87,6 +97,14 @@ namespace WebForTraining.Controllers
         public ActionResult changePassword()
         {
             if (!CheckSession())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            return View();
+        }
+        public ActionResult resetPassword()
+        {
+            if (!CheckResetSession())
             {
                 return RedirectToAction("Index", "Login");
             }
@@ -326,6 +344,17 @@ namespace WebForTraining.Controllers
             int id = int.Parse(userID);
             
             ClsReturnValues k = Administration.changePassword(id, oldPassword, newPassword);
+            return Json(new { id = k.ID, isSuccess = k.IsSuccess ?? false ? 1 : 0, msg = k.Response });
+        }
+        public JsonResult setResetPassword(string userID, string newPassword, string confirmNewPassword)
+        {
+            if (newPassword != confirmNewPassword)
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "Confirm password not correct." });
+            }
+            int id = int.Parse(userID);
+
+            ClsReturnValues k = Administration.resetPassword(id, newPassword);
             return Json(new { id = k.ID, isSuccess = k.IsSuccess ?? false ? 1 : 0, msg = k.Response });
         }
         public JsonResult setAccessLevel(string accessLevelID, string userGroupID, string formID, string canAdd, string canView, string canEdit, string canDelete, string canApprove)

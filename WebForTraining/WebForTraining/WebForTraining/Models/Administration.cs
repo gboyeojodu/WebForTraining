@@ -155,11 +155,23 @@ namespace WebForTraining.Models
 
         #endregion
 
-        #region Change Password
+        #region Change, Reset Password
         public static ClsReturnValues changePassword(int userID, string oldPassword, string newPassword)
         {
             newPassword = Security.Encrypt(newPassword);
             oldPassword = Security.Encrypt(oldPassword);
+            ClsReturnValues lst = new ClsReturnValues();
+            using (var db = new tdoEntities())
+            {
+                lst = db.uspChangePassword(userID, oldPassword, newPassword).FirstOrDefault();
+            }
+            return lst;
+        }
+        public static ClsReturnValues resetPassword(int userID, string newPassword)
+        {
+            newPassword = Security.Encrypt(newPassword);
+            ClsUsers U = Administration.getUsers().Where(p => p.userID == userID).ToList().FirstOrDefault();
+            string oldPassword = U.password;
             ClsReturnValues lst = new ClsReturnValues();
             using (var db = new tdoEntities())
             {

@@ -27,7 +27,7 @@
         <table class="table table-striped responsive-utilities jambo_table dataTable" id="tblAccessLevel">
             <thead>
                 <tr>
-                    <th><input type="checkbox" class="selAccessLevel" onclick="checkAllTableBox(this, 'tblAccessLevel');" /></th>
+                    <th><input type="checkbox" class="selAccessLevel" onclick="checkAllTableBox(this);" /></th>
                     <th><strong>Menu</strong></th>
                     <th><strong>Form</strong></th>
                     <th><strong>Add</strong></th>
@@ -41,7 +41,7 @@
                 @foreach (var acc in AccessLevel)
                 {
                     <tr>
-                        <td><input type="checkbox" onclick="checkAllRow(this,'selChk_@acc.accessLevelID');" id="selChk_@acc.accessLevelID" class=" selaccesslevel" />
+                        <td><input type="checkbox" onclick="checkAllRow(this);" id="selChk_@acc.accessLevelID" class=" selaccesslevel" />
                         <input type="hidden" id="accessLevelID" name="accessLevelID" value="@acc.accessLevelID" /></td>
                         <td><span class="underline">@acc.menuName</span></td>
                         <td><input type="hidden" id="formID" name="formID" value="@acc.formID" />@acc.formName</td>

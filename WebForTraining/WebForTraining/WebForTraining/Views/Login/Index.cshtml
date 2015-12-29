@@ -32,33 +32,43 @@
 </head>
 <body style="background:#F7F7F7;">
 
-    <div class="">
-        <div id="wrapper">
-            <div id="login" class="animate form">
-                <section class="login_content">
-                    <form method="post" id="loginForm">
-                        <h1>Login Form</h1>
-                        <div>
+    <div id="wrapper" class="wrapper">
+        <div class="modal-content">
+            <div class="modal-header" style="padding-bottom:0;">
+                @*<div class="animate form">*@
+                <section class="login_content" style="padding-top:0;">
+                    <h1>Login Form</h1>
+                </section>
+                @*</div>*@
+            </div>
+            <form method="post" id="loginForm">
+                <div class="modal-body" style="padding-bottom:1%;">
+
+                    <section class="login_content" style="padding-top:0; padding-bottom:0;">
+                        <div class="form-group">
                             <input type="text" name="Username" id="username" class="form-control" placeholder="Username" data-validation="required" />
                         </div>
-                        <div>
+                        <div class="form-group">
                             <input type="password" name="Password" id="Password" class="form-control" placeholder="Password" data-validation="required" />
                         </div>
-                        <div>
-                            <button type="submit" class="btn btn-default">Log in</button> 
-                            <a class="reset_pass" href="#">Lost your password?</a>
-                        </div>
-                        <div class="clearfix"></div>
-                    </form>
-                    <!-- form -->
-                </section>
-                <!-- content -->
-            </div>
+                    </section>
+                    <!-- content -->
+
+                </div>
+                <div class="modal-footer">
+                    <div>
+                        <button type="submit" class="btn btn-default">Log in</button>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </form>
+            <!-- form -->   
         </div>
     </div>
     <script src="../js/jquery.min.js"></script>
     @*<script src="../js/custom.js"></script>*@
     <script src="../Asset/form-validator/jquery.form-validator.js"></script>
+    <script src="../js/myScript.js"></script>
     <!-- PNotify -->
     <script src="../js/notify/pnotify.core.js"></script>
     <script src="../js/notify/pnotify.buttons.js"></script>
@@ -94,9 +104,51 @@
                     alertMsg('Notification', 'Access granted', 'success');
                     window.location.replace("/Home/Index");
                 }
-                else {
+                else if (dt.isSuccess == 0 && dt.msg == "PRYP") {
+                    alertMsg('Notification', 'Please reset your password', 'error');
+                    ld_fm_no_id("/Administration/resetPassword", "wrapper");
+
+                } else {
                     alertMsg('Notification', dt.msg, 'error');
-                    //alert(dt.msg);
+                }
+            }).fail(function (jqXHR, textStatus) {
+                alertMsg('Notification', textStatus, 'error');
+                //alert(textStatus);
+            });
+
+            //alert('called finally');
+            return false;
+        }
+        function resetPassword() {
+
+            var newPassword = $.trim($("#newPassword").val());
+            var confirmNewPassword = $.trim($("#confirmNewPassword").val());
+
+            if (newPassword.length < 1 ){
+                alertMsg('Notification', 'Please enter a valid password.', 'error');
+                return;
+            }
+            if (newPassword != confirmNewPassword) {
+                alertMsg('Notification', 'The password you enterd does not match.', 'error');
+                return;
+            }
+
+            $.ajax({
+                type: "POST",
+                url: '/Administration/setResetPassword',
+                dataType: 'json',
+                data: $('#resetPasswordForm').serialize()
+            }).done(function (dt) {
+                //alert(dt);
+                //console.log(dt);
+                if (dt.isSuccess == 1) {
+                    alertMsg('Success!', 'Please login again.', 'success');
+                    setTimeout(function () {
+                        window.location.replace("/Login/Index");
+                    }, 2000);
+                   
+                } else {
+                    alertMsg('Notification', dt.msg, 'error');
                 }
             }).fail(function (jqXHR, textStatus) {
                 alertMsg('Notification', textStatus, 'error');

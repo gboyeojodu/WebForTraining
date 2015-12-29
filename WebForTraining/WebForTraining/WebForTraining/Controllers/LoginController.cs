@@ -43,9 +43,9 @@ namespace WebForTraining.Controllers
             {
                 if (U.resetPassword == true)
                 {
-                    return Json(new { id = U.userID, isSuccess = false, msg = "Please reset your password" });
-
-
+                    Session["ResetUsername"] = U.userName;
+                    Session["ResetID"] = U.userID;
+                    return Json(new { id = U.userID, isSuccess = 0, msg = "PRYP" });
                 }
             }
 
