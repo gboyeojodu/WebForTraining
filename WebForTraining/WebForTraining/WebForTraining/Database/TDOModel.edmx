@@ -76,6 +76,27 @@
           <Parameter Name="createdByID" Type="int" Mode="In" />
           <Parameter Name="sessionID" Type="uniqueidentifier" Mode="In" />
         </Function>
+        <Function Name="uspAddEditRegister" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tdoRegisterID" Type="int" Mode="In" />
+          <Parameter Name="jobNumber" Type="varchar" Mode="In" />
+          <Parameter Name="dateReceived" Type="datetime" Mode="In" />
+          <Parameter Name="expiryDate" Type="datetime" Mode="In" />
+          <Parameter Name="status" Type="varchar" Mode="In" />
+          <Parameter Name="cargoTypeID" Type="int" Mode="In" />
+          <Parameter Name="fileRef" Type="varchar" Mode="In" />
+          <Parameter Name="destinationID" Type="int" Mode="In" />
+          <Parameter Name="terminalID" Type="int" Mode="In" />
+          <Parameter Name="containerNo" Type="varchar" Mode="In" />
+          <Parameter Name="returnTerminal" Type="int" Mode="In" />
+          <Parameter Name="truckID" Type="int" Mode="In" />
+          <Parameter Name="tdoReceiptDate" Type="datetime" Mode="In" />
+          <Parameter Name="schDelDate" Type="datetime" Mode="In" />
+          <Parameter Name="loadingTime" Type="datetime" Mode="In" />
+          <Parameter Name="dispatchTime" Type="datetime" Mode="In" />
+          <Parameter Name="remarks" Type="varchar" Mode="In" />
+          <Parameter Name="createdByID" Type="int" Mode="In" />
+          <Parameter Name="sessionID" Type="uniqueidentifier" Mode="In" />
+        </Function>
         <Function Name="uspAddEditState" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="stateID" Type="int" Mode="In" />
           <Parameter Name="stateName" Type="varchar" Mode="In" />
@@ -161,6 +182,9 @@
         <Function Name="uspDelRegion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="regionID" Type="int" Mode="In" />
         </Function>
+        <Function Name="uspDelRegister" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tdoRegisterID" Type="int" Mode="In" />
+        </Function>
         <Function Name="uspDelState" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="stateID" Type="int" Mode="In" />
         </Function>
@@ -190,6 +214,7 @@
         <Function Name="uspGetForms" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="formID" Type="int" Mode="In" />
         </Function>
+        <Function Name="uspGetJobNumber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="uspGetMenuIcons" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="menuIconID" Type="int" Mode="In" />
         </Function>
@@ -200,6 +225,9 @@
           <Parameter Name="menuID" Type="int" Mode="In" />
         </Function>
         <Function Name="uspGetRegion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="uspGetRegister" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tdoRegisterID" Type="int" Mode="In" />
+        </Function>
         <Function Name="uspGetState" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="uspGetTruckType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="uspGetUserDisplay" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -434,6 +462,34 @@
           <FunctionImport Name="uspDelCity" ReturnType="Collection(tdoModel.ClsReturnValues)">
           <Parameter Name="cityID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="uspAddEditRegister" ReturnType="Collection(tdoModel.ClsReturnValues)">
+            <Parameter Name="tdoRegisterID" Mode="In" Type="Int32" />
+            <Parameter Name="jobNumber" Mode="In" Type="String" />
+            <Parameter Name="dateReceived" Mode="In" Type="DateTime" />
+            <Parameter Name="expiryDate" Mode="In" Type="DateTime" />
+            <Parameter Name="status" Mode="In" Type="String" />
+            <Parameter Name="cargoTypeID" Mode="In" Type="Int32" />
+            <Parameter Name="fileRef" Mode="In" Type="String" />
+            <Parameter Name="destinationID" Mode="In" Type="Int32" />
+            <Parameter Name="terminalID" Mode="In" Type="Int32" />
+            <Parameter Name="containerNo" Mode="In" Type="String" />
+            <Parameter Name="returnTerminal" Mode="In" Type="Int32" />
+            <Parameter Name="truckID" Mode="In" Type="Int32" />
+            <Parameter Name="tdoReceiptDate" Mode="In" Type="DateTime" />
+            <Parameter Name="schDelDate" Mode="In" Type="DateTime" />
+            <Parameter Name="loadingTime" Mode="In" Type="DateTime" />
+            <Parameter Name="dispatchTime" Mode="In" Type="DateTime" />
+            <Parameter Name="remarks" Mode="In" Type="String" />
+            <Parameter Name="createdByID" Mode="In" Type="Int32" />
+            <Parameter Name="sessionID" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="uspDelRegister" ReturnType="Collection(tdoModel.ClsReturnValues)">
+          <Parameter Name="tdoRegisterID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="uspGetRegister" ReturnType="Collection(tdoModel.ClsRegister)">
+          <Parameter Name="tdoRegisterID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="uspGetJobNumber" ReturnType="Collection(tdoModel.ClsJobNumber)" />
         </EntityContainer>
         <ComplexType Name="ClsReturnValues">
           <Property Type="Int32" Name="ID" Nullable="true" />
@@ -629,10 +685,36 @@
           <Property Type="Guid" Name="sessionID" Nullable="true" />
           <Property Type="String" Name="userName" Nullable="false" MaxLength="255" />
         </ComplexType>
-        <ComplexType Name="uspDelCity_Result">
-          <Property Type="Int32" Name="ID" Nullable="true" />
-          <Property Type="Boolean" Name="IsSuccess" Nullable="true" />
-          <Property Type="String" Name="Response" Nullable="true" />
+        <ComplexType Name="ClsRegister">
+          <Property Type="Int32" Name="tdoRegisterID" Nullable="false" />
+          <Property Type="String" Name="jobNumber" Nullable="false" MaxLength="30" />
+          <Property Type="DateTime" Name="dateReceived" Nullable="true" />
+          <Property Type="DateTime" Name="expiryDate" Nullable="true" />
+          <Property Type="String" Name="status" Nullable="true" MaxLength="15" />
+          <Property Type="Int32" Name="cargoTypeID" Nullable="true" />
+          <Property Type="String" Name="cargoTypeName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="fileRef" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="destinationID" Nullable="true" />
+          <Property Type="String" Name="destinationName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="terminalID" Nullable="true" />
+          <Property Type="String" Name="terminalName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="containerNo" Nullable="true" MaxLength="15" />
+          <Property Type="Int32" Name="returnTerminal" Nullable="true" />
+          <Property Type="String" Name="returnTerminalName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="truckID" Nullable="true" />
+          <Property Type="String" Name="truckName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="truckRegNum" Nullable="false" MaxLength="20" />
+          <Property Type="DateTime" Name="tdoReceiptDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="schDelDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="loadingTime" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="dispatchTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="remarks" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="createdByID" Nullable="true" />
+          <Property Type="String" Name="userName" Nullable="false" MaxLength="255" />
+          <Property Type="Guid" Name="sessionID" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ClsJobNumber">
+          <Property Type="String" Name="jobNumber" Nullable="true" MaxLength="10" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1169,6 +1251,63 @@
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="IsSuccess" ColumnName="IsSuccess" />
                 <ScalarProperty Name="Response" ColumnName="Response" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspAddEditRegister" FunctionName="tdoModel.Store.uspAddEditRegister">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="tdoModel.ClsReturnValues">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IsSuccess" ColumnName="IsSuccess" />
+                <ScalarProperty Name="Response" ColumnName="Response" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspDelRegister" FunctionName="tdoModel.Store.uspDelRegister">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="tdoModel.ClsReturnValues">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IsSuccess" ColumnName="IsSuccess" />
+                <ScalarProperty Name="Response" ColumnName="Response" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspGetRegister" FunctionName="tdoModel.Store.uspGetRegister">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="tdoModel.ClsRegister">
+                <ScalarProperty Name="tdoRegisterID" ColumnName="tdoRegisterID" />
+                <ScalarProperty Name="jobNumber" ColumnName="jobNumber" />
+                <ScalarProperty Name="dateReceived" ColumnName="dateReceived" />
+                <ScalarProperty Name="expiryDate" ColumnName="expiryDate" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="cargoTypeID" ColumnName="cargoTypeID" />
+                <ScalarProperty Name="cargoTypeName" ColumnName="cargoTypeName" />
+                <ScalarProperty Name="fileRef" ColumnName="fileRef" />
+                <ScalarProperty Name="destinationID" ColumnName="destinationID" />
+                <ScalarProperty Name="destinationName" ColumnName="destinationName" />
+                <ScalarProperty Name="terminalID" ColumnName="terminalID" />
+                <ScalarProperty Name="terminalName" ColumnName="terminalName" />
+                <ScalarProperty Name="containerNo" ColumnName="containerNo" />
+                <ScalarProperty Name="returnTerminal" ColumnName="returnTerminal" />
+                <ScalarProperty Name="returnTerminalName" ColumnName="returnTerminalName" />
+                <ScalarProperty Name="truckID" ColumnName="truckID" />
+                <ScalarProperty Name="truckName" ColumnName="truckName" />
+                <ScalarProperty Name="truckRegNum" ColumnName="truckRegNum" />
+                <ScalarProperty Name="tdoReceiptDate" ColumnName="tdoReceiptDate" />
+                <ScalarProperty Name="schDelDate" ColumnName="schDelDate" />
+                <ScalarProperty Name="loadingTime" ColumnName="loadingTime" />
+                <ScalarProperty Name="dispatchTime" ColumnName="dispatchTime" />
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
+                <ScalarProperty Name="createdByID" ColumnName="createdByID" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="sessionID" ColumnName="sessionID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspGetJobNumber" FunctionName="tdoModel.Store.uspGetJobNumber" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="tdoModel.ClsJobNumber">
+                <ScalarProperty Name="jobNumber" ColumnName="jobNumber" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

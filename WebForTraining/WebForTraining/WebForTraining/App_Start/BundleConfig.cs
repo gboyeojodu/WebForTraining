@@ -34,6 +34,8 @@ namespace WebForTraining
                        "~/js/icheck/icheck.min.js",
                         "~/js/custom.js",
                        "~/js/datatables/js/jquery.dataTables.js",
+                       "~/js/datepicker/daterangepicker.js",
+                       "~/js/datepicker/bootstrap-datepicker.js",
                        "~/js/datatables/tools/js/dataTables.tableTools.js"
                       ));
             
@@ -45,6 +47,7 @@ namespace WebForTraining
                       "~/less/custom.css",
                       "~/css/normalize.css",
                       "~/css/icheck/flat/green.css",
+                      "~/js/datepicker/datepicker.css",
                       "~/css/datatables/tools/css/dataTables.tableTools.css"
                       ));
 

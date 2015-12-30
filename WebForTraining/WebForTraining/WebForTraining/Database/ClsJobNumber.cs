@@ -11,10 +11,8 @@ namespace WebForTraining.Database
 {
     using System;
     
-    public partial class uspDelCity_Result
+    public partial class ClsJobNumber
     {
-        public Nullable<int> ID { get; set; }
-        public Nullable<bool> IsSuccess { get; set; }
-        public string Response { get; set; }
+        public string jobNumber { get; set; }
     }
 }

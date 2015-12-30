@@ -766,5 +766,109 @@ namespace WebForTraining.Database
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspDelCity", cityIDParameter);
         }
+    
+        public virtual ObjectResult<ClsReturnValues> uspAddEditRegister(Nullable<int> tdoRegisterID, string jobNumber, Nullable<System.DateTime> dateReceived, Nullable<System.DateTime> expiryDate, string status, Nullable<int> cargoTypeID, string fileRef, Nullable<int> destinationID, Nullable<int> terminalID, string containerNo, Nullable<int> returnTerminal, Nullable<int> truckID, Nullable<System.DateTime> tdoReceiptDate, Nullable<System.DateTime> schDelDate, Nullable<System.DateTime> loadingTime, Nullable<System.DateTime> dispatchTime, string remarks, Nullable<int> createdByID, Nullable<System.Guid> sessionID)
+        {
+            var tdoRegisterIDParameter = tdoRegisterID.HasValue ?
+                new ObjectParameter("tdoRegisterID", tdoRegisterID) :
+                new ObjectParameter("tdoRegisterID", typeof(int));
+    
+            var jobNumberParameter = jobNumber != null ?
+                new ObjectParameter("jobNumber", jobNumber) :
+                new ObjectParameter("jobNumber", typeof(string));
+    
+            var dateReceivedParameter = dateReceived.HasValue ?
+                new ObjectParameter("dateReceived", dateReceived) :
+                new ObjectParameter("dateReceived", typeof(System.DateTime));
+    
+            var expiryDateParameter = expiryDate.HasValue ?
+                new ObjectParameter("expiryDate", expiryDate) :
+                new ObjectParameter("expiryDate", typeof(System.DateTime));
+    
+            var statusParameter = status != null ?
+                new ObjectParameter("status", status) :
+                new ObjectParameter("status", typeof(string));
+    
+            var cargoTypeIDParameter = cargoTypeID.HasValue ?
+                new ObjectParameter("cargoTypeID", cargoTypeID) :
+                new ObjectParameter("cargoTypeID", typeof(int));
+    
+            var fileRefParameter = fileRef != null ?
+                new ObjectParameter("fileRef", fileRef) :
+                new ObjectParameter("fileRef", typeof(string));
+    
+            var destinationIDParameter = destinationID.HasValue ?
+                new ObjectParameter("destinationID", destinationID) :
+                new ObjectParameter("destinationID", typeof(int));
+    
+            var terminalIDParameter = terminalID.HasValue ?
+                new ObjectParameter("terminalID", terminalID) :
+                new ObjectParameter("terminalID", typeof(int));
+    
+            var containerNoParameter = containerNo != null ?
+                new ObjectParameter("containerNo", containerNo) :
+                new ObjectParameter("containerNo", typeof(string));
+    
+            var returnTerminalParameter = returnTerminal.HasValue ?
+                new ObjectParameter("returnTerminal", returnTerminal) :
+                new ObjectParameter("returnTerminal", typeof(int));
+    
+            var truckIDParameter = truckID.HasValue ?
+                new ObjectParameter("truckID", truckID) :
+                new ObjectParameter("truckID", typeof(int));
+    
+            var tdoReceiptDateParameter = tdoReceiptDate.HasValue ?
+                new ObjectParameter("tdoReceiptDate", tdoReceiptDate) :
+                new ObjectParameter("tdoReceiptDate", typeof(System.DateTime));
+    
+            var schDelDateParameter = schDelDate.HasValue ?
+                new ObjectParameter("schDelDate", schDelDate) :
+                new ObjectParameter("schDelDate", typeof(System.DateTime));
+    
+            var loadingTimeParameter = loadingTime.HasValue ?
+                new ObjectParameter("loadingTime", loadingTime) :
+                new ObjectParameter("loadingTime", typeof(System.DateTime));
+    
+            var dispatchTimeParameter = dispatchTime.HasValue ?
+                new ObjectParameter("dispatchTime", dispatchTime) :
+                new ObjectParameter("dispatchTime", typeof(System.DateTime));
+    
+            var remarksParameter = remarks != null ?
+                new ObjectParameter("remarks", remarks) :
+                new ObjectParameter("remarks", typeof(string));
+    
+            var createdByIDParameter = createdByID.HasValue ?
+                new ObjectParameter("createdByID", createdByID) :
+                new ObjectParameter("createdByID", typeof(int));
+    
+            var sessionIDParameter = sessionID.HasValue ?
+                new ObjectParameter("sessionID", sessionID) :
+                new ObjectParameter("sessionID", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspAddEditRegister", tdoRegisterIDParameter, jobNumberParameter, dateReceivedParameter, expiryDateParameter, statusParameter, cargoTypeIDParameter, fileRefParameter, destinationIDParameter, terminalIDParameter, containerNoParameter, returnTerminalParameter, truckIDParameter, tdoReceiptDateParameter, schDelDateParameter, loadingTimeParameter, dispatchTimeParameter, remarksParameter, createdByIDParameter, sessionIDParameter);
+        }
+    
+        public virtual ObjectResult<ClsReturnValues> uspDelRegister(Nullable<int> tdoRegisterID)
+        {
+            var tdoRegisterIDParameter = tdoRegisterID.HasValue ?
+                new ObjectParameter("tdoRegisterID", tdoRegisterID) :
+                new ObjectParameter("tdoRegisterID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspDelRegister", tdoRegisterIDParameter);
+        }
+    
+        public virtual ObjectResult<ClsRegister> uspGetRegister(Nullable<int> tdoRegisterID)
+        {
+            var tdoRegisterIDParameter = tdoRegisterID.HasValue ?
+                new ObjectParameter("tdoRegisterID", tdoRegisterID) :
+                new ObjectParameter("tdoRegisterID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsRegister>("uspGetRegister", tdoRegisterIDParameter);
+        }
+    
+        public virtual ObjectResult<ClsJobNumber> uspGetJobNumber()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsJobNumber>("uspGetJobNumber");
+        }
     }
 }
