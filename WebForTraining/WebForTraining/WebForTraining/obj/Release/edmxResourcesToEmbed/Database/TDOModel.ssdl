@@ -43,6 +43,13 @@
     <Parameter Name="createdByID" Type="int" Mode="In" />
     <Parameter Name="sessionID" Type="uniqueidentifier" Mode="In" />
   </Function>
+  <Function Name="uspAddEditLocation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="locationID" Type="int" Mode="In" />
+    <Parameter Name="locationName" Type="varchar" Mode="In" />
+    <Parameter Name="regionID" Type="int" Mode="In" />
+    <Parameter Name="createdByID" Type="int" Mode="In" />
+    <Parameter Name="sessionID" Type="uniqueidentifier" Mode="In" />
+  </Function>
   <Function Name="uspAddEditMenuIcons" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="menuIconID" Type="int" Mode="In" />
     <Parameter Name="menuID" Type="int" Mode="In" />
@@ -65,6 +72,13 @@
     <Parameter Name="menuRanking" Type="int" Mode="In" />
     <Parameter Name="sessionID" Type="uniqueidentifier" Mode="In" />
   </Function>
+  <Function Name="uspAddEditPort" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="portID" Type="int" Mode="In" />
+    <Parameter Name="portName" Type="varchar" Mode="In" />
+    <Parameter Name="locationID" Type="int" Mode="In" />
+    <Parameter Name="createdByID" Type="int" Mode="In" />
+    <Parameter Name="sessionID" Type="uniqueidentifier" Mode="In" />
+  </Function>
   <Function Name="uspAddEditRegion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="regionID" Type="int" Mode="In" />
     <Parameter Name="regionName" Type="varchar" Mode="In" />
@@ -75,6 +89,21 @@
     <Parameter Name="stateID" Type="int" Mode="In" />
     <Parameter Name="stateName" Type="varchar" Mode="In" />
     <Parameter Name="stateCode" Type="varchar" Mode="In" />
+    <Parameter Name="createdByID" Type="int" Mode="In" />
+    <Parameter Name="sessionID" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="uspAddEditTerminal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="terminalID" Type="int" Mode="In" />
+    <Parameter Name="terminalName" Type="varchar" Mode="In" />
+    <Parameter Name="portID" Type="int" Mode="In" />
+    <Parameter Name="createdByID" Type="int" Mode="In" />
+    <Parameter Name="sessionID" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="uspAddEditTruck" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="truckID" Type="int" Mode="In" />
+    <Parameter Name="truckName" Type="varchar" Mode="In" />
+    <Parameter Name="regNumb" Type="varchar" Mode="In" />
+    <Parameter Name="truckTypeID" Type="int" Mode="In" />
     <Parameter Name="createdByID" Type="int" Mode="In" />
     <Parameter Name="sessionID" Type="uniqueidentifier" Mode="In" />
   </Function>
@@ -144,6 +173,9 @@
   <Function Name="uspDelForms" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="formID" Type="int" Mode="In" />
   </Function>
+  <Function Name="uspDelLocation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="locationID" Type="int" Mode="In" />
+  </Function>
   <Function Name="uspDelMenuIcons" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="menuIconID" Type="int" Mode="In" />
   </Function>
@@ -153,11 +185,20 @@
   <Function Name="uspDelMenus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="menuID" Type="int" Mode="In" />
   </Function>
+  <Function Name="uspDelPort" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="portID" Type="int" Mode="In" />
+  </Function>
   <Function Name="uspDelRegion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="regionID" Type="int" Mode="In" />
   </Function>
   <Function Name="uspDelState" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="stateID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="uspDelTerminal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="terminalID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="uspDelTruck" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="truckID" Type="int" Mode="In" />
   </Function>
   <Function Name="uspDelTruckType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="truckTypeID" Type="int" Mode="In" />
@@ -185,6 +226,7 @@
   <Function Name="uspGetForms" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="formID" Type="int" Mode="In" />
   </Function>
+  <Function Name="uspGetLocation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="uspGetMenuIcons" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="menuIconID" Type="int" Mode="In" />
   </Function>
@@ -194,8 +236,11 @@
   <Function Name="uspGetMenus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="menuID" Type="int" Mode="In" />
   </Function>
+  <Function Name="uspGetPort" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="uspGetRegion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="uspGetState" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="uspGetTerminal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="uspGetTruck" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="uspGetTruckType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="uspGetUserDisplay" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="userID" Type="int" Mode="In" />

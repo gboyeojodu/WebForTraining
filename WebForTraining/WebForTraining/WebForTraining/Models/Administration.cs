@@ -155,7 +155,7 @@ namespace WebForTraining.Models
 
         #endregion
 
-#region Driver
+        #region Driver
         public static ClsReturnValues setDriver(ClsDriver obj, Guid SessionID)
         {
             ClsReturnValues lst = new ClsReturnValues();
@@ -289,6 +289,146 @@ namespace WebForTraining.Models
             using (var db = new tdoEntities())
             {
                 lst = db.uspDelCity(cityID).FirstOrDefault();
+            }
+            return lst;
+        }
+
+        #endregion
+
+        #region Location
+        public static ClsReturnValues setLocation(ClsLocation obj, Guid SessionID)
+        {
+            ClsReturnValues lst = new ClsReturnValues();
+
+            using (var db = new tdoEntities())
+            {
+
+                lst = db.uspAddEditLocation(obj.locationID, obj.locationName, obj.regionID, obj.createdByID, SessionID).FirstOrDefault();
+            }
+            return lst;
+        }
+
+        public static List<ClsLocation> getLocation()
+        {
+            List<ClsLocation> lst = new List<ClsLocation>();
+            using (var db = new tdoEntities())
+            {
+                lst = db.uspGetLocation().ToList<ClsLocation>();
+            }
+            return lst;
+        }
+
+        public static ClsReturnValues delLocation(int locationID)
+        {
+            ClsReturnValues lst = new ClsReturnValues();
+            using (var db = new tdoEntities())
+            {
+                lst = db.uspDelLocation(locationID).FirstOrDefault();
+            }
+            return lst;
+        }
+
+        #endregion
+
+        #region Port
+        public static ClsReturnValues setPort(ClsPort obj, Guid SessionID)
+        {
+            ClsReturnValues lst = new ClsReturnValues();
+
+            using (var db = new tdoEntities())
+            {
+
+                lst = db.uspAddEditPort(obj.portID, obj.portName, obj.locationID, obj.createdByID, SessionID).FirstOrDefault();
+            }
+            return lst;
+        }
+
+        public static List<ClsPort> getPort()
+        {
+            List<ClsPort> lst = new List<ClsPort>();
+            using (var db = new tdoEntities())
+            {
+                lst = db.uspGetPort().ToList<ClsPort>();
+            }
+            return lst;
+        }
+
+        public static ClsReturnValues delPort(int portID)
+        {
+            ClsReturnValues lst = new ClsReturnValues();
+            using (var db = new tdoEntities())
+            {
+                lst = db.uspDelPort(portID).FirstOrDefault();
+            }
+            return lst;
+        }
+
+        #endregion
+
+        #region Terminal
+        public static ClsReturnValues setTerminal(ClsTerminal obj, Guid SessionID)
+        {
+            ClsReturnValues lst = new ClsReturnValues();
+
+            using (var db = new tdoEntities())
+            {
+
+                lst = db.uspAddEditTerminal(obj.terminalID, obj.terminalName, obj.portID, obj.createdByID, SessionID).FirstOrDefault();
+            }
+            return lst;
+        }
+
+        public static List<ClsTerminal> getTerminal()
+        {
+            List<ClsTerminal> lst = new List<ClsTerminal>();
+            using (var db = new tdoEntities())
+            {
+                lst = db.uspGetTerminal().ToList<ClsTerminal>();
+            }
+            return lst;
+        }
+
+        public static ClsReturnValues delTerminal(int terminalID)
+        {
+            ClsReturnValues lst = new ClsReturnValues();
+            using (var db = new tdoEntities())
+            {
+                lst = db.uspDelTerminal(terminalID).FirstOrDefault();
+            }
+            return lst;
+        }
+
+        #endregion
+
+        #region Truck
+        public static ClsReturnValues setTruck(ClsTruck obj, Guid SessionID)
+        {
+            ClsReturnValues lst = new ClsReturnValues();
+
+            using (var db = new tdoEntities())
+            {
+
+                lst = db.uspAddEditTruck(obj.truckID, obj.truckName, obj.regNumb, obj.truckTypeID, obj.createdByID, SessionID).FirstOrDefault();
+            }
+            return lst;
+        }
+
+        public static List<ClsTruck> getTruck()
+        {
+            List<ClsTruck> lst = new List<ClsTruck>();
+            using (var db = new tdoEntities())
+            {
+                lst = db.uspGetTruck().ToList<ClsTruck>();
+            }
+            return lst;
+        }
+
+        public static ClsReturnValues delTruck(int truckID)
+        {
+            ClsReturnValues lst = new ClsReturnValues();
+            using (var db = new tdoEntities())
+            {
+                lst = db.uspDelTruck(truckID).FirstOrDefault();
             }
             return lst;
         }

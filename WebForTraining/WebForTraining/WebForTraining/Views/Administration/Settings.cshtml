@@ -36,16 +36,16 @@
                         <a href="#city_tab" role="tab" id="city-tab" data-toggle="tab" aria-expanded="false" onclick="javascript: ld_fm('/Administration/getCityDisplay', 'cityDetail');">City</a>
                     </li>
                     <li role="presentation" class="">
-                        <a href="#location_tab" role="tab" id="location-tab" data-toggle="tab" aria-expanded="false">Location</a>
+                        <a href="#location_tab" role="tab" id="location-tab" data-toggle="tab" aria-expanded="false" onclick="javascript: ld_fm('/Administration/getLocationDisplay', 'locationDetail');">Location</a>
                     </li>
                     <li role="presentation" class="">
-                        <a href="#port_tab" role="tab" id="port-tab" data-toggle="tab" aria-expanded="false">Port</a>
+                        <a href="#port_tab" role="tab" id="port-tab" data-toggle="tab" aria-expanded="false" onclick="javascript: ld_fm('/Administration/getPortDisplay', 'portDetail');">Port</a>
                     </li>
                     <li role="presentation" class="">
-                        <a href="#terminal_tab" role="tab" id="terminal-tab" data-toggle="tab" aria-expanded="false">Terminal</a>
+                        <a href="#terminal_tab" role="tab" id="terminal-tab" data-toggle="tab" aria-expanded="false" onclick="javascript: ld_fm('/Administration/getTerminalDisplay', 'terminalDetail');">Terminal</a>
                     </li>
                     <li role="presentation" class="">
-                        <a href="#truck_tab" role="tab" id="truck-tab" data-toggle="tab" aria-expanded="false">Truck</a>
+                        <a href="#truck_tab" role="tab" id="truck-tab" data-toggle="tab" aria-expanded="false" onclick="javascript: ld_fm('/Administration/getTruckDisplay', 'truckDetail');">Truck</a>
                     </li>
                 </ul>
 
@@ -143,19 +143,67 @@
 
                     </div>
 
-                    <div role="tabpanel" class="tab-pane fade" id="location-tab" aria-labelledby="location_tab">
+                    <div role="tabpanel" class="tab-pane fade" id="location_tab" aria-labelledby="location-tab">
+
+                        <button type="button" id="btnRefreshLocation" class="btn btn-primary refresh" onclick="javascript: ld_fm('/Administration/getLocationDisplay', 'locationDetail');" title="Click to refresh">
+                            <i class="fa fa-refresh"></i>
+                        </button>
+                        <button data-toggle="modal" id="btnAddLocation" type="button" onclick="javascript: ld_modal_fm('/Administration/AddEditLocation', 'modalContentLoad', '0');" class="btn btn-primary" title="Click to Add New Record">
+                            <i class=" fa fa-plus"></i>
+                        </button>
+                        <button id="btnDelLocation" type="button" onclick="javascript: splitCheckboxIdDelete('selLocation', 'tblLocation', '/Administration/deleteLocation');" class="btn btn-danger" title="Click to Delete Record">
+                            <i class=" fa fa-trash"></i>
+                        </button>
+                        <div id="locationDetail" class="locationDetail">
+                        </div>
 
                     </div>
 
                     <div role="tabpanel" class="tab-pane fade" id="port_tab" aria-labelledby="port-tab">
 
+                        <button type="button" id="btnRefreshPort" class="btn btn-primary refresh" onclick="javascript: ld_fm('/Administration/getPortDisplay', 'portDetail');" title="Click to refresh">
+                            <i class="fa fa-refresh"></i>
+                        </button>
+                        <button data-toggle="modal" id="btnAddPort" type="button" onclick="javascript: ld_modal_fm('/Administration/AddEditPort', 'modalContentLoad', '0');" class="btn btn-primary" title="Click to Add New Record">
+                            <i class=" fa fa-plus"></i>
+                        </button>
+                        <button id="btnDelPort" type="button" onclick="javascript: splitCheckboxIdDelete('selPort', 'tblPort', '/Administration/deletePort');" class="btn btn-danger" title="Click to Delete Record">
+                            <i class=" fa fa-trash"></i>
+                        </button>
+                        <div id="portDetail" class="portDetail">
+                        </div>
+
                     </div>
 
                     <div role="tabpanel" class="tab-pane fade" id="terminal_tab" aria-labelledby="terminal-tab">
 
+                        <button type="button" id="btnRefreshTerminal" class="btn btn-primary refresh" onclick="javascript: ld_fm('/Administration/getTerminalDisplay', 'terminalDetail');" title="Click to refresh">
+                            <i class="fa fa-refresh"></i>
+                        </button>
+                        <button data-toggle="modal" id="btnAddTerminal" type="button" onclick="javascript: ld_modal_fm('/Administration/AddEditTerminal', 'modalContentLoad', '0');" class="btn btn-primary" title="Click to Add New Record">
+                            <i class=" fa fa-plus"></i>
+                        </button>
+                        <button id="btnDelTerminal" type="button" onclick="javascript: splitCheckboxIdDelete('selTerminal', 'tblTerminal', '/Administration/deleteTerminal');" class="btn btn-danger" title="Click to Delete Record">
+                            <i class=" fa fa-trash"></i>
+                        </button>
+                        <div id="terminalDetail" class="terminalDetail">
+                        </div>
+
                     </div>
 
                     <div role="tabpanel" class="tab-pane fade" id="truck_tab" aria-labelledby="truck-tab">
+
+                        <button type="button" id="btnRefreshTruck" class="btn btn-primary refresh" onclick="javascript: ld_fm('/Administration/getTruckDisplay', 'truckDetail');" title="Click to refresh">
+                            <i class="fa fa-refresh"></i>
+                        </button>
+                        <button data-toggle="modal" id="btnAddTruck" type="button" onclick="javascript: ld_modal_fm('/Administration/AddEditTruck', 'modalContentLoad', '0');" class="btn btn-primary" title="Click to Add New Record">
+                            <i class=" fa fa-plus"></i>
+                        </button>
+                        <button id="btnDelTruck" type="button" onclick="javascript: splitCheckboxIdDelete('selTruck', 'tblTruck', '/Administration/deleteTruck');" class="btn btn-danger" title="Click to Delete Record">
+                            <i class=" fa fa-trash"></i>
+                        </button>
+                        <div id="truckDetail" class="truckDetail">
+                        </div>
 
                     </div>
 

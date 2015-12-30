@@ -212,6 +212,51 @@
     <FunctionImport Name="uspDelCity" ReturnType="Collection(tdoModel.ClsReturnValues)">
       <Parameter Name="cityID" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="uspAddEditLocation" ReturnType="Collection(tdoModel.ClsReturnValues)">
+      <Parameter Name="locationID" Mode="In" Type="Int32" />
+      <Parameter Name="locationName" Mode="In" Type="String" />
+      <Parameter Name="regionID" Mode="In" Type="Int32" />
+      <Parameter Name="createdByID" Mode="In" Type="Int32" />
+      <Parameter Name="sessionID" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="uspAddEditPort" ReturnType="Collection(tdoModel.ClsReturnValues)">
+      <Parameter Name="portID" Mode="In" Type="Int32" />
+      <Parameter Name="portName" Mode="In" Type="String" />
+      <Parameter Name="locationID" Mode="In" Type="Int32" />
+      <Parameter Name="createdByID" Mode="In" Type="Int32" />
+      <Parameter Name="sessionID" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="uspDelLocation" ReturnType="Collection(tdoModel.ClsReturnValues)">
+      <Parameter Name="locationID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspDelPort" ReturnType="Collection(tdoModel.ClsReturnValues)">
+      <Parameter Name="portID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspDelTerminal" ReturnType="Collection(tdoModel.ClsReturnValues)">
+      <Parameter Name="terminalID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspGetLocation" ReturnType="Collection(tdoModel.ClsLocation)" />
+    <FunctionImport Name="uspGetPort" ReturnType="Collection(tdoModel.ClsPort)" />
+    <FunctionImport Name="uspGetTerminal" ReturnType="Collection(tdoModel.ClsTerminal)" />
+    <FunctionImport Name="uspGetTruck" ReturnType="Collection(tdoModel.ClsTruck)" />
+    <FunctionImport Name="uspAddEditTerminal" ReturnType="Collection(tdoModel.ClsReturnValues)">
+      <Parameter Name="terminalID" Mode="In" Type="Int32" />
+      <Parameter Name="terminalName" Mode="In" Type="String" />
+      <Parameter Name="portID" Mode="In" Type="Int32" />
+      <Parameter Name="createdByID" Mode="In" Type="Int32" />
+      <Parameter Name="sessionID" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="uspAddEditTruck" ReturnType="Collection(tdoModel.ClsReturnValues)">
+      <Parameter Name="truckID" Mode="In" Type="Int32" />
+      <Parameter Name="truckName" Mode="In" Type="String" />
+      <Parameter Name="regNumb" Mode="In" Type="String" />
+      <Parameter Name="truckTypeID" Mode="In" Type="Int32" />
+      <Parameter Name="createdByID" Mode="In" Type="Int32" />
+      <Parameter Name="sessionID" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="uspDelTruck" ReturnType="Collection(tdoModel.ClsReturnValues)">
+      <Parameter Name="truckID" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="ClsReturnValues">
     <Property Type="Int32" Name="ID" Nullable="true" />
@@ -407,9 +452,53 @@
     <Property Type="Guid" Name="sessionID" Nullable="true" />
     <Property Type="String" Name="userName" Nullable="false" MaxLength="255" />
   </ComplexType>
-  <ComplexType Name="uspDelCity_Result">
-    <Property Type="Int32" Name="ID" Nullable="true" />
-    <Property Type="Boolean" Name="IsSuccess" Nullable="true" />
-    <Property Type="String" Name="Response" Nullable="true" />
+  <ComplexType Name="ClsLocation">
+    <Property Type="Int32" Name="locationID" Nullable="false" />
+    <Property Type="String" Name="locationName" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="regionID" Nullable="false" />
+    <Property Type="String" Name="regionName" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="dateCreated" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="dateModified" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="modifiedByID" Nullable="true" />
+    <Property Type="Int32" Name="createdByID" Nullable="true" />
+    <Property Type="Guid" Name="sessionID" Nullable="true" />
+    <Property Type="String" Name="userName" Nullable="false" MaxLength="255" />
+  </ComplexType>
+  <ComplexType Name="ClsPort">
+    <Property Type="Int32" Name="portID" Nullable="false" />
+    <Property Type="String" Name="portName" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="locationID" Nullable="false" />
+    <Property Type="String" Name="locationName" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="dateCreated" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="dateModified" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="modifiedByID" Nullable="true" />
+    <Property Type="Int32" Name="createdByID" Nullable="true" />
+    <Property Type="Guid" Name="sessionID" Nullable="true" />
+    <Property Type="String" Name="userName" Nullable="false" MaxLength="255" />
+  </ComplexType>
+  <ComplexType Name="ClsTerminal">
+    <Property Type="Int32" Name="terminalID" Nullable="false" />
+    <Property Type="String" Name="terminalName" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="portID" Nullable="false" />
+    <Property Type="String" Name="portName" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="dateCreated" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="dateModified" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="modifiedByID" Nullable="true" />
+    <Property Type="Int32" Name="createdByID" Nullable="true" />
+    <Property Type="Guid" Name="sessionID" Nullable="true" />
+    <Property Type="String" Name="userName" Nullable="false" MaxLength="255" />
+  </ComplexType>
+  <ComplexType Name="ClsTruck">
+    <Property Type="Int32" Name="truckID" Nullable="false" />
+    <Property Type="String" Name="truckName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="regNumb" Nullable="false" MaxLength="20" />
+    <Property Type="Int32" Name="truckTypeID" Nullable="true" />
+    <Property Type="DateTime" Name="dateCreated" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="dateModified" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="modifiedByID" Nullable="true" />
+    <Property Type="Int32" Name="createdByID" Nullable="true" />
+    <Property Type="Guid" Name="sessionID" Nullable="true" />
+    <Property Type="String" Name="userName" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="truckTypeName" Nullable="false" MaxLength="50" />
   </ComplexType>
 </Schema>

@@ -291,7 +291,77 @@ public ActionResult Index()
             return View();
         }
 
+        public ActionResult getLocationDisplay()
+        {
+            if (!CheckSession())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            return View();
+        }
 
+        public ActionResult AddEditLocation()
+        {
+            if (!CheckSession())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            return View();
+        }
+
+        public ActionResult getPortDisplay()
+        {
+            if (!CheckSession())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            return View();
+        }
+
+        public ActionResult AddEditPort()
+        {
+            if (!CheckSession())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            return View();
+        }
+
+        public ActionResult getTerminalDisplay()
+        {
+            if (!CheckSession())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            return View();
+        }
+
+        public ActionResult AddEditTerminal()
+        {
+            if (!CheckSession())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            return View();
+        }
+
+        public ActionResult getTruckDisplay()
+        {
+            if (!CheckSession())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            return View();
+        }
+
+        public ActionResult AddEditTruck()
+        {
+            if (!CheckSession())
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            return View();
+        }
 
 
 
@@ -982,6 +1052,327 @@ public ActionResult Index()
                 catch { }
                 if (_id > 0)
                     obj.Add(Administration.delCity(_id));
+            }
+
+            bool isSuccess = obj.Count(p => p.IsSuccess == false) > 0 ? false : true;
+            if (obj.Count(p => p.IsSuccess == true) > 1)
+            {
+                message = obj.Count(p => p.IsSuccess == true).ToString() + " records deleted";
+            }
+            else
+            {
+                message = obj.Count(p => p.IsSuccess == true).ToString() + " record deleted";
+            }
+
+            return Json(new { id = isSuccess ? 1 : 0, isSuccess = isSuccess ? 1 : 0, msg = message });
+        }
+
+        #endregion
+
+        #region Location
+
+        public JsonResult setLocation(string locationID, string locationName, string regionID)
+        {
+            List<ClsUserDisplay> userDisplay = new List<ClsUserDisplay>();
+            using (tdoEntities db = new tdoEntities())
+            {
+                userDisplay = db.uspGetUserDisplay(GetID()).ToList<ClsUserDisplay>();
+            }
+            List<string> editableForms = Restriction.GetEditableForms(userDisplay);
+            List<string> addableForms = Restriction.GetAddableForms(userDisplay);
+
+            if (int.Parse(locationID) == 0 && !addableForms.Contains("Location"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to add new records." });
+            }
+            else if (int.Parse(locationID) != 0 && !editableForms.Contains("Location"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to edit records." });
+            }
+
+            if (locationID == "") { locationID = "0"; }
+
+            Guid Session = new Guid(GetSession()); //do not hard code session ID and createdbyID
+            int _id = 0;
+            try { _id = int.Parse(locationID.Trim()); }
+            catch { }
+            ClsLocation obj = new ClsLocation()
+            {
+                locationID = _id,
+                locationName = locationName,
+                regionID = int.Parse(regionID),
+                createdByID = GetID(),
+                sessionID = Session
+            };
+            ClsReturnValues k = Administration.setLocation(obj, Session);
+            return Json(new { id = k.ID, isSuccess = k.IsSuccess ?? false ? 1 : 0, msg = k.Response });
+        }
+
+        public JsonResult deleteLocation(string ids)
+        {
+
+            List<ClsUserDisplay> userDisplay = new List<ClsUserDisplay>();
+            using (tdoEntities db = new tdoEntities())
+            {
+                userDisplay = db.uspGetUserDisplay(GetID()).ToList<ClsUserDisplay>();
+            }
+            List<string> deleteableForms = Restriction.GetDeletableForms(userDisplay);
+
+            if (!deleteableForms.Contains("Location"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to delete records here" });
+            }
+
+            string[] id_s = ids.Trim().Split(',');
+            string message = "";
+            List<ClsReturnValues> obj = new List<ClsReturnValues>();
+            foreach (var id in id_s)
+            {
+                int _id = 0; try { _id = int.Parse(id.Trim()); }
+                catch { }
+                if (_id > 0)
+                    obj.Add(Administration.delLocation(_id));
+            }
+
+            bool isSuccess = obj.Count(p => p.IsSuccess == false) > 0 ? false : true;
+            if (obj.Count(p => p.IsSuccess == true) > 1)
+            {
+                message = obj.Count(p => p.IsSuccess == true).ToString() + " records deleted";
+            }
+            else
+            {
+                message = obj.Count(p => p.IsSuccess == true).ToString() + " record deleted";
+            }
+
+            return Json(new { id = isSuccess ? 1 : 0, isSuccess = isSuccess ? 1 : 0, msg = message });
+        }
+
+        #endregion
+
+        #region Port
+
+        public JsonResult setPort(string portID, string portName, string locationID)
+        {
+            List<ClsUserDisplay> userDisplay = new List<ClsUserDisplay>();
+            using (tdoEntities db = new tdoEntities())
+            {
+                userDisplay = db.uspGetUserDisplay(GetID()).ToList<ClsUserDisplay>();
+            }
+            List<string> editableForms = Restriction.GetEditableForms(userDisplay);
+            List<string> addableForms = Restriction.GetAddableForms(userDisplay);
+
+            if (int.Parse(portID) == 0 && !addableForms.Contains("Port"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to add new records." });
+            }
+            else if (int.Parse(portID) != 0 && !editableForms.Contains("Port"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to edit records." });
+            }
+
+            if (portID == "") { portID = "0"; }
+
+            Guid Session = new Guid(GetSession()); //do not hard code session ID and createdbyID
+            int _id = 0;
+            try { _id = int.Parse(portID.Trim()); }
+            catch { }
+            ClsPort obj = new ClsPort()
+            {
+                portID = _id,
+                portName = portName,
+                locationID = int.Parse(locationID),
+                createdByID = GetID(),
+                sessionID = Session
+            };
+            ClsReturnValues k = Administration.setPort(obj, Session);
+            return Json(new { id = k.ID, isSuccess = k.IsSuccess ?? false ? 1 : 0, msg = k.Response });
+        }
+
+        public JsonResult deletePort(string ids)
+        {
+
+            List<ClsUserDisplay> userDisplay = new List<ClsUserDisplay>();
+            using (tdoEntities db = new tdoEntities())
+            {
+                userDisplay = db.uspGetUserDisplay(GetID()).ToList<ClsUserDisplay>();
+            }
+            List<string> deleteableForms = Restriction.GetDeletableForms(userDisplay);
+
+            if (!deleteableForms.Contains("Port"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to delete records here" });
+            }
+
+            string[] id_s = ids.Trim().Split(',');
+            string message = "";
+            List<ClsReturnValues> obj = new List<ClsReturnValues>();
+            foreach (var id in id_s)
+            {
+                int _id = 0; try { _id = int.Parse(id.Trim()); }
+                catch { }
+                if (_id > 0)
+                    obj.Add(Administration.delPort(_id));
+            }
+
+            bool isSuccess = obj.Count(p => p.IsSuccess == false) > 0 ? false : true;
+            if (obj.Count(p => p.IsSuccess == true) > 1)
+            {
+                message = obj.Count(p => p.IsSuccess == true).ToString() + " records deleted";
+            }
+            else
+            {
+                message = obj.Count(p => p.IsSuccess == true).ToString() + " record deleted";
+            }
+
+            return Json(new { id = isSuccess ? 1 : 0, isSuccess = isSuccess ? 1 : 0, msg = message });
+        }
+
+        #endregion
+
+        #region Terminal
+
+        public JsonResult setTerminal(string terminalID, string terminalName, string portID)
+        {
+            List<ClsUserDisplay> userDisplay = new List<ClsUserDisplay>();
+            using (tdoEntities db = new tdoEntities())
+            {
+                userDisplay = db.uspGetUserDisplay(GetID()).ToList<ClsUserDisplay>();
+            }
+            List<string> editableForms = Restriction.GetEditableForms(userDisplay);
+            List<string> addableForms = Restriction.GetAddableForms(userDisplay);
+
+            if (int.Parse(terminalID) == 0 && !addableForms.Contains("Terminal"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to add new records." });
+            }
+            else if (int.Parse(terminalID) != 0 && !editableForms.Contains("Terminal"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to edit records." });
+            }
+
+            if (terminalID == "") { terminalID = "0"; }
+
+            Guid Session = new Guid(GetSession()); //do not hard code session ID and createdbyID
+            int _id = 0;
+            try { _id = int.Parse(terminalID.Trim()); }
+            catch { }
+            ClsTerminal obj = new ClsTerminal()
+            {
+                terminalID = _id,
+                terminalName = terminalName,
+                portID = int.Parse(portID),
+                createdByID = GetID(),
+                sessionID = Session
+            };
+            ClsReturnValues k = Administration.setTerminal(obj, Session);
+            return Json(new { id = k.ID, isSuccess = k.IsSuccess ?? false ? 1 : 0, msg = k.Response });
+        }
+
+        public JsonResult deleteTerminal(string ids)
+        {
+
+            List<ClsUserDisplay> userDisplay = new List<ClsUserDisplay>();
+            using (tdoEntities db = new tdoEntities())
+            {
+                userDisplay = db.uspGetUserDisplay(GetID()).ToList<ClsUserDisplay>();
+            }
+            List<string> deleteableForms = Restriction.GetDeletableForms(userDisplay);
+
+            if (!deleteableForms.Contains("Terminal"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to delete records here" });
+            }
+
+            string[] id_s = ids.Trim().Split(',');
+            string message = "";
+            List<ClsReturnValues> obj = new List<ClsReturnValues>();
+            foreach (var id in id_s)
+            {
+                int _id = 0; try { _id = int.Parse(id.Trim()); }
+                catch { }
+                if (_id > 0)
+                    obj.Add(Administration.delTerminal(_id));
+            }
+
+            bool isSuccess = obj.Count(p => p.IsSuccess == false) > 0 ? false : true;
+            if (obj.Count(p => p.IsSuccess == true) > 1)
+            {
+                message = obj.Count(p => p.IsSuccess == true).ToString() + " records deleted";
+            }
+            else
+            {
+                message = obj.Count(p => p.IsSuccess == true).ToString() + " record deleted";
+            }
+
+            return Json(new { id = isSuccess ? 1 : 0, isSuccess = isSuccess ? 1 : 0, msg = message });
+        }
+
+        #endregion
+
+        #region Truck
+
+        public JsonResult setTruck(string truckID, string truckName, string regNumb, string truckTypeID)
+        {
+            List<ClsUserDisplay> userDisplay = new List<ClsUserDisplay>();
+            using (tdoEntities db = new tdoEntities())
+            {
+                userDisplay = db.uspGetUserDisplay(GetID()).ToList<ClsUserDisplay>();
+            }
+            List<string> editableForms = Restriction.GetEditableForms(userDisplay);
+            List<string> addableForms = Restriction.GetAddableForms(userDisplay);
+
+            if (int.Parse(truckID) == 0 && !addableForms.Contains("Truck"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to add new records." });
+            }
+            else if (int.Parse(truckID) != 0 && !editableForms.Contains("Truck"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to edit records." });
+            }
+
+            if (truckID == "") { truckID = "0"; }
+
+            Guid Session = new Guid(GetSession()); //do not hard code session ID and createdbyID
+            int _id = 0;
+            try { _id = int.Parse(truckID.Trim()); }
+            catch { }
+            ClsTruck obj = new ClsTruck()
+            {
+                truckID = _id,
+                truckName = truckName,
+                regNumb = regNumb,
+                truckTypeID = int.Parse(truckTypeID),
+                createdByID = GetID(),
+                sessionID = Session
+            };
+            ClsReturnValues k = Administration.setTruck(obj, Session);
+            return Json(new { id = k.ID, isSuccess = k.IsSuccess ?? false ? 1 : 0, msg = k.Response });
+        }
+
+        public JsonResult deleteTruck(string ids)
+        {
+
+            List<ClsUserDisplay> userDisplay = new List<ClsUserDisplay>();
+            using (tdoEntities db = new tdoEntities())
+            {
+                userDisplay = db.uspGetUserDisplay(GetID()).ToList<ClsUserDisplay>();
+            }
+            List<string> deleteableForms = Restriction.GetDeletableForms(userDisplay);
+
+            if (!deleteableForms.Contains("Truck"))
+            {
+                return Json(new { id = 0, isSuccess = false, msg = "You are not allowed to delete records here" });
+            }
+
+            string[] id_s = ids.Trim().Split(',');
+            string message = "";
+            List<ClsReturnValues> obj = new List<ClsReturnValues>();
+            foreach (var id in id_s)
+            {
+                int _id = 0; try { _id = int.Parse(id.Trim()); }
+                catch { }
+                if (_id > 0)
+                    obj.Add(Administration.delTruck(_id));
             }
 
             bool isSuccess = obj.Count(p => p.IsSuccess == false) > 0 ? false : true;

@@ -766,5 +766,165 @@ namespace WebForTraining.Database
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspDelCity", cityIDParameter);
         }
+    
+        public virtual ObjectResult<ClsReturnValues> uspAddEditLocation(Nullable<int> locationID, string locationName, Nullable<int> regionID, Nullable<int> createdByID, Nullable<System.Guid> sessionID)
+        {
+            var locationIDParameter = locationID.HasValue ?
+                new ObjectParameter("locationID", locationID) :
+                new ObjectParameter("locationID", typeof(int));
+    
+            var locationNameParameter = locationName != null ?
+                new ObjectParameter("locationName", locationName) :
+                new ObjectParameter("locationName", typeof(string));
+    
+            var regionIDParameter = regionID.HasValue ?
+                new ObjectParameter("regionID", regionID) :
+                new ObjectParameter("regionID", typeof(int));
+    
+            var createdByIDParameter = createdByID.HasValue ?
+                new ObjectParameter("createdByID", createdByID) :
+                new ObjectParameter("createdByID", typeof(int));
+    
+            var sessionIDParameter = sessionID.HasValue ?
+                new ObjectParameter("sessionID", sessionID) :
+                new ObjectParameter("sessionID", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspAddEditLocation", locationIDParameter, locationNameParameter, regionIDParameter, createdByIDParameter, sessionIDParameter);
+        }
+    
+        public virtual ObjectResult<ClsReturnValues> uspAddEditPort(Nullable<int> portID, string portName, Nullable<int> locationID, Nullable<int> createdByID, Nullable<System.Guid> sessionID)
+        {
+            var portIDParameter = portID.HasValue ?
+                new ObjectParameter("portID", portID) :
+                new ObjectParameter("portID", typeof(int));
+    
+            var portNameParameter = portName != null ?
+                new ObjectParameter("portName", portName) :
+                new ObjectParameter("portName", typeof(string));
+    
+            var locationIDParameter = locationID.HasValue ?
+                new ObjectParameter("locationID", locationID) :
+                new ObjectParameter("locationID", typeof(int));
+    
+            var createdByIDParameter = createdByID.HasValue ?
+                new ObjectParameter("createdByID", createdByID) :
+                new ObjectParameter("createdByID", typeof(int));
+    
+            var sessionIDParameter = sessionID.HasValue ?
+                new ObjectParameter("sessionID", sessionID) :
+                new ObjectParameter("sessionID", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspAddEditPort", portIDParameter, portNameParameter, locationIDParameter, createdByIDParameter, sessionIDParameter);
+        }
+    
+        public virtual ObjectResult<ClsReturnValues> uspDelLocation(Nullable<int> locationID)
+        {
+            var locationIDParameter = locationID.HasValue ?
+                new ObjectParameter("locationID", locationID) :
+                new ObjectParameter("locationID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspDelLocation", locationIDParameter);
+        }
+    
+        public virtual ObjectResult<ClsReturnValues> uspDelPort(Nullable<int> portID)
+        {
+            var portIDParameter = portID.HasValue ?
+                new ObjectParameter("portID", portID) :
+                new ObjectParameter("portID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspDelPort", portIDParameter);
+        }
+    
+        public virtual ObjectResult<ClsReturnValues> uspDelTerminal(Nullable<int> terminalID)
+        {
+            var terminalIDParameter = terminalID.HasValue ?
+                new ObjectParameter("terminalID", terminalID) :
+                new ObjectParameter("terminalID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspDelTerminal", terminalIDParameter);
+        }
+    
+        public virtual ObjectResult<ClsLocation> uspGetLocation()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsLocation>("uspGetLocation");
+        }
+    
+        public virtual ObjectResult<ClsPort> uspGetPort()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsPort>("uspGetPort");
+        }
+    
+        public virtual ObjectResult<ClsTerminal> uspGetTerminal()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsTerminal>("uspGetTerminal");
+        }
+    
+        public virtual ObjectResult<ClsTruck> uspGetTruck()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsTruck>("uspGetTruck");
+        }
+    
+        public virtual ObjectResult<ClsReturnValues> uspAddEditTerminal(Nullable<int> terminalID, string terminalName, Nullable<int> portID, Nullable<int> createdByID, Nullable<System.Guid> sessionID)
+        {
+            var terminalIDParameter = terminalID.HasValue ?
+                new ObjectParameter("terminalID", terminalID) :
+                new ObjectParameter("terminalID", typeof(int));
+    
+            var terminalNameParameter = terminalName != null ?
+                new ObjectParameter("terminalName", terminalName) :
+                new ObjectParameter("terminalName", typeof(string));
+    
+            var portIDParameter = portID.HasValue ?
+                new ObjectParameter("portID", portID) :
+                new ObjectParameter("portID", typeof(int));
+    
+            var createdByIDParameter = createdByID.HasValue ?
+                new ObjectParameter("createdByID", createdByID) :
+                new ObjectParameter("createdByID", typeof(int));
+    
+            var sessionIDParameter = sessionID.HasValue ?
+                new ObjectParameter("sessionID", sessionID) :
+                new ObjectParameter("sessionID", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspAddEditTerminal", terminalIDParameter, terminalNameParameter, portIDParameter, createdByIDParameter, sessionIDParameter);
+        }
+    
+        public virtual ObjectResult<ClsReturnValues> uspAddEditTruck(Nullable<int> truckID, string truckName, string regNumb, Nullable<int> truckTypeID, Nullable<int> createdByID, Nullable<System.Guid> sessionID)
+        {
+            var truckIDParameter = truckID.HasValue ?
+                new ObjectParameter("truckID", truckID) :
+                new ObjectParameter("truckID", typeof(int));
+    
+            var truckNameParameter = truckName != null ?
+                new ObjectParameter("truckName", truckName) :
+                new ObjectParameter("truckName", typeof(string));
+    
+            var regNumbParameter = regNumb != null ?
+                new ObjectParameter("regNumb", regNumb) :
+                new ObjectParameter("regNumb", typeof(string));
+    
+            var truckTypeIDParameter = truckTypeID.HasValue ?
+                new ObjectParameter("truckTypeID", truckTypeID) :
+                new ObjectParameter("truckTypeID", typeof(int));
+    
+            var createdByIDParameter = createdByID.HasValue ?
+                new ObjectParameter("createdByID", createdByID) :
+                new ObjectParameter("createdByID", typeof(int));
+    
+            var sessionIDParameter = sessionID.HasValue ?
+                new ObjectParameter("sessionID", sessionID) :
+                new ObjectParameter("sessionID", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspAddEditTruck", truckIDParameter, truckNameParameter, regNumbParameter, truckTypeIDParameter, createdByIDParameter, sessionIDParameter);
+        }
+    
+        public virtual ObjectResult<ClsReturnValues> uspDelTruck(Nullable<int> truckID)
+        {
+            var truckIDParameter = truckID.HasValue ?
+                new ObjectParameter("truckID", truckID) :
+                new ObjectParameter("truckID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ClsReturnValues>("uspDelTruck", truckIDParameter);
+        }
     }
 }
