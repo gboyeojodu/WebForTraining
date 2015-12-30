@@ -1,0 +1,69 @@
+﻿Merge branch 'master' of https://github.com/gboyeojodu/WebForTraining
+
+# Conflicts:
+#	WebForTraining/WebForTraining/WebForTraining/Controllers/AdministrationController.cs
+#	WebForTraining/WebForTraining/WebForTraining/Models/Administration.cs
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch and 'origin/master' have diverged,
+# and have 1 and 4 different commits each, respectively.
+#   (use "git pull" to merge the remote branch into yours)
+#
+# All conflicts fixed but you are still merging.
+#
+# Changes to be committed:
+#	modified:   .gitignore
+#	deleted:    Resources.zip
+#	modified:   WebForTraining/WebForTraining/WebForTraining.v12.suo
+#	deleted:    WebForTraining/WebForTraining/WebForTraining/App_Data/tdo20151227
+#	deleted:    WebForTraining/WebForTraining/WebForTraining/App_Data/uspAddEditTruckType.sql
+#	deleted:    WebForTraining/WebForTraining/WebForTraining/App_Data/uspDelTruckType.sql
+#	deleted:    WebForTraining/WebForTraining/WebForTraining/App_Data/uspGetTruckType.sql
+#	modified:   WebForTraining/WebForTraining/WebForTraining/Controllers/AdministrationController.cs
+#	modified:   WebForTraining/WebForTraining/WebForTraining/Database/ClsCity.cs
+#	new file:   WebForTraining/WebForTraining/WebForTraining/Database/ClsDriver.cs
+#	new file:   WebForTraining/WebForTraining/WebForTraining/Database/ClsRegion.cs
+#	new file:   WebForTraining/WebForTraining/WebForTraining/Database/ClsState.cs
+#	modified:   WebForTraining/WebForTraining/WebForTraining/Database/TDOModel.Context.cs
+#	modified:   WebForTraining/WebForTraining/WebForTraining/Database/TDOModel.Designer.cs
+#	modified:   WebForTraining/WebForTraining/WebForTraining/Database/TDOModel.edmx
+#	new file:   WebForTraining/WebForTraining/WebForTraining/Database/uspDelCity_Result.cs
+#	modified:   WebForTraining/WebForTraining/WebForTraining/Models/Administration.cs
+#	modified:   WebForTraining/WebForTraining/WebForTraining/Views/Administration/AddEditCargoType.cshtml
+#	new file:   WebForTraining/WebForTraining/WebForTraining/Views/Administration/AddEditCity.cshtml
+#	new file:   WebForTraining/WebForTraining/WebForTraining/Views/Administration/AddEditDriver.cshtml
+#	new file:   WebForTraining/WebForTraining/WebForTraining/Views/Administration/AddEditRegion.cshtml
+#	new file:   WebForTraining/WebForTraining/WebForTraining/Views/Administration/AddEditState.cshtml
+#	modified:   WebForTraining/WebForTraining/WebForTraining/Views/Administration/AddEditTruckType.cshtml
+#	modified:   WebForTraining/WebForTraining/WebForTraining/Views/Administration/Settings.cshtml
+#	deleted:    WebForTraining/WebForTraining/WebForTraining/Views/Administration/Setup - Copy.cshtml
+#	deleted:    WebForTraining/WebForTraining/WebForTraining/Views/Administration/Setup2.cshtml
+#	modified:   WebForTraining/WebForTraining/WebForTraining/Views/Administration/getCargoTypeDisplay.cshtml
+#	new file:   WebForTraining/WebForTraining/WebForTraining/Views/Administration/getCityDisplay.cshtml
+#	new file:   WebForTraining/WebForTraining/WebForTraining/Views/Administration/getDriverDisplay.cshtml
+#	new file:   WebForTraining/WebForTraining/WebForTraining/Views/Administration/getRegionDisplay.cshtml
+#	new file:   WebForTraining/WebForTraining/WebForTraining/Views/Administration/getStateDisplay.cshtml
+#	modified:   WebForTraining/WebForTraining/WebForTraining/Views/Administration/getTruckTypeDisplay.cshtml
+#	modified:   WebForTraining/WebForTraining/WebForTraining/Web.config
+#	modified:   WebForTraining/WebForTraining/WebForTraining/WebForTraining.csproj
+#	modified:   WebForTraining/WebForTraining/WebForTraining/WebForTraining.csproj.user
+#	modified:   WebForTraining/WebForTraining/WebForTraining/bin/WebForTraining.dll
+#	modified:   WebForTraining/WebForTraining/WebForTraining/bin/WebForTraining.dll.config
+#	modified:   WebForTraining/WebForTraining/WebForTraining/bin/WebForTraining.pdb
+#	new file:   WebForTraining/WebForTraining/WebForTraining/obj/Release/TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs
+#	new file:   WebForTraining/WebForTraining/WebForTraining/obj/Release/TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs
+#	new file:   WebForTraining/WebForTraining/WebForTraining/obj/Release/TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs
+#	new file:   WebForTraining/WebForTraining/WebForTraining/obj/Release/WebForTraining.csproj.FileListAbsolute.txt
+#	modified:   WebForTraining/WebForTraining/WebForTraining/obj/Release/edmxResourcesToEmbed/Database/TDOModel.csdl
+#	modified:   WebForTraining/WebForTraining/WebForTraining/obj/Release/edmxResourcesToEmbed/Database/TDOModel.msl
+#	modified:   WebForTraining/WebForTraining/WebForTraining/obj/Release/edmxResourcesToEmbed/Database/TDOModel.ssdl
+#
+
